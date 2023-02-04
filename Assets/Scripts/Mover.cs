@@ -26,7 +26,7 @@ public class Mover : MonoBehaviour
     bool hasHit = Physics.Raycast(ray, out hit);
 
     if(hasHit){
-        this.GetComponent<NavMeshAgent>().destination = hit.transform.position;
+        this.GetComponent<NavMeshAgent>().destination = hit.point;
     }
   }
 }
