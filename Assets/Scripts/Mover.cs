@@ -4,27 +4,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Mover : MonoBehaviour
+namespace RPG.Movement
 {
+  public class Mover : MonoBehaviour
+  {
     [SerializeField] Transform target;
     Ray lastRay;
-
-
-    // Update is called once per frame
     void Update()
     {
         AnimationControl();
     }
     
-  public void MoveTo(Vector3 destination)
-  {
-    GetComponent<NavMeshAgent>().destination = destination;
-  }
+    public void MoveTo(Vector3 destination)
+    {
+        GetComponent<NavMeshAgent>().destination = destination;
+    }
 
-  private void AnimationControl(){
-    Vector3 velocity = GetComponent<NavMeshAgent>().velocity;
-    Vector3 localVelocity = transform.InverseTransformDirection(velocity);
-    float speed = localVelocity.z;
-    GetComponent<Animator>().SetFloat("forwardSpeed", speed);
+    private void AnimationControl(){
+        Vector3 velocity = GetComponent<NavMeshAgent>().velocity;
+        Vector3 localVelocity = transform.InverseTransformDirection(velocity);
+        float speed = localVelocity.z;
+        GetComponent<Animator>().SetFloat("forwardSpeed", speed);
+    }
   }
 }
