@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace RPG.Core
 {
-    public class CameraFollow : MonoBehaviour
+  public class CameraFollow : MonoBehaviour
+  {
+    [SerializeField] Transform target;
+    [SerializeField] Vector3 offset;
+    void LateUpdate()
     {
-        [SerializeField] Transform target;
-        [SerializeField] Vector3 offset;
-        void LateUpdate()
-        {
-            this.transform.position = target.transform.position + offset;
-        }
+      this.transform.position = target.transform.position + offset;
     }
+  }
 }
