@@ -10,8 +10,9 @@ namespace RPG.Combat
     [SerializeField] float weaponRange = 2f;
     Transform target;
     private void Update() {
-        if (target != null){
-            GetComponent<Mover>().MoveTo(target.position - new Vector3(0,0,weaponRange));
+        bool isInRange = Vector3.Distance(transform.position, target.position) < weaponRange;
+        if (target != null && !isInRange){
+            GetComponent<Mover>().MoveTo(target.position);
         }
     }
     public void Attack(CombatTarget combatTarget)
