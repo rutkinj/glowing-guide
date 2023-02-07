@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1052152647207519622}
   - component: {fileID: 2557695688378815985}
-  - component: {fileID: 2952406247551192284}
   - component: {fileID: 2952406247551192285}
   - component: {fileID: 2952406247551192290}
   - component: {fileID: 1785579433}
   - component: {fileID: 6857735178471699350}
   - component: {fileID: 1992414555}
+  - component: {fileID: 1992414556}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -81,19 +81,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2952406247551192284
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6890645859421257475}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3424c11210fcd4430a799f4d8895db04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
 --- !u!195 &2952406247551192285
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -145,7 +132,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6890645859421257475}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dbc3577fd3814342afbbe19287a1cb6, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ca4084b443bc4dd698befec6daa305a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &6857735178471699350
@@ -157,10 +144,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6890645859421257475}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10c53698232664a9ca250caffe722164, type: 3}
+  m_Script: {fileID: 11500000, guid: 5ef028316f7fa49a28addfa4b3519902, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponRange: 2
+  target: {fileID: 0}
 --- !u!114 &1992414555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,7 +157,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 6890645859421257475}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8832b4fe6ebe74cb48e2812d24dc1681, type: 3}
+  m_Script: {fileID: 11500000, guid: a768f00fab48c42e980cb9ddc60ed153, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponRange: 2
+  attackDelay: 1
+--- !u!114 &1992414556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6890645859421257475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e15226f1654e45cc816fae0fe80e3b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &2952406246519267948

@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthPoints : MonoBehaviour
+namespace RPG.Combat
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+  public class HealthPoints : MonoBehaviour
+  {
+    [SerializeField] float health = 100f;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void TakeDamage(float damage){
+        if(health == 0) return;
+        health -= damage;
+        if (health <= 0){
+            health = 0;
+        }
+        print("hp: " + health);
     }
+  }
 }
