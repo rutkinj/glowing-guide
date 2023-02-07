@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using RPG.Combat;
 
 namespace RPG.Movement
 {
@@ -11,7 +12,8 @@ namespace RPG.Movement
     [SerializeField] Transform target;
     NavMeshAgent navMeshAgent;
 
-    private void Start() {
+    private void Start()
+    {
       navMeshAgent = GetComponent<NavMeshAgent>();
     }
     void Update()
@@ -19,13 +21,20 @@ namespace RPG.Movement
       AnimationControl();
     }
 
+
+    public void StartMoveAction(Vector3 destination)
+    {
+      GetComponent<Fighter>().ClearTarget();
+      MoveTo(destination);
+    }
     public void MoveTo(Vector3 destination)
     {
       navMeshAgent.destination = destination;
       navMeshAgent.isStopped = false;
     }
 
-    public void Stop(){
+    public void Stop()
+    {
       navMeshAgent.isStopped = true;
     }
     private void AnimationControl()
