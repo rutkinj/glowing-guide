@@ -21,6 +21,7 @@ namespace RPG.Combat
       else
       {
         GetComponent<Mover>().Cancel();
+        GetComponent<Animator>().SetTrigger("attack");
       }
     }
     public void Attack(CombatTarget combatTarget)
@@ -35,6 +36,11 @@ namespace RPG.Combat
     private bool GetIsInRange()
     {
       return Vector3.Distance(transform.position, target.position) < weaponRange;
+    }
+    // Animation Event
+    private void Hit()
+    {
+
     }
   }
 }
