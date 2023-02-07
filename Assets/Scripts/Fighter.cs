@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RPG.Core;
 using RPG.Movement;
 
 namespace RPG.Combat
@@ -11,8 +12,8 @@ namespace RPG.Combat
     Transform target;
     private void Update()
     {
-      if(target == null) return;
-      
+      if (target == null) return;
+
       if (target != null && !GetIsInRange())
       {
         GetComponent<Mover>().MoveTo(target.position);
@@ -24,6 +25,7 @@ namespace RPG.Combat
     }
     public void Attack(CombatTarget combatTarget)
     {
+      GetComponent<ActionScheduler>().StartAction(this);
       target = combatTarget.transform;
     }
     public void ClearTarget()

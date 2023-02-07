@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using RPG.Combat;
+using RPG.Core;
 
 namespace RPG.Movement
 {
@@ -29,6 +30,7 @@ namespace RPG.Movement
     }
     public void MoveTo(Vector3 destination)
     {
+      GetComponent<ActionScheduler>().StartAction(this);
       navMeshAgent.destination = destination;
       navMeshAgent.isStopped = false;
     }
