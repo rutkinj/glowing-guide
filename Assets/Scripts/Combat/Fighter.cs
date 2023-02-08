@@ -33,6 +33,7 @@ namespace RPG.Combat
 
     private void AttackBehavior()
     {
+      transform.LookAt(target.transform.position);
       if (timeSinceLastAttack >= attackDelay && !target.GetIsDead())
       {
         GetComponent<Animator>().SetTrigger("attack"); //And triggers Hit() found below
@@ -61,6 +62,12 @@ namespace RPG.Combat
     private bool GetIsInRange()
     {
       return Vector3.Distance(transform.position, target.transform.position) < weaponRange;
+    }
+
+    public bool CanAttack(CombatTarget combatTarget){
+      if(combatTarget == null) return false;
+      HealthPoints testTarget = combatTarget.GetComponent<HealthPoints>();
+      return testTarget != null && !testTarget.GetIsDead();
     }
   }
 }
