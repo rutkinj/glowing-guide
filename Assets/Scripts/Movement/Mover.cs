@@ -25,6 +25,7 @@ namespace RPG.Movement
     public void StartMoveAction(Vector3 destination)
     {
       GetComponent<ActionScheduler>().StartAction(this);
+      GetComponent<Animator>().SetTrigger("cancelAttack");
       MoveTo(destination);
     }
     public void MoveTo(Vector3 destination)
