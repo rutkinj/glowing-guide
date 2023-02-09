@@ -36,6 +36,7 @@ namespace RPG.Combat
       transform.LookAt(target.transform.position);
       if (timeSinceLastAttack >= attackDelay && !target.GetIsDead())
       {
+        GetComponent<Animator>().ResetTrigger("cancelAttack");
         GetComponent<Animator>().SetTrigger("attack"); //And triggers Hit() found below
         timeSinceLastAttack = 0f;
       }
@@ -44,6 +45,7 @@ namespace RPG.Combat
     //Animation Event
     private void Hit()
     {
+      if(target == null) return;
       target.TakeDamage(weaponDamage);
     }
 
@@ -55,6 +57,7 @@ namespace RPG.Combat
 
     public void Cancel()
     {
+      GetComponent<Animator>().ResetTrigger("attack");
       GetComponent<Animator>().SetTrigger("cancelAttack");
       target = null;
     }
