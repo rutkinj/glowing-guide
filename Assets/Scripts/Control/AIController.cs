@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using RPG.Combat;
+using RPG.Core;
 
 namespace RPG.Control
 {
@@ -10,24 +11,28 @@ namespace RPG.Control
     [SerializeField] float chaseDistance = 5f;
 
     Fighter fighter;
+    HealthPoints healthPoints;
     GameObject player;
 
     private void Start()
     {
       fighter = GetComponent<Fighter>();
+      healthPoints = GetComponent<HealthPoints>();
       player = GameObject.FindWithTag("Player");
     }
 
 
     private void Update()
     {
+      if (healthPoints.GetIsDead()) return;
       if (InAttackRange(player) && fighter.CanAttack(player))
       {
         //give chase
         print(this + "shoudl give chase!");
         fighter.Attack(player);
       }
-      else{
+      else
+      {
         fighter.Cancel();
       }
     }

@@ -19,6 +19,7 @@ namespace RPG.Core
 
     private void DeathBehavior(){
       GetComponent<Animator>().SetTrigger("die");
+      GetComponent<ActionScheduler>().CancelCurrentAction();
       isDead = true;
       health = 0;
     }

@@ -10,11 +10,17 @@ namespace RPG.Control
 {
   public class PlayerController : MonoBehaviour
   {
+    HealthPoints healthPoints;
+
+    private void Start()
+    {
+      healthPoints = GetComponent<HealthPoints>();
+    }
     void Update()
     {
+      if (healthPoints.GetIsDead()) return;
       if (InteractWithCombat()) return;
       if (InteractWithMovement()) return;
-      print("nothin");
     }
 
     private bool InteractWithCombat()
