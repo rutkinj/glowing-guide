@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RPG.Combat;
 using RPG.Core;
+using RPG.Movement;
 
 namespace RPG.Control
 {
@@ -14,11 +15,14 @@ namespace RPG.Control
     HealthPoints healthPoints;
     GameObject player;
 
+    Vector3 guardPosition;
+
     private void Start()
     {
       fighter = GetComponent<Fighter>();
       healthPoints = GetComponent<HealthPoints>();
       player = GameObject.FindWithTag("Player");
+      guardPosition = transform.position;
     }
 
 
@@ -33,7 +37,7 @@ namespace RPG.Control
       }
       else
       {
-        fighter.Cancel();
+        GetComponent<Mover>().StartMoveAction(guardPosition);
       }
     }
 
