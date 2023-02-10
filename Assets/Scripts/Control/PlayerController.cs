@@ -21,11 +21,12 @@ namespace RPG.Control
       RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
       foreach (RaycastHit hit in hits)
       {
-        if (hit.transform.GetComponent<CombatTarget>() && !hit.transform.GetComponent<HealthPoints>().GetIsDead())
+        CombatTarget target = hit.transform.GetComponent<CombatTarget>();
+        if (target != null && !hit.transform.GetComponent<HealthPoints>().GetIsDead())
         {
           if (Input.GetMouseButtonDown(0))
           {
-            GetComponent<Fighter>().Attack(hit.transform.GetComponent<CombatTarget>());
+            GetComponent<Fighter>().Attack(target.gameObject);
           }
           return true;
         }
