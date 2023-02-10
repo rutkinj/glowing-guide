@@ -84,6 +84,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chaseDistance: 5
+  suspicionTime: 7
 --- !u!4 &7889832869086184531 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1052152647207519622, guid: 34f04cfd1ae2e48348d8d9e1aa9eaedc, type: 3}
