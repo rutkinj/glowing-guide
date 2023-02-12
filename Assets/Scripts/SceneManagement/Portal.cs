@@ -8,11 +8,20 @@ namespace RPG.SceneManagement
   public class Portal : MonoBehaviour
   {
     [SerializeField] int sceneIndex = -1;
-    private void OnTriggerEnter(Collider other) {
-        if(other.tag == "Player"){
-            SceneManager.LoadScene(sceneIndex);
-        }
-        print("TRIGGERED!!");
+    private void OnTriggerEnter(Collider other)
+    {
+      if (other.tag == "Player")
+      {
+        StartCoroutine(Transition());
+      }
+    }
+
+    private IEnumerator Transition()
+    {
+      DontDestroyOnLoad(gameObject);
+      yield return SceneManager.LoadSceneAsync(sceneIndex);
+      print("Scene loaded");
+      Destroy(gameObject);
     }
   }
 }
