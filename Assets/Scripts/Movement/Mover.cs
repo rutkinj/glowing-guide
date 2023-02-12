@@ -26,13 +26,13 @@ namespace RPG.Movement
     }
 
 
-    public void StartMoveAction(Vector3 destination, float speedFraction)
+    public void StartMoveAction(Vector3 destination, float speedFraction = 1f)
     {
       GetComponent<ActionScheduler>().StartAction(this);
       GetComponent<Animator>().SetTrigger("cancelAttack");
       MoveTo(destination, speedFraction);
     }
-    public void MoveTo(Vector3 destination, float speedFraction)
+    public void MoveTo(Vector3 destination, float speedFraction = 1f)
     {
       navMeshAgent.speed = maxSpeed * Mathf.Clamp01(speedFraction);
       navMeshAgent.destination = destination;
