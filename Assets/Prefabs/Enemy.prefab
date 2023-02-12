@@ -59,6 +59,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6857735178471699350, guid: 34f04cfd1ae2e48348d8d9e1aa9eaedc, type: 3}
+      propertyPath: maxSpeed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6890645859421257475, guid: 34f04cfd1ae2e48348d8d9e1aa9eaedc, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -85,6 +89,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chaseDistance: 5
   suspicionTime: 7
+  patrolPath: {fileID: 0}
+  waypointTolerance: 1
+  patrolResttime: 0.5
+  patrolSpeedFraction: 0.5
 --- !u!4 &7889832869086184531 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1052152647207519622, guid: 34f04cfd1ae2e48348d8d9e1aa9eaedc, type: 3}
