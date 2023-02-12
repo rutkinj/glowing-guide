@@ -14,6 +14,7 @@ namespace RPG.Control
     [SerializeField] float suspicionTime = 2f;
     [SerializeField] PatrolPath patrolPath;
     [SerializeField] float waypointTolerance = 1f;
+    [SerializeField] float patrolResttime = .5f;
 
     Fighter fighter;
     HealthPoints healthPoints;
@@ -21,6 +22,7 @@ namespace RPG.Control
     Vector3 guardPosition;
     int currentWaypointIndex = 0;
     float timeSinceSeenPlayer = Mathf.Infinity;
+    float timeAtWaypoint = Mathf.Infinity;
 
     private void Start()
     {
@@ -36,7 +38,6 @@ namespace RPG.Control
       if (healthPoints.GetIsDead()) return;
       if (InAttackRange(player) && fighter.CanAttack(player))
       {
-        //give chase
         timeSinceSeenPlayer = 0f;
         fighter.Attack(player);
       }
@@ -48,8 +49,8 @@ namespace RPG.Control
       {
         PatrolBehavior();
       }
-
       timeSinceSeenPlayer += Time.deltaTime;
+      timeAtWaypoint += Time.deltaTime;
     }
 
     private void PatrolBehavior()
@@ -61,11 +62,14 @@ namespace RPG.Control
         if (AtWaypoint())
         {
           CycleWaypoint();
+          timeAtWaypoint = UnityEngine.Random.Range(0f,2f);
         }
         nextPosition = GetCurrentWaypoint();
       }
-
-      GetComponent<Mover>().StartMoveAction(nextPosition);
+      if (timeAtWaypoint > patrolResttime)
+      {
+        GetComponent<Mover>().StartMoveAction(nextPosition);
+      }
     }
 
     private Vector3 GetCurrentWaypoint()
