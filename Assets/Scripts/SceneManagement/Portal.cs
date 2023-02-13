@@ -27,10 +27,14 @@ namespace RPG.SceneManagement
     private IEnumerator Transition()
     {
       DontDestroyOnLoad(gameObject);
+
+      Fader fader = FindObjectOfType<Fader>();
+      yield return StartCoroutine(fader.FadeOut());
       yield return SceneManager.LoadSceneAsync(sceneIndex);
 
       Portal otherPortal = GetOtherPortal();
       UpdatePlayer(otherPortal);
+      yield return StartCoroutine(fader.FadeIn());
 
       Destroy(gameObject);
     }
