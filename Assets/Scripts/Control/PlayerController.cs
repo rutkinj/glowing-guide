@@ -55,12 +55,6 @@ namespace RPG.Control
           return true;
         }
       }
-
-      // bool hasHit = Physics.Raycast(GetMouseRay(), out hit);
-      // if (hasHit)
-      // {
-
-      // }
       return false;
     }
 
