@@ -43,16 +43,24 @@ namespace RPG.Control
 
     private bool InteractWithMovement()
     {
-      RaycastHit hit;
-      bool hasHit = Physics.Raycast(GetMouseRay(), out hit);
-      if (hasHit)
+      RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
+      foreach (RaycastHit hit in hits)
       {
-        if (Input.GetMouseButton(0))
+        if (hit.transform.CompareTag("Ground"))
         {
-          GetComponent<Mover>().StartMoveAction(hit.point);
+          if (Input.GetMouseButton(0))
+          {
+            GetComponent<Mover>().StartMoveAction(hit.point);
+          }
+          return true;
         }
-        return true;
       }
+
+      // bool hasHit = Physics.Raycast(GetMouseRay(), out hit);
+      // if (hasHit)
+      // {
+
+      // }
       return false;
     }
 
