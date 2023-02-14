@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8835420627957002457}
     m_Modifications:
+    - target: {fileID: 105360, guid: 659981ab97d9bb64990767ef5f931f7c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 142548, guid: 659981ab97d9bb64990767ef5f931f7c, type: 3}
       propertyPath: m_Name
       value: Character_Skeleton_Slave_01
@@ -58,6 +62,11 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 9506036, guid: 659981ab97d9bb64990767ef5f931f7c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 659981ab97d9bb64990767ef5f931f7c, type: 3}
+--- !u!4 &7109831272169436920 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 437034, guid: 659981ab97d9bb64990767ef5f931f7c, type: 3}
+  m_PrefabInstance: {fileID: 7109831272169070034}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8359885414005454175
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -65,6 +74,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1992414555, guid: 34f04cfd1ae2e48348d8d9e1aa9eaedc, type: 3}
+      propertyPath: weaponPrefab
+      value: 
+      objectReference: {fileID: 3854478088142647790, guid: 6bf559628148b431fb11087c75f21d5e, type: 3}
+    - target: {fileID: 1992414555, guid: 34f04cfd1ae2e48348d8d9e1aa9eaedc, type: 3}
+      propertyPath: handTransform
+      value: 
+      objectReference: {fileID: 7109831272169436920}
     - target: {fileID: 1052152647207519622, guid: 34f04cfd1ae2e48348d8d9e1aa9eaedc, type: 3}
       propertyPath: m_RootOrder
       value: 0
