@@ -102,7 +102,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1.85
-  m_BaseOffset: 0
+  m_BaseOffset: -0.07
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!95 &2952406247551192290
@@ -138,6 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  maxSpeed: 3
 --- !u!114 &1992414555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,6 +154,8 @@ MonoBehaviour:
   weaponRange: 2
   attackDelay: 1
   weaponDamage: 12
+  weaponPrefab: {fileID: 0}
+  handTransform: {fileID: 0}
 --- !u!114 &1992414556
 MonoBehaviour:
   m_ObjectHideFlags: 0
