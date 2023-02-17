@@ -9,6 +9,7 @@ namespace RPG.Combat
   {
     [SerializeField] AnimatorOverrideController animationOverride = null;
     [SerializeField] GameObject equippedPrefab = null;
+    [SerializeField] bool rightHandEquip = true;
     [SerializeField] float weaponDamage = 0f;
     [SerializeField] float weaponRange = 2f;
     [SerializeField] float attackDelay = 1f;
@@ -17,11 +18,12 @@ namespace RPG.Combat
     public float WeaponRange { get => weaponRange; }
     public float AttackDelay { get => attackDelay; }
 
-    public void Spawn(Transform handTransform, Animator animator)
+    public void Spawn(Transform rightHand, Transform leftHand, Animator animator)
     {
       if (equippedPrefab != null)
       {
-        Instantiate(equippedPrefab, handTransform);
+        Transform hand = rightHandEquip ? rightHand : leftHand;
+        Instantiate(equippedPrefab, hand);
       }
       if (animationOverride != null)
       {
