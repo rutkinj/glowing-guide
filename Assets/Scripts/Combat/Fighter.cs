@@ -8,9 +8,6 @@ namespace RPG.Combat
 {
   public class Fighter : MonoBehaviour, IAction
   {
-    [SerializeField] float weaponRange = 2f;
-    [SerializeField] float attackDelay = 1f;
-    [SerializeField] float weaponDamage = 12f;
     [SerializeField] Transform handTransform = null;
     [SerializeField] Weapon weapon = null;
     HealthPoints target;
@@ -42,7 +39,7 @@ namespace RPG.Combat
     private void AttackBehavior()
     {
       transform.LookAt(target.transform.position);
-      if (timeSinceLastAttack >= attackDelay && !target.GetIsDead())
+      if (timeSinceLastAttack >= weapon.AttackDelay && !target.GetIsDead())
       {
         GetComponent<Animator>().ResetTrigger("cancelAttack");
         GetComponent<Animator>().SetTrigger("attack"); //And triggers Hit() found below
@@ -54,7 +51,7 @@ namespace RPG.Combat
     private void Hit()
     {
       if (target == null) return;
-      target.TakeDamage(weaponDamage);
+      target.TakeDamage(weapon.WeaponDamage);
     }
 
     public void Attack(GameObject combatTarget)
@@ -72,7 +69,7 @@ namespace RPG.Combat
 
     private bool GetIsInRange()
     {
-      return Vector3.Distance(transform.position, target.transform.position) < weaponRange;
+      return Vector3.Distance(transform.position, target.transform.position) < weapon.WeaponRange;
     }
 
     public bool CanAttack(GameObject combatTarget)
