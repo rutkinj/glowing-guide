@@ -9,15 +9,16 @@ namespace RPG.Combat
   public class Fighter : MonoBehaviour, IAction
   {
     [SerializeField] Transform handTransform = null;
-    [SerializeField] Weapon weapon = null;
+    [SerializeField] Weapon defaultWeapon = null;
     HealthPoints target;
     Mover mover;
     float timeSinceLastAttack = Mathf.Infinity;
+    Weapon currentWeapon = null;
 
     private void Start()
     {
       mover = GetComponent<Mover>();
-      SpawnWeapon();
+      EquipWeapon(defaultWeapon);
     }
     private void Update()
     {
@@ -39,7 +40,7 @@ namespace RPG.Combat
     private void AttackBehavior()
     {
       transform.LookAt(target.transform.position);
-      if (timeSinceLastAttack >= weapon.AttackDelay && !target.GetIsDead())
+      if (timeSinceLastAttack >= currentWeapon.AttackDelay && !target.GetIsDead())
       {
         GetComponent<Animator>().ResetTrigger("cancelAttack");
         GetComponent<Animator>().SetTrigger("attack"); //And triggers Hit() found below
@@ -51,7 +52,7 @@ namespace RPG.Combat
     private void Hit()
     {
       if (target == null) return;
-      target.TakeDamage(weapon.WeaponDamage);
+      target.TakeDamage(currentWeapon.WeaponDamage);
     }
 
     public void Attack(GameObject combatTarget)
@@ -69,7 +70,7 @@ namespace RPG.Combat
 
     private bool GetIsInRange()
     {
-      return Vector3.Distance(transform.position, target.transform.position) < weapon.WeaponRange;
+      return Vector3.Distance(transform.position, target.transform.position) < currentWeapon.WeaponRange;
     }
 
     public bool CanAttack(GameObject combatTarget)
@@ -79,8 +80,9 @@ namespace RPG.Combat
       return testTarget != null && !testTarget.GetIsDead();
     }
 
-    private void SpawnWeapon(){
-      if(weapon == null) return;
+    public void EquipWeapon(Weapon weapon){
+      // if(weapon == null) return;
+      currentWeapon = weapon;
       Animator animator = GetComponent<Animator>();
       weapon.Spawn(handTransform, animator);
     }
