@@ -62,6 +62,11 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 9506036, guid: 659981ab97d9bb64990767ef5f931f7c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 659981ab97d9bb64990767ef5f931f7c, type: 3}
+--- !u!4 &7109831272169383894 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 489988, guid: 659981ab97d9bb64990767ef5f931f7c, type: 3}
+  m_PrefabInstance: {fileID: 7109831272169070034}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7109831272169436920 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 437034, guid: 659981ab97d9bb64990767ef5f931f7c, type: 3}
@@ -90,6 +95,14 @@ PrefabInstance:
       propertyPath: animationOverride
       value: 
       objectReference: {fileID: 22100000, guid: 901d851302ec74d67a6f9875d712df28, type: 2}
+    - target: {fileID: 1992414555, guid: 34f04cfd1ae2e48348d8d9e1aa9eaedc, type: 3}
+      propertyPath: leftHandTransform
+      value: 
+      objectReference: {fileID: 7109831272169383894}
+    - target: {fileID: 1992414555, guid: 34f04cfd1ae2e48348d8d9e1aa9eaedc, type: 3}
+      propertyPath: rightHandTransform
+      value: 
+      objectReference: {fileID: 7109831272169436920}
     - target: {fileID: 1052152647207519622, guid: 34f04cfd1ae2e48348d8d9e1aa9eaedc, type: 3}
       propertyPath: m_RootOrder
       value: 0
