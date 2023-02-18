@@ -42,7 +42,7 @@ namespace RPG.Combat
     {
       Transform hand = rightHandEquip ? rightHand : leftHand;
       Projectile projectileInstance = Instantiate(projectile, hand.position, Quaternion.identity);
-      projectileInstance.SetTarget(target);
+      projectileInstance.SetTarget(target, weaponDamage);
     }
   }
 }

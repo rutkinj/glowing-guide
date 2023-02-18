@@ -18,3 +18,4 @@ MonoBehaviour:
   weaponDamage: 6
   weaponRange: 10
   attackDelay: 1
+  projectile: {fileID: 1418100072, guid: fcb958a797cac47849222d8c988f89e6, type: 3}

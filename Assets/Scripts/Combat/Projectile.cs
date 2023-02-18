@@ -5,8 +5,9 @@ using RPG.Core;
 
 public class Projectile : MonoBehaviour
 {
-  [SerializeField] HealthPoints target;
   [SerializeField] float projectileSpeed;
+  HealthPoints target;
+  float damage;
   void Start(){
     transform.LookAt(GetAimLocation());
   }
@@ -15,9 +16,19 @@ public class Projectile : MonoBehaviour
     transform.Translate(Vector3.forward * projectileSpeed * Time.deltaTime);
   }
 
-  public void SetTarget(HealthPoints target)
+  private void OnTriggerEnter(Collider other) {
+    if(other.GetComponent<HealthPoints>() != target){
+        print("not the target");
+        return;
+    }
+    target.TakeDamage(damage);
+    Destroy(gameObject);
+  }
+
+  public void SetTarget(HealthPoints target, float damage)
   {
     this.target = target;
+    this.damage = damage;
   }
 
   private Vector3 GetAimLocation()
