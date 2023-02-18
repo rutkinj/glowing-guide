@@ -187,7 +187,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ef7d1ccbeff491d9b81fa1df581a2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpeed: 10
+  projectileSpeed: 1
+  isHoming: 0
 --- !u!65 &6384184411897667734
 BoxCollider:
   m_ObjectHideFlags: 0
