@@ -6,12 +6,14 @@ using RPG.Core;
 public class Projectile : MonoBehaviour
 {
   [SerializeField] float projectileSpeed;
+  [SerializeField] float projectileLifetime = 10f;
   [SerializeField] bool isHoming = false;
   HealthPoints target;
   float damage;
   void Start()
   {
     transform.LookAt(GetAimLocation());
+    Destroy(gameObject, projectileLifetime);
   }
   void Update()
   {
@@ -26,7 +28,7 @@ public class Projectile : MonoBehaviour
       print("not the target");
       return;
     }
-    if(target.GetIsDead()) return;
+    if (target.GetIsDead()) return;
     target.TakeDamage(damage);
     Destroy(gameObject);
   }
