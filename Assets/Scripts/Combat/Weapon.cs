@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using RPG.Core;
+using System;
 
 namespace RPG.Combat
 {
@@ -15,22 +16,37 @@ namespace RPG.Combat
     [SerializeField] float weaponRange = 2f;
     [SerializeField] float attackDelay = 1f;
     [SerializeField] Projectile projectile = null;
-
+    const string weaponName = "Weapon";
     public float WeaponDamage { get => weaponDamage; }
     public float WeaponRange { get => weaponRange; }
     public float AttackDelay { get => attackDelay; }
 
     public void Spawn(Transform rightHand, Transform leftHand, Animator animator)
     {
+      DestroyOldWeapon(rightHand, leftHand);
       if (equippedPrefab != null)
       {
         Transform hand = rightHandEquip ? rightHand : leftHand;
-        Instantiate(equippedPrefab, hand);
+        GameObject weapon = Instantiate(equippedPrefab, hand);
+        weapon.name = weaponName;
       }
       if (animationOverride != null)
       {
         animator.runtimeAnimatorController = animationOverride;
       }
+    }
+
+    private void DestroyOldWeapon(Transform rightHand, Transform leftHand)
+    {
+      Transform oldWeapon = rightHand.Find(weaponName);
+      if (oldWeapon == null)
+      {
+        oldWeapon = leftHand.Find(weaponName);
+      }
+      if (oldWeapon == null) return;
+
+      oldWeapon.name = "DESTROYING";
+      Destroy(oldWeapon.gameObject);
     }
 
     public bool HasProjectile()
