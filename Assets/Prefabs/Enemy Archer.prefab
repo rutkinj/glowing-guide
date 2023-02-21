@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1166927257334762484, guid: 49c093db9455c41fe9b679d71af09582, type: 3}
+      propertyPath: characterClass
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4343673004850298582, guid: 49c093db9455c41fe9b679d71af09582, type: 3}
       propertyPath: m_Name
       value: Enemy Archer
