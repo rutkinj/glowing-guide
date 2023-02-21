@@ -16,15 +16,16 @@ namespace RPG.Combat{
     }
 
     private IEnumerator HideForSeconds(float timeToWait){
-      GetComponent<CapsuleCollider>().enabled = false;
-      foreach(Transform child in transform){
-        child.gameObject.SetActive(false);
-      }
+      ShowPickup(false);
       yield return new WaitForSeconds(timeToWait);
-      GetComponent<CapsuleCollider>().enabled = true;
+      ShowPickup(true);
+    }
+
+    private void ShowPickup(bool showOrNo){
+      GetComponent<Collider>().enabled = showOrNo;
       foreach (Transform child in transform)
       {
-        child.gameObject.SetActive(true);
+        child.gameObject.SetActive(showOrNo);
       }
     }
   }
