@@ -6,7 +6,6 @@ using UnityEngine.AI;
 using RPG.Core;
 using RPG.Attributes;
 
-
 namespace RPG.Movement
 {
   public class Mover : MonoBehaviour, IAction
