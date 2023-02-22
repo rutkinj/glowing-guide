@@ -11,7 +11,6 @@ namespace RPG.Stats
     {
       [SerializeField] CharacterClass className;
       [SerializeField] int[] maxHealth;
-      [SerializeField] int[] damage;
     }
   }
 }

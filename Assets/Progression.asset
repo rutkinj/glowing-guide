@@ -14,11 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterClass:
   - className: 1
-    maxHealth: 01000000020000000300000004000000
-    damage: 01000000020000000300000004000000
+    maxHealth: 0f00000014000000190000001e00000023000000
   - className: 2
-    maxHealth: 
-    damage: 
+    maxHealth: 0a0000000f00000014000000190000001e000000
   - className: 3
-    maxHealth: 
-    damage: 
+    maxHealth: 050000000a0000000f0000001400000019000000
