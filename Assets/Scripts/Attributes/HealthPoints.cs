@@ -8,21 +8,27 @@ namespace RPG.Attributes
 {
   public class HealthPoints : MonoBehaviour
   {
-    [SerializeField] float health = 100f;
+    float currentHealth;
+    float maxHealth;
     bool isDead = false;
 
     private void Start()
     {
-      health = GetComponent<BaseStats>().GetHealth();
+      maxHealth = GetComponent<BaseStats>().GetHealth();
+      currentHealth = maxHealth;
     }
     public void TakeDamage(float damage)
     {
-      health -= damage;
-      if (health <= 0 && !isDead)
+      currentHealth -= damage;
+      if (currentHealth <= 0 && !isDead)
       {
         DeathBehavior();
       }
-      print("hp: " + health);
+      print("hp: " + currentHealth);
+    }
+
+    public float GetHPPercentage(){
+      return (currentHealth/maxHealth) * 100;
     }
 
     private void DeathBehavior()
@@ -30,7 +36,7 @@ namespace RPG.Attributes
       GetComponent<Animator>().SetTrigger("die");
       GetComponent<ActionScheduler>().CancelCurrentAction();
       isDead = true;
-      health = 0;
+      currentHealth = 0;
     }
 
     public bool GetIsDead()
