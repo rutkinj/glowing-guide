@@ -10,6 +10,7 @@ public class Projectile : MonoBehaviour
   [SerializeField] float projectileLifetime = 10f;
   [SerializeField] bool isHoming = false;
   HealthPoints target;
+  GameObject instigator = null;
   float damage;
   void Start()
   {
@@ -30,14 +31,15 @@ public class Projectile : MonoBehaviour
       return;
     }
     if (target.GetIsDead()) return;
-    target.TakeDamage(damage);
+    target.TakeDamage(instigator, damage);
     Destroy(gameObject);
   }
 
-  public void SetTarget(HealthPoints target, float damage)
+  public void SetTarget(HealthPoints target, GameObject instigator, float damage)
   {
     this.target = target;
     this.damage = damage;
+    this.instigator = instigator;
   }
 
   private Vector3 GetAimLocation()

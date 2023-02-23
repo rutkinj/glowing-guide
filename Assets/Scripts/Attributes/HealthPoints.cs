@@ -17,7 +17,7 @@ namespace RPG.Attributes
       maxHealth = GetComponent<BaseStats>().GetHealth();
       currentHealth = maxHealth;
     }
-    public void TakeDamage(float damage)
+    public void TakeDamage(GameObject instigator, float damage)
     {
       currentHealth -= damage;
       if (currentHealth <= 0 && !isDead)
