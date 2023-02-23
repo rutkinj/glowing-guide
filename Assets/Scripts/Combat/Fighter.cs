@@ -101,5 +101,9 @@ namespace RPG.Combat
       Animator animator = GetComponent<Animator>();
       weapon.Spawn(rightHandTransform, leftHandTransform, animator);
     }
+
+    public HealthPoints GetTarget(){
+      return target;
+    }
   }
 }
