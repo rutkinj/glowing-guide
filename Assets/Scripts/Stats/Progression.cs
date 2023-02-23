@@ -25,7 +25,7 @@ namespace RPG.Stats
     class ProgressionCharacterClass
     {
       [SerializeField] CharacterClass className;
-      [SerializeField] ProgressionStat stats;
+      [SerializeField] ProgressionStat[] stats;
 
       // public int[] MaxHealth { get => maxHealth; set => maxHealth = value; }
 
@@ -38,7 +38,7 @@ namespace RPG.Stats
     [System.Serializable]
     class ProgressionStat
     {
-      [SerializeField] Stat[] stat;
+      [SerializeField] Stat stat;
       [SerializeField] float[] levels;
     }
 
