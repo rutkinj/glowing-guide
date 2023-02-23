@@ -14,8 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterClasses:
   - className: 1
-    maxHealth: 0f0000001400000019000000
+    stats:
+      stat: 0000000000000000
+      levels: []
   - className: 2
-    maxHealth: 0a0000000f00000014000000
+    stats:
+      stat: 00000000
+      levels: []
   - className: 3
-    maxHealth: 050000000a0000000f000000
+    stats:
+      stat: 
+      levels: []

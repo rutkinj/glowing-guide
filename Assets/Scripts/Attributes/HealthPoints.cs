@@ -31,9 +31,9 @@ namespace RPG.Attributes
     private void GiveExp(GameObject instigator)
     {
       Experience experience = instigator.GetComponent<Experience>();
-      float expAmount = GetComponent<BaseStats>().GetExperienceReward();
       if (experience != null)
       {
+        float expAmount = GetComponent<BaseStats>().GetExperienceReward();
         experience.GainExperience(expAmount);
       }
     }
