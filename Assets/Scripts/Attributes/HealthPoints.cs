@@ -22,13 +22,25 @@ namespace RPG.Attributes
       currentHealth -= damage;
       if (currentHealth <= 0 && !isDead)
       {
+        GiveExp(instigator);
         DeathBehavior();
       }
       print("hp: " + currentHealth);
     }
 
-    public float GetHPPercentage(){
-      return (currentHealth/maxHealth) * 100;
+    private void GiveExp(GameObject instigator)
+    {
+      Experience experience = instigator.GetComponent<Experience>();
+      float expAmount = GetComponent<BaseStats>().GetExperienceReward();
+      if (experience != null)
+      {
+        experience.GainExperience(expAmount);
+      }
+    }
+
+    public float GetHPPercentage()
+    {
+      return (currentHealth / maxHealth) * 100;
     }
 
     private void DeathBehavior()
