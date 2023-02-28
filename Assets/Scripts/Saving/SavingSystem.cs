@@ -10,14 +10,21 @@ namespace RPG.Saving
     public void Save(string saveName)
     {
       string path = GetPathFromSaveName(saveName);
-      print(GetPathFromSaveName(saveName));
-      FileStream stream = File.Open(path, FileMode.Create);
-      stream.WriteByte(42);
-      stream.Close();
+      print("Saving to: " + path);
+      using (FileStream stream = File.Open(path, FileMode.Create))
+      {
+        stream.WriteByte(42);
+      }
     }
     public void Load(string saveName)
     {
-      print(GetPathFromSaveName(saveName));
+      string path = GetPathFromSaveName(saveName);
+      print("Loading from: " + path);
+      using (FileStream stream = File.Open(path, FileMode.Open))
+      {
+        byte[] buffer = new byte[stream.Length];
+        stream.Read(buffer, 0, buffer.Length);
+      }
     }
 
     private string GetPathFromSaveName(string saveName)
