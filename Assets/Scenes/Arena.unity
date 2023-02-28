@@ -5393,6 +5393,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 83866029400011688, guid: db87c708d90424681990ef2ca1665385, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 83866029400011688, guid: db87c708d90424681990ef2ca1665385, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1772468055966843118, guid: db87c708d90424681990ef2ca1665385, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7261706456118187863, guid: db87c708d90424681990ef2ca1665385, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -5427,6 +5439,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7261706456118187863, guid: db87c708d90424681990ef2ca1665385, type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7261706456118187863, guid: db87c708d90424681990ef2ca1665385, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7261706456118187863, guid: db87c708d90424681990ef2ca1665385, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7261706456118187863, guid: db87c708d90424681990ef2ca1665385, type: 3}
+      propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7261706456118187863, guid: db87c708d90424681990ef2ca1665385, type: 3}
