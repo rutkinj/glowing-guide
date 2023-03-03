@@ -12,11 +12,11 @@ namespace RPG.Saving
     {
       if (Input.GetKeyDown(KeyCode.S))
       {
-        GetComponent<SavingSystem>().Save(defaultSaveFile);
+        GetComponent<JsonSavingSystem>().Save(defaultSaveFile);
       }
       if (Input.GetKeyDown(KeyCode.L))
       {
-        GetComponent<SavingSystem>().Load(defaultSaveFile);
+        GetComponent<JsonSavingSystem>().Load(defaultSaveFile);
       }
     }
   }
