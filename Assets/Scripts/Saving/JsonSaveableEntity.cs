@@ -24,7 +24,7 @@ namespace RPG.Saving
       IDictionary<string, JToken> stateDict = state;
       // foreach (IJsonSaveable saveable in stateDict)
       // {
-   
+
       // }
       return null;
     }
@@ -34,11 +34,40 @@ namespace RPG.Saving
 
     }
 
-    // #if UNITY_EDITOR
-    //   private void Update(){
-    //   if (Application.IsPlaying(gameObject)) return;
-    //   if (string.IsNullOrEmpty(gameObject.scene.path)) return;
+#if UNITY_EDITOR
+    private void Update()
+    {
+      if (Application.IsPlaying(gameObject)) return;
+      if (string.IsNullOrEmpty(gameObject.scene.path)) return;
 
-    // }
+      SerializedObject serializedObject = new SerializedObject(this);
+      SerializedProperty property = serializedObject.FindProperty("uniqueID");
+
+      if (string.IsNullOrEmpty(property.stringValue) || !IsUnique(property.stringValue))
+      {
+        property.stringValue = System.Guid.NewGuid().ToString();
+        serializedObject.ApplyModifiedProperties();
+      }
+      globalLookup[property.stringValue] = this;
+    }
+
+#endif
+
+    private bool IsUnique(string key)
+    {
+      if (!globalLookup.ContainsKey(key)) return true;
+      if (globalLookup[key] == this) return true;
+      if (globalLookup[key] == null)
+      {
+        globalLookup.Remove(key);
+        return true;
+      }
+      if (globalLookup[key].GetUniqueID() != key)
+      {
+        globalLookup.Remove(key);
+        return true;
+      }
+      return false;
+    }
   }
 }
