@@ -22,10 +22,13 @@ namespace RPG.Saving
     {
       JObject state = new JObject();
       IDictionary<string, JToken> stateDict = state;
-      // foreach (IJsonSaveable saveable in stateDict)
-      // {
-
-      // }
+      foreach (IJsonSaveable saveable in GetComponents<IJsonSaveable>())
+      {
+        JToken token = saveable.CaptureAsJToken();
+        string component = saveable.GetType().ToString();
+        Debug.Log($"{name} Capture {component} = {token.ToString()}");
+        stateDict[saveable.GetType().ToString()] = token;
+      }
       return null;
     }
 
