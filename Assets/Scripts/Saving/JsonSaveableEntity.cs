@@ -36,9 +36,11 @@ namespace RPG.Saving
     {
       JObject jObj = jToken.ToObject<JObject>();
       IDictionary<string, JToken> stateDict = jObj;
-      foreach(IJsonSaveable saveable in GetComponents<IJsonSaveable>()){
+      foreach (IJsonSaveable saveable in GetComponents<IJsonSaveable>())
+      {
         string component = saveable.GetType().ToString();
-        if (stateDict.ContainsKey(component)){
+        if (stateDict.ContainsKey(component))
+        {
           Debug.Log($"{name} Restore {component} = {stateDict[component].ToString()}");
           saveable.RestoreFromJToken(stateDict[component]);
         }
