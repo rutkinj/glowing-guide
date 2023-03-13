@@ -53,7 +53,7 @@ namespace RPG.Saving
       }
     }
 
-    private void RestoreState(JObject state)
+    private void RestoreFromToken(JObject state)
     {
       IDictionary<string, JToken> stateDict = state;
       foreach (JsonSaveableEntity saveable in FindObjectsOfType<JsonSaveableEntity>())
