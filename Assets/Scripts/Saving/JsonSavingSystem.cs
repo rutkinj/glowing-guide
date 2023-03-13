@@ -14,7 +14,14 @@ namespace RPG.Saving
     private const string ext = ".json";
 
     public IEnumerator LoadLastScene(string saveFile){
-      JObject state = 
+      JObject state = LoadJsonFromFile(saveFile);
+      IDictionary<string, JToken> statedict = state;
+      int buildIndex = SceneManager.GetActiveScene().buildIndex;
+      if(statedict.ContainsKey("lastSceneBuildIndex")){
+        buildIndex = (int)statedict["lastSceneBuildIndex"];
+      }
+      yield return SceneManager.LoadSceneAsync(buildIndex);
+      RestoreFromToken(state);
     }
     public void Save(string saveName)
     {
