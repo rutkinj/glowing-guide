@@ -25,13 +25,9 @@ namespace RPG.Saving
     }
     public void Save(string saveName)
     {
-      string path = GetPathFromSaveName(saveName);
-      print("Saving to: " + path);
-      using (FileStream stream = File.Open(path, FileMode.Create))
-      {
-        //json magic capture state
-        // stream.Write(buffer, 0, buffer.Length);
-      }
+      JObject state = LoadJsonFromFile(saveName);
+      CaptureAsToken(state);
+      SaveFileAsJson(saveName, state);
     }
     public void Load(string saveName)
     {
@@ -67,8 +63,18 @@ namespace RPG.Saving
 
     }
 
-    private JObject LoadJsonFromFile(string saveFile){
-      string path = GetPathFromSaveName(saveFile);
+    private void SaveFileAsJson(string saveName, JObject state){
+      string path = GetPathFromSaveName(saveName);
+      using(var textWriter = File.CreateText(path)){
+        using(var writer = new JsonTextWriter(textWriter)){
+          writer.Formatting = Formatting.Indented;
+          state.WriteTo(writer);
+        }
+      }
+    }
+
+    private JObject LoadJsonFromFile(string saveName){
+      string path = GetPathFromSaveName(saveName);
       if(!File.Exists(path)) return new JObject();
 
       using (var textReader = File.OpenText(path)){
