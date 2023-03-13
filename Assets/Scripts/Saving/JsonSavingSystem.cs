@@ -5,11 +5,17 @@ using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace RPG.Saving
 {
   public class JsonSavingSystem : MonoBehaviour
   {
+    private const string ext = ".json";
+
+    public IEnumerator LoadLastScene(string saveFile){
+      JObject state = 
+    }
     public void Save(string saveName)
     {
       string path = GetPathFromSaveName(saveName);
@@ -54,9 +60,22 @@ namespace RPG.Saving
 
     }
 
+    private JObject LoadJsonFromFile(string saveFile){
+      string path = GetPathFromSaveName(saveFile);
+      if(!File.Exists(path)) return new JObject();
+
+      using (var textReader = File.OpenText(path)){
+        using (var reader = new JsonTextReader(textReader)){
+          reader.FloatParseHandling = FloatParseHandling.Double;
+
+          return JObject.Load(reader);
+        }
+      }
+    }
+
     private string GetPathFromSaveName(string saveName)
     {
-      return Path.Combine(Application.persistentDataPath, saveName + ".json");
+      return Path.Combine(Application.persistentDataPath, saveName + ext);
     }
   }
 }
