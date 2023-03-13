@@ -41,6 +41,17 @@ namespace RPG.Saving
       File.Delete(GetPathFromSaveName(saveName));
     }
 
+    public IEnumerable<string> ListSaves()
+    {
+      foreach (string path in Directory.EnumerateFiles(Application.persistentDataPath))
+      {
+        if (Path.GetExtension(path) == ext)
+        {
+          yield return Path.GetFileNameWithoutExtension(path);
+        }
+      }
+    }
+
     private void CaptureAsToken(JObject state)
     {
       IDictionary<string, JToken> stateDict = state;
