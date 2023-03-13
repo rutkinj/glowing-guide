@@ -29,12 +29,20 @@ namespace RPG.Saving
         Debug.Log($"{name} Capture {component} = {token.ToString()}");
         stateDict[saveable.GetType().ToString()] = token;
       }
-      return null;
+      return state;
     }
 
-    public void RestoreFromJToken(object state)
+    public void RestoreFromJToken(JToken jToken)
     {
-
+      JObject jObj = jToken.ToObject<JObject>();
+      IDictionary<string, JToken> stateDict = jObj;
+      foreach(IJsonSaveable saveable in GetComponents<IJsonSaveable>()){
+        string component = saveable.GetType().ToString();
+        if (stateDict.ContainsKey(component)){
+          Debug.Log($"{name} Restore {component} = {stateDict[component].ToString()}");
+          saveable.RestoreFromJToken(stateDict[component]);
+        }
+      }
     }
 
 #if UNITY_EDITOR
