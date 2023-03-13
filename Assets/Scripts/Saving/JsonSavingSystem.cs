@@ -13,11 +13,13 @@ namespace RPG.Saving
   {
     private const string ext = ".json";
 
-    public IEnumerator LoadLastScene(string saveFile){
+    public IEnumerator LoadLastScene(string saveFile)
+    {
       JObject state = LoadJsonFromFile(saveFile);
       IDictionary<string, JToken> statedict = state;
       int buildIndex = SceneManager.GetActiveScene().buildIndex;
-      if(statedict.ContainsKey("lastSceneBuildIndex")){
+      if (statedict.ContainsKey("lastSceneBuildIndex"))
+      {
         buildIndex = (int)statedict["lastSceneBuildIndex"];
       }
       yield return SceneManager.LoadSceneAsync(buildIndex);
@@ -31,13 +33,12 @@ namespace RPG.Saving
     }
     public void Load(string saveName)
     {
-      string path = GetPathFromSaveName(saveName);
-      print("Loading from: " + path);
-      using (FileStream stream = File.Open(path, FileMode.Open))
-      {
-        byte[] buffer = new byte[stream.Length];
-        stream.Read(buffer, 0, buffer.Length);
-      }
+      RestoreFromToken(LoadJsonFromFile(saveName));
+    }
+
+    public void Delete(string saveName)
+    {
+      File.Delete(GetPathFromSaveName(saveName));
     }
 
     private void CaptureAsToken(JObject state)
@@ -63,22 +64,30 @@ namespace RPG.Saving
 
     }
 
-    private void SaveFileAsJson(string saveName, JObject state){
+    private void SaveFileAsJson(string saveName, JObject state)
+    {
       string path = GetPathFromSaveName(saveName);
-      using(var textWriter = File.CreateText(path)){
-        using(var writer = new JsonTextWriter(textWriter)){
+
+      using (var textWriter = File.CreateText(path))
+      {
+        using (var writer = new JsonTextWriter(textWriter))
+        {
           writer.Formatting = Formatting.Indented;
+
           state.WriteTo(writer);
         }
       }
     }
 
-    private JObject LoadJsonFromFile(string saveName){
+    private JObject LoadJsonFromFile(string saveName)
+    {
       string path = GetPathFromSaveName(saveName);
-      if(!File.Exists(path)) return new JObject();
+      if (!File.Exists(path)) return new JObject();
 
-      using (var textReader = File.OpenText(path)){
-        using (var reader = new JsonTextReader(textReader)){
+      using (var textReader = File.OpenText(path))
+      {
+        using (var reader = new JsonTextReader(textReader))
+        {
           reader.FloatParseHandling = FloatParseHandling.Double;
 
           return JObject.Load(reader);
