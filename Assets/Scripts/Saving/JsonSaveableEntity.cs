@@ -83,6 +83,4 @@ namespace RPG.Saving
       return false;
     }
   }
-
-  //bingbong commit
 }
