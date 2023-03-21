@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using RPG.Core;
 using RPG.Stats;
+using RPG.Saving;
 using UnityEngine;
+using Newtonsoft.Json.Linq;
 
 namespace RPG.Attributes
 {
-  public class HealthPoints : MonoBehaviour
+  public class HealthPoints : MonoBehaviour, IJsonSaveable
   {
     float currentHealth;
     float maxHealth;
@@ -54,6 +56,16 @@ namespace RPG.Attributes
     public bool GetIsDead()
     {
       return isDead;
+    }
+
+    public JToken CaptureAsJToken()
+    {
+      return JToken.FromObject(currentHealth);
+    }
+
+    public void RestoreFromJToken(JToken state)
+    {
+      currentHealth = state.ToObject<float>();
     }
   }
 }
