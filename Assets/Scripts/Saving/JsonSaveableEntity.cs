@@ -27,7 +27,7 @@ namespace RPG.Saving
         JToken token = saveable.CaptureAsJToken();
         string component = saveable.GetType().ToString();
         Debug.Log($"{name} Capture {component} = {token.ToString()}");
-        stateDict[saveable.GetType().ToString()] = token;
+        stateDict[component] = token;
       }
       return state;
     }
