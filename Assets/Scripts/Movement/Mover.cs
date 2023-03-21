@@ -54,13 +54,13 @@ namespace RPG.Movement
     }
 
     public JToken CaptureAsJToken(){
-      return JToken.FromObject(transform.position);
+      return transform.position.ToToken();
     }
 
     public void RestoreFromJToken(JToken state)
     {
       navMeshAgent.enabled = false;
-      transform.position = state.ToObject<Vector3>();
+      transform.position = state.ToVector3();
       navMeshAgent.enabled = true;
       GetComponent<ActionScheduler>().CancelCurrentAction();
     }
