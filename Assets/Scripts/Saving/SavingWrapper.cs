@@ -8,16 +8,28 @@ namespace RPG.Saving
   {
     const string defaultSaveFile = "defaultSave";
 
+    private void Start()
+    {
+      Load();
+    }
     private void Update()
     {
       if (Input.GetKeyDown(KeyCode.S))
       {
-        GetComponent<JsonSavingSystem>().Save(defaultSaveFile);
+        Save();
       }
       if (Input.GetKeyDown(KeyCode.L))
       {
-        GetComponent<JsonSavingSystem>().Load(defaultSaveFile);
+        Load();
       }
+    }
+    public void Save()
+    {
+      GetComponent<JsonSavingSystem>().Save(defaultSaveFile);
+    }
+    public void Load()
+    {
+      GetComponent<JsonSavingSystem>().Load(defaultSaveFile);
     }
   }
 }
