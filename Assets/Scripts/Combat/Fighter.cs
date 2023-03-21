@@ -4,10 +4,12 @@ using UnityEngine;
 using RPG.Core;
 using RPG.Attributes;
 using RPG.Movement;
+using RPG.Saving;
+using Newtonsoft.Json.Linq;
 
 namespace RPG.Combat
 {
-  public class Fighter : MonoBehaviour, IAction
+  public class Fighter : MonoBehaviour, IAction, IJsonSaveable
   {
     [SerializeField] Transform rightHandTransform = null;
     [SerializeField] Transform leftHandTransform = null;
@@ -104,6 +106,18 @@ namespace RPG.Combat
 
     public HealthPoints GetTarget(){
       return target;
+    }
+
+    public JToken CaptureAsJToken()
+    {
+      return JToken.FromObject(currentWeapon.name);
+    }
+
+    public void RestoreFromJToken(JToken state)
+    {
+      string weaponName = state.ToObject<string>();
+      Weapon weapon = UnityEngine.Resources.Load<Weapon>(weaponName);
+      EquipWeapon(weapon);
     }
   }
 }
