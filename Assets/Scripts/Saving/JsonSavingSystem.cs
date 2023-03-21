@@ -59,6 +59,7 @@ namespace RPG.Saving
       {
         stateDict[saveable.GetUniqueID()] = saveable.CaptureAsJToken();
       }
+      stateDict["lastSceneBuildIndex"] = SceneManager.GetActiveScene().buildIndex;
     }
 
     private void RestoreFromToken(JObject state)

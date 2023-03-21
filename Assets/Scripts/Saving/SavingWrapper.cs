@@ -8,9 +8,12 @@ namespace RPG.Saving
   {
     const string defaultSaveFile = "defaultSave";
 
-    private void Start()
+    JsonSavingSystem save;
+
+    private IEnumerator Start()
     {
-      Load();
+      save = GetComponent<JsonSavingSystem>();
+      yield return save.LoadLastScene(defaultSaveFile);
     }
     private void Update()
     {
