@@ -15,13 +15,22 @@ MonoBehaviour:
   characterClasses:
   - className: 1
     stats:
-      stat: 0000000000000000
+    - stat: 0
+      levels:
+      - 50
+      - 100
+      - 200
+    - stat: 1
       levels: []
   - className: 2
     stats:
-      stat: 00000000
+    - stat: 0
+      levels: []
+    - stat: 0
       levels: []
   - className: 3
     stats:
-      stat: 
+    - stat: 0
+      levels: []
+    - stat: 0
       levels: []
