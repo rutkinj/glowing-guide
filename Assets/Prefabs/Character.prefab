@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 1992414555}
   - component: {fileID: 1992414556}
   - component: {fileID: -8685676745161960500}
+  - component: {fileID: -904478576383042234}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -169,9 +170,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efd42546f51eb4d8cb1b7948fcaa043a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startLevel: 1
-  characterClass: 0
   progression: {fileID: 11400000, guid: 23ed4820fd86e4ed2a3fa5648e271e45, type: 2}
+  characterClass: 0
+  startLevel: 1
 --- !u!114 &-2881270095572792611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,7 +185,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a69f626890c34b02b920bebd15736a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
 --- !u!114 &6857735178471699350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,6 +238,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2abefc735db3f437f96ddf84d5b8a3ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-904478576383042234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6890645859421257475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51ad6b29cc70c450997f77d2ee0ec293, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueID: 
 --- !u!1001 &5082601271717830955
 PrefabInstance:
   m_ObjectHideFlags: 0
