@@ -20,17 +20,27 @@ MonoBehaviour:
       - 50
       - 100
       - 200
-    - stat: 1
-      levels: []
   - className: 2
     stats:
     - stat: 0
-      levels: []
-    - stat: 0
-      levels: []
+      levels:
+      - 20
+      - 30
+      - 40
+    - stat: 1
+      levels:
+      - 10
+      - 20
+      - 30
   - className: 3
     stats:
     - stat: 0
-      levels: []
-    - stat: 0
-      levels: []
+      levels:
+      - 10
+      - 20
+      - 30
+    - stat: 1
+      levels:
+      - 11
+      - 22
+      - 33
