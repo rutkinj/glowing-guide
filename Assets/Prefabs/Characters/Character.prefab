@@ -14,13 +14,13 @@ GameObject:
   - component: {fileID: 2952406247551192290}
   - component: {fileID: 5550275950894527498}
   - component: {fileID: 8580274832982909101}
-  - component: {fileID: 8346978098641046049}
   - component: {fileID: -2881270095572792611}
   - component: {fileID: 6857735178471699350}
   - component: {fileID: 1992414555}
   - component: {fileID: 1992414556}
   - component: {fileID: -8685676745161960500}
   - component: {fileID: -904478576383042234}
+  - component: {fileID: 8346978098641046049}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -158,21 +158,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &8346978098641046049
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6890645859421257475}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efd42546f51eb4d8cb1b7948fcaa043a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  progression: {fileID: 11400000, guid: 23ed4820fd86e4ed2a3fa5648e271e45, type: 2}
-  characterClass: 0
-  startLevel: 1
 --- !u!114 &-2881270095572792611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,6 +236,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uniqueID: 
+--- !u!114 &8346978098641046049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6890645859421257475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efd42546f51eb4d8cb1b7948fcaa043a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progression: {fileID: 11400000, guid: 23ed4820fd86e4ed2a3fa5648e271e45, type: 2}
+  characterClass: 0
+  startLevel: 1
 --- !u!1001 &5082601271717830955
 PrefabInstance:
   m_ObjectHideFlags: 0
