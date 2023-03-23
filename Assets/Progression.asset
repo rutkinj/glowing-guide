@@ -20,6 +20,11 @@ MonoBehaviour:
       - 50
       - 100
       - 200
+    - stat: 2
+      levels:
+      - 10
+      - 30
+      - 50
   - className: 2
     stats:
     - stat: 0
