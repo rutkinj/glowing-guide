@@ -23,8 +23,8 @@ MonoBehaviour:
     - stat: 2
       levels:
       - 10
+      - 20
       - 30
-      - 50
   - className: 2
     stats:
     - stat: 0
