@@ -25,6 +25,10 @@ namespace RPG.Saving
       {
         Load();
       }
+      if (Input.GetKeyDown(KeyCode.D))
+      {
+        Delete();
+      }
     }
     public void Save()
     {
@@ -33,6 +37,10 @@ namespace RPG.Saving
     public void Load()
     {
       GetComponent<JsonSavingSystem>().Load(defaultSaveFile);
+    }
+
+    public void Delete(){
+      GetComponent<JsonSavingSystem>().Delete(defaultSaveFile);
     }
   }
 }
