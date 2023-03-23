@@ -4283,8 +4283,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1047971492049722972, guid: 31e3cef9736c6403db84a6c5c1aa2341, type: 3}
       propertyPath: startLevel
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1047971492049722972, guid: 31e3cef9736c6403db84a6c5c1aa2341, type: 3}
+      propertyPath: levelUpEffect
+      value: 
+      objectReference: {fileID: 8414569459872777687, guid: d903bfce37a8a4655b90067ae7ea72ce, type: 3}
     - target: {fileID: 7778348212165846416, guid: 31e3cef9736c6403db84a6c5c1aa2341, type: 3}
       propertyPath: m_IsActive
       value: 1
