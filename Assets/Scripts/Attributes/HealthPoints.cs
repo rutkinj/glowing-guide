@@ -41,7 +41,6 @@ namespace RPG.Attributes
         GiveExp(instigator);
         DeathBehavior();
       }
-      print("hp: " + currentHealth);
     }
 
     private void GiveExp(GameObject instigator)
@@ -54,9 +53,20 @@ namespace RPG.Attributes
       }
     }
     public void CalcHealthOnLevelUp(){
-      float currentHpPercent = GetHPPercentage()/100;
-      maxHealth = baseStats.GetStat(Stat.Health);
-      currentHealth = maxHealth * currentHpPercent;
+      // //// full heal ////
+      // maxHealth = baseStats.GetStat(Stat.Health);
+      // currentHealth = maxHealth;
+
+      // //// maintain current % ////
+      // float currentHpPercent = GetHPPercentage()/100;
+      // maxHealth = baseStats.GetStat(Stat.Health);
+      // currentHealth = maxHealth * currentHpPercent;
+
+      //// add increase to current hp ////
+      float newMax = baseStats.GetStat(Stat.Health);
+      float maxHpDiff = newMax - maxHealth;
+      maxHealth = newMax;
+      currentHealth += maxHpDiff;
     }
     public float GetHPPercentage()
     {
