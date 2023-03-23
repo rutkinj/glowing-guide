@@ -16,7 +16,7 @@ namespace RPG.Attributes
     }
 
     private void Update() {
-        healthDisplayText.SetText(string.Format("{0:0}%", healthPoints.GetHPPercentage()));
+        healthDisplayText.SetText(healthPoints.CurrentHealthAsString());
     }
   }
 }

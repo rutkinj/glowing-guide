@@ -35,6 +35,7 @@ namespace RPG.Attributes
     }
     public void LoseHealth(GameObject instigator, float damage)
     {
+      print(gameObject.name + " took damage: " + damage);
       currentHealth -= damage;
       if (currentHealth <= 0 && !isDead)
       {
@@ -71,6 +72,10 @@ namespace RPG.Attributes
     public float GetHPPercentage()
     {
       return (currentHealth / maxHealth) * 100;
+    }
+
+    public string CurrentHealthAsString(){
+      return currentHealth.ToString() + " / " + maxHealth.ToString();
     }
 
     private void DeathBehavior()

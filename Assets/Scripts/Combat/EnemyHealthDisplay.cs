@@ -22,7 +22,7 @@ namespace RPG.Combat
       HealthPoints target = player.GetTarget();
       if (target != null)
       {
-        healthDisplayText.SetText(string.Format("{0:0}%", target.GetHPPercentage()));
+        healthDisplayText.SetText(target.CurrentHealthAsString());
       }
       else
       {
