@@ -10,7 +10,12 @@ namespace RPG.Saving
 
     JsonSavingSystem save;
 
-    private IEnumerator Start()
+    private void Awake()
+    {
+      StartCoroutine(LoadLastScene());
+    }
+
+    private IEnumerator LoadLastScene()
     {
       save = GetComponent<JsonSavingSystem>();
       yield return save.LoadLastScene(defaultSaveFile);
@@ -39,7 +44,8 @@ namespace RPG.Saving
       GetComponent<JsonSavingSystem>().Load(defaultSaveFile);
     }
 
-    public void Delete(){
+    public void Delete()
+    {
       GetComponent<JsonSavingSystem>().Delete(defaultSaveFile);
     }
   }
