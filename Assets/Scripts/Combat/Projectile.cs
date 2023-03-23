@@ -31,7 +31,7 @@ public class Projectile : MonoBehaviour
       return;
     }
     if (target.GetIsDead()) return;
-    target.TakeDamage(instigator, damage);
+    target.LoseHealth(instigator, damage);
     Destroy(gameObject);
   }
 

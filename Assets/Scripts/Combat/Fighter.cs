@@ -62,7 +62,7 @@ namespace RPG.Combat
       }
       else
       {
-        target.TakeDamage(gameObject, currentWeapon.WeaponDamage);
+        target.LoseHealth(gameObject, currentWeapon.WeaponDamage);
       }
     }
 

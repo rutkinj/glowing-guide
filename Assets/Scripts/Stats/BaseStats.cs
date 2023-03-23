@@ -14,6 +14,7 @@ namespace RPG.Stats
     Experience experience = null;
     int currentLevel = 0;
     
+    public event Action onLevelUp;
 
     private void Start() {
       experience = GetComponent<Experience>();
@@ -29,6 +30,7 @@ namespace RPG.Stats
       if(newLevel > currentLevel){
         currentLevel = newLevel;
         LevelUpEffect();
+        onLevelUp();
       }
     }
 
@@ -39,7 +41,7 @@ namespace RPG.Stats
 
     public float GetStat(Stat stat)
     {
-      return progression.GetStat(stat, characterClass, startLevel);
+      return progression.GetStat(stat, characterClass, GetLevel());
     }
 
     public int GetLevel(){

@@ -10,19 +10,30 @@ namespace RPG.Attributes
 {
   public class HealthPoints : MonoBehaviour, IJsonSaveable
   {
+    BaseStats baseStats;
     float currentHealth = -999;
     float maxHealth;
     bool isDead = false;
 
     private void Start()
     {
-      maxHealth = GetComponent<BaseStats>().GetStat(Stat.Health);
+      baseStats = GetComponent<BaseStats>();
+      baseStats.onLevelUp += CalcHealthOnLevelUp;
+
+      maxHealth = baseStats.GetStat(Stat.Health);
       if (currentHealth < 0)
       {
         currentHealth = maxHealth;
       }
     }
-    public void TakeDamage(GameObject instigator, float damage)
+
+    public void GainHealth(float hpGain){
+      currentHealth += hpGain;
+      if(currentHealth > maxHealth){
+        currentHealth = maxHealth;
+      }
+    }
+    public void LoseHealth(GameObject instigator, float damage)
     {
       currentHealth -= damage;
       if (currentHealth <= 0 && !isDead)
@@ -42,7 +53,11 @@ namespace RPG.Attributes
         experience.GainExperience(expAmount);
       }
     }
-
+    public void CalcHealthOnLevelUp(){
+      float currentHpPercent = GetHPPercentage()/100;
+      maxHealth = baseStats.GetStat(Stat.Health);
+      currentHealth = maxHealth * currentHpPercent;
+    }
     public float GetHPPercentage()
     {
       return (currentHealth / maxHealth) * 100;
