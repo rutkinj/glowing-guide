@@ -10,14 +10,17 @@ namespace RPG.Attributes
 {
   public class HealthPoints : MonoBehaviour, IJsonSaveable
   {
-    float currentHealth;
+    float currentHealth = -999;
     float maxHealth;
     bool isDead = false;
 
     private void Start()
     {
       maxHealth = GetComponent<BaseStats>().GetStat(Stat.Health);
-      currentHealth = maxHealth;
+      if (currentHealth < 0)
+      {
+        currentHealth = maxHealth;
+      }
     }
     public void TakeDamage(GameObject instigator, float damage)
     {
@@ -66,6 +69,9 @@ namespace RPG.Attributes
     public void RestoreFromJToken(JToken state)
     {
       currentHealth = state.ToObject<float>();
+      if(currentHealth == 0){
+        DeathBehavior();
+      }
     }
   }
 }
