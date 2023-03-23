@@ -14,6 +14,17 @@ namespace RPG.Stats
     {
       return progression.GetStat(stat, characterClass, startLevel);
     }
+
+    public int GetLevel()
+    {
+      float currentExp = GetComponent<Experience>().GetExperiencePoints();
+      int maxLevel = progression.GetLevels(Stat.ExperienceToLevelUp, characterClass);
+      for(int levels = 1; levels < maxLevel; levels ++){
+        float expToLevel = progression.GetStat(Stat.ExperienceToLevelUp, characterClass, levels);
+        if (currentExp < expToLevel) return levels;
+      }
+      return maxLevel + 1;
+    }
   }
 }
 
