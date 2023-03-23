@@ -22,8 +22,8 @@ namespace RPG.Stats
 
       float currentExp = experience.GetExperiencePoints();
       int maxLevel = progression.GetLevels(Stat.ExperienceToLevelUp, characterClass);
-      
-      for(int levels = 1; levels < maxLevel; levels ++){
+
+      for(int levels = 1; levels <= maxLevel; levels ++){
         float expToLevel = progression.GetStat(Stat.ExperienceToLevelUp, characterClass, levels);
         if (currentExp < expToLevel) return levels;
       }
