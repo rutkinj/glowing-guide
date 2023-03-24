@@ -27,7 +27,6 @@ public class Projectile : MonoBehaviour
   {
     if (other.GetComponent<HealthPoints>() != target)
     {
-      print("not the target");
       return;
     }
     if (target.GetIsDead()) return;
