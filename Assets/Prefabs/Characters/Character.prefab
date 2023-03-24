@@ -196,8 +196,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a768f00fab48c42e980cb9ddc60ed153, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rightHandTransform: {fileID: 0}
-  leftHandTransform: {fileID: 0}
+  rightHandTransform: {fileID: 5082601271718284385}
+  leftHandTransform: {fileID: 5082601271718260995}
   defaultWeapon: {fileID: 11400000, guid: 961ed18f779ac4fc1a031fd5a1c730e3, type: 2}
 --- !u!114 &1992414556
 MonoBehaviour:
@@ -250,7 +250,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progression: {fileID: 11400000, guid: 23ed4820fd86e4ed2a3fa5648e271e45, type: 2}
   characterClass: 0
+  levelUpEffect: {fileID: 0}
   startLevel: 1
+  useModifiers: 0
 --- !u!1001 &5082601271717830955
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -312,6 +314,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10f9cee6cfdd7df43a5d805acd44763f, type: 3}
+--- !u!4 &5082601271718260995 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 495656, guid: 10f9cee6cfdd7df43a5d805acd44763f, type: 3}
+  m_PrefabInstance: {fileID: 5082601271717830955}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5082601271718284385 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 470346, guid: 10f9cee6cfdd7df43a5d805acd44763f, type: 3}
+  m_PrefabInstance: {fileID: 5082601271717830955}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5082601271718285999 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 471940, guid: 10f9cee6cfdd7df43a5d805acd44763f, type: 3}

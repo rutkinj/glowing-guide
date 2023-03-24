@@ -64,8 +64,8 @@ MonoBehaviour:
       - 3
       - 6
       - 9
-  - className: 1
+  - className: 4
     stats:
     - stat: 0
       levels:
-      - 1e+10
+      - 100
