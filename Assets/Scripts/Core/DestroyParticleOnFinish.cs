@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RPG.Core
 {
-  public class DestroyPaticleOnFinish : MonoBehaviour
+  public class DestroyParticleOnFinish : MonoBehaviour
   {
     [SerializeField] GameObject toDestroy = null;
     void Update()
