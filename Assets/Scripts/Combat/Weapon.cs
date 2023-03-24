@@ -18,6 +18,8 @@ namespace RPG.Combat
     [SerializeField] Projectile projectile = null;
     const string weaponName = "Weapon";
     public float WeaponDamage { get => weaponDamage; }
+
+    [Range(-1,1)] public float DamagePercentMod = 0;
     public float WeaponRange { get => weaponRange; }
     public float AttackDelay { get => attackDelay; }
 

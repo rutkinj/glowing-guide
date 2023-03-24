@@ -113,6 +113,7 @@ namespace RPG.Combat
       GetComponent<Animator>().ResetTrigger("attack");
       GetComponent<Animator>().SetTrigger("cancelAttack");
       target = null;
+      // GetComponent<Mover>().Cancel();
     }
 
     ///// IJsonSaveable
@@ -130,9 +131,17 @@ namespace RPG.Combat
     }
 
     ///// IModifierProvider
-    public IEnumerable<float> GetModifiers(Stat stat)
+    public IEnumerable<float> GetAdditiveModifiers(Stat stat)
     {
-      throw new System.NotImplementedException();
+      if (stat == Stat.Damage){
+        yield return currentWeapon.WeaponDamage;
+      }
+    }
+    public IEnumerable<float> GetPercentileModifiers(Stat stat)
+    {
+      if (stat == Stat.Damage){
+        yield return currentWeapon.DamagePercentMod;
+      }
     }
   }
 }

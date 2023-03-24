@@ -4,7 +4,8 @@ namespace RPG.Stats
 {
   public interface IModifierProvider
   {
-    IEnumerable<float> GetModifiers(Stat stat);
+    IEnumerable<float> GetAdditiveModifiers(Stat stat);
+    IEnumerable<float> GetPercentileModifiers(Stat stat);
   }
 }
 

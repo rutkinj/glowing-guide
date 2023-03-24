@@ -19,3 +19,4 @@ MonoBehaviour:
   weaponRange: 2
   attackDelay: 1
   projectile: {fileID: 0}
+  DamagePercentMod: 0
