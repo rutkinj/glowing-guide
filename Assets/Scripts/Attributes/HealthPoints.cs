@@ -27,16 +27,18 @@ namespace RPG.Attributes
       }
     }
 
-    public void GainHealth(float hpGain){
+    public void GainHealth(float hpGain)
+    {
       currentHealth += hpGain;
-      if(currentHealth > maxHealth){
+      if (currentHealth > maxHealth)
+      {
         currentHealth = maxHealth;
       }
     }
     public void LoseHealth(GameObject instigator, float damage)
     {
       print(gameObject.name + " took damage: " + damage);
-      currentHealth -= damage;
+      if (gameObject.tag != "PunchingBag") currentHealth -= damage;
       if (currentHealth <= 0 && !isDead)
       {
         GiveExp(instigator);
@@ -53,7 +55,8 @@ namespace RPG.Attributes
         experience.GainExperience(expAmount);
       }
     }
-    public void CalcHealthOnLevelUp(){
+    public void CalcHealthOnLevelUp()
+    {
       // //// full heal ////
       // maxHealth = baseStats.GetStat(Stat.Health);
       // currentHealth = maxHealth;
@@ -74,7 +77,8 @@ namespace RPG.Attributes
       return (currentHealth / maxHealth) * 100;
     }
 
-    public string CurrentHealthAsString(){
+    public string CurrentHealthAsString()
+    {
       return currentHealth.ToString() + " / " + maxHealth.ToString();
     }
 
@@ -99,7 +103,8 @@ namespace RPG.Attributes
     public void RestoreFromJToken(JToken state)
     {
       currentHealth = state.ToObject<float>();
-      if(currentHealth == 0){
+      if (currentHealth == 0)
+      {
         DeathBehavior();
       }
     }
