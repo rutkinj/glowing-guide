@@ -25,6 +25,11 @@ MonoBehaviour:
       - 10
       - 20
       - 30
+    - stat: 3
+      levels:
+      - 5
+      - 10
+      - 20
   - className: 2
     stats:
     - stat: 0
@@ -37,6 +42,11 @@ MonoBehaviour:
       - 10
       - 20
       - 30
+    - stat: 3
+      levels:
+      - 4
+      - 7
+      - 10
   - className: 3
     stats:
     - stat: 0
@@ -49,3 +59,8 @@ MonoBehaviour:
       - 11
       - 22
       - 33
+    - stat: 3
+      levels:
+      - 3
+      - 6
+      - 9

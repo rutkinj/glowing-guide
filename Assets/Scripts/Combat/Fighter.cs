@@ -5,6 +5,7 @@ using RPG.Core;
 using RPG.Attributes;
 using RPG.Movement;
 using RPG.Saving;
+using RPG.Stats;
 using Newtonsoft.Json.Linq;
 
 namespace RPG.Combat
@@ -56,13 +57,15 @@ namespace RPG.Combat
     private void Hit()
     {
       if (target == null) return;
+      float damage = GetComponent<BaseStats>().GetStat(Stat.Damage);
       if (currentWeapon.HasProjectile())
       {
-        currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target, gameObject);
+        currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target, gameObject, damage);
       }
       else
       {
-        target.LoseHealth(gameObject, currentWeapon.WeaponDamage);
+        
+        target.LoseHealth(gameObject, damage);
       }
     }
 
