@@ -41,7 +41,12 @@ namespace RPG.Stats
 
     public float GetStat(Stat stat)
     {
-      return progression.GetStat(stat, characterClass, GetLevel());
+      return progression.GetStat(stat, characterClass, GetLevel())  + GetModifier(stat);
+    }
+
+    private float GetModifier(Stat stat)
+    {
+      throw new NotImplementedException();
     }
 
     public int GetLevel(){
