@@ -5,6 +5,7 @@ using RPG.Stats;
 using RPG.Saving;
 using UnityEngine;
 using Newtonsoft.Json.Linq;
+using System;
 
 namespace RPG.Attributes
 {
@@ -103,10 +104,19 @@ namespace RPG.Attributes
     public void RestoreFromJToken(JToken state)
     {
       currentHealth = state.ToObject<float>();
-      if (currentHealth == 0)
+      if (currentHealth <= 0)
       {
         DeathBehavior();
       }
+      else{
+        Revive();
+      }
+    }
+
+    private void Revive()
+    {
+      isDead = false;
+      GetComponent<Animator>().SetTrigger("revive");
     }
   }
 }
