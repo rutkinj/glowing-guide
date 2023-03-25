@@ -3210,7 +3210,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainingDummy (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3185700965748726205, guid: f82474ba097c3435baddf6f5558c59d5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f82474ba097c3435baddf6f5558c59d5, type: 3}
 --- !u!1001 &491644394
 PrefabInstance:
