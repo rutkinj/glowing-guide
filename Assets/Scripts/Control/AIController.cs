@@ -32,7 +32,7 @@ namespace RPG.Control
       healthPoints = GetComponent<HealthPoints>();
       player = GameObject.FindWithTag("Player");
     }
-
+    
     private void Start()
     {
       guardPosition = transform.position;

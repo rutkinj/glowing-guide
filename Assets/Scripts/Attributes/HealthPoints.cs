@@ -6,27 +6,27 @@ using RPG.Saving;
 using UnityEngine;
 using Newtonsoft.Json.Linq;
 using System;
+using RPG.Utils;
 
 namespace RPG.Attributes
 {
   public class HealthPoints : MonoBehaviour, IJsonSaveable
   {
     BaseStats baseStats;
-    float currentHealth = -999;
+    LazyValue<float> currentHealth;
     float maxHealth;
     bool isDead = false;
 
     private void Awake()
     {
       baseStats = GetComponent<BaseStats>();
+      currentHealth = new LazyValue<float>(GetInitialHealth);
+      maxHealth = currentHealth.value;
     }
-    private void Start()
+
+    private float GetInitialHealth()
     {
-      maxHealth = baseStats.GetStat(Stat.Health);
-      if (currentHealth < 0)
-      {
-        currentHealth = maxHealth;
-      }
+      return baseStats.GetStat(Stat.Health);
     }
 
     private void OnEnable()
@@ -41,17 +41,17 @@ namespace RPG.Attributes
 
     public void GainHealth(float hpGain)
     {
-      currentHealth += hpGain;
-      if (currentHealth > maxHealth)
+      currentHealth.value += hpGain;
+      if (currentHealth.value > maxHealth)
       {
-        currentHealth = maxHealth;
+        currentHealth.value = maxHealth;
       }
     }
     public void LoseHealth(GameObject instigator, float damage)
     {
       print(gameObject.name + " took damage: " + damage);
-      if (gameObject.tag != "PunchingBag") currentHealth -= damage;
-      if (currentHealth <= 0 && !isDead)
+      if (gameObject.tag != "PunchingBag") currentHealth.value -= damage;
+      if (currentHealth.value <= 0 && !isDead)
       {
         GiveExp(instigator);
         DeathBehavior();
@@ -84,17 +84,17 @@ namespace RPG.Attributes
       maxHealth = newMax;
       if (maxHpDiff > 0) // bugfix for loading a save where your level is lower
       {
-        currentHealth += maxHpDiff;
+        currentHealth.value += maxHpDiff;
       }
     }
     public float GetHPPercentage()
     {
-      return (currentHealth / maxHealth) * 100;
+      return (currentHealth.value / maxHealth) * 100;
     }
 
     public string CurrentHealthAsString()
     {
-      return currentHealth.ToString() + " / " + maxHealth.ToString();
+      return currentHealth.value.ToString() + " / " + maxHealth.ToString();
     }
 
     private void DeathBehavior()
@@ -102,7 +102,7 @@ namespace RPG.Attributes
       GetComponent<Animator>().SetTrigger("die");
       GetComponent<ActionScheduler>().CancelCurrentAction();
       isDead = true;
-      currentHealth = 0;
+      currentHealth.value = 0;
     }
 
     public bool GetIsDead()
@@ -112,13 +112,13 @@ namespace RPG.Attributes
 
     public JToken CaptureAsJToken()
     {
-      return JToken.FromObject(currentHealth);
+      return JToken.FromObject(currentHealth.value);
     }
 
     public void RestoreFromJToken(JToken state)
     {
-      currentHealth = state.ToObject<float>();
-      if (currentHealth <= 0)
+      currentHealth.value = state.ToObject<float>();
+      if (currentHealth.value <= 0)
       {
         DeathBehavior();
       }
