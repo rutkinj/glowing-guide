@@ -17,11 +17,13 @@ namespace RPG.Stats
     {
       return experiencePoints;
     }
+
     public void GainExperience(float exp)
     {
       experiencePoints += exp;
       onExpGain();
     }
+
     public JToken CaptureAsJToken()
     {
       return JToken.FromObject(experiencePoints);
@@ -30,6 +32,7 @@ namespace RPG.Stats
     public void RestoreFromJToken(JToken state)
     {
       experiencePoints = state.ToObject<float>();
+      onExpGain();
     }
   }
 

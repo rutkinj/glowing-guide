@@ -16,7 +16,7 @@ namespace RPG.Control
     [SerializeField] PatrolPath patrolPath;
     [SerializeField] float waypointTolerance = 1f;
     [SerializeField] float patrolResttime = .5f;
-    [Range(0f,1f)][SerializeField] float patrolSpeedFraction = 0.5f;
+    [Range(0f, 1f)][SerializeField] float patrolSpeedFraction = 0.5f;
 
     Fighter fighter;
     HealthPoints healthPoints;
@@ -26,14 +26,17 @@ namespace RPG.Control
     float timeSinceSeenPlayer = Mathf.Infinity;
     float timeAtWaypoint = Mathf.Infinity;
 
-    private void Start()
+    private void Awake()
     {
       fighter = GetComponent<Fighter>();
       healthPoints = GetComponent<HealthPoints>();
       player = GameObject.FindWithTag("Player");
-      guardPosition = transform.position;
     }
 
+    private void Start()
+    {
+      guardPosition = transform.position;
+    }
 
     private void Update()
     {
@@ -64,7 +67,7 @@ namespace RPG.Control
         if (AtWaypoint())
         {
           CycleWaypoint();
-          timeAtWaypoint = UnityEngine.Random.Range(0f,2f);
+          timeAtWaypoint = UnityEngine.Random.Range(0f, 2f);
         }
         nextPosition = GetCurrentWaypoint();
       }

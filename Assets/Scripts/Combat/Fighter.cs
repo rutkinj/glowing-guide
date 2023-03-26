@@ -20,7 +20,7 @@ namespace RPG.Combat
     Weapon currentWeapon = null;
     float timeSinceLastAttack = Mathf.Infinity;
 
-    private void Start()
+    private void Awake()
     {
       mover = GetComponent<Mover>();
       EquipWeapon(defaultWeapon);

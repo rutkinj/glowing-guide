@@ -26,7 +26,6 @@ namespace RPG.Saving
       {
         JToken token = saveable.CaptureAsJToken();
         string component = saveable.GetType().ToString();
-        Debug.Log($"{name} Capture {component} = {token.ToString()}");
         stateDict[component] = token;
       }
       return state;
@@ -41,7 +40,6 @@ namespace RPG.Saving
         string component = saveable.GetType().ToString();
         if (stateDict.ContainsKey(component))
         {
-          Debug.Log($"{name} Restore {component} = {stateDict[component].ToString()}");
           saveable.RestoreFromJToken(stateDict[component]);
         }
       }

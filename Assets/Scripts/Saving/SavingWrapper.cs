@@ -8,17 +8,17 @@ namespace RPG.Saving
   {
     const string defaultSaveFile = "defaultSave";
 
-    JsonSavingSystem save;
+    JsonSavingSystem saveSys;
 
     private void Awake()
     {
+      saveSys = GetComponent<JsonSavingSystem>();
       StartCoroutine(LoadLastScene());
     }
 
     private IEnumerator LoadLastScene()
     {
-      save = GetComponent<JsonSavingSystem>();
-      yield return save.LoadLastScene(defaultSaveFile);
+      yield return saveSys.LoadLastScene(defaultSaveFile);
     }
     private void Update()
     {
@@ -37,16 +37,16 @@ namespace RPG.Saving
     }
     public void Save()
     {
-      GetComponent<JsonSavingSystem>().Save(defaultSaveFile);
+      saveSys.Save(defaultSaveFile);
     }
     public void Load()
     {
-      GetComponent<JsonSavingSystem>().Load(defaultSaveFile);
+      saveSys.Load(defaultSaveFile);
     }
 
     public void Delete()
     {
-      GetComponent<JsonSavingSystem>().Delete(defaultSaveFile);
+      saveSys.Delete(defaultSaveFile);
     }
   }
 }

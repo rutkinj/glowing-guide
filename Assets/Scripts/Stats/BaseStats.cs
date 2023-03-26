@@ -17,14 +17,29 @@ namespace RPG.Stats
 
     public event Action onLevelUp;
 
-    private void Start()
+    private void Awake()
     {
       experience = GetComponent<Experience>();
-      currentLevel = CalculateLevel();
+    }
 
+    private void Start()
+    {
+      currentLevel = CalculateLevel();
+    }
+
+    private void OnEnable()
+    {
       if (experience != null)
       {
         experience.onExpGain += UpdateLevel;
+      }
+    }
+
+    private void OnDisable()
+    {
+      if (experience != null)
+      {
+        experience.onExpGain -= UpdateLevel;
       }
     }
 
@@ -35,6 +50,11 @@ namespace RPG.Stats
       {
         currentLevel = newLevel;
         LevelUpEffect();
+        onLevelUp();
+      }
+      else if (newLevel < currentLevel)
+      {
+        currentLevel = newLevel;
         onLevelUp();
       }
     }
@@ -57,7 +77,7 @@ namespace RPG.Stats
     private float GetAdditiveMods(Stat stat)
     {
       float totalModifier = 0;
-      if(!useModifiers) return totalModifier;
+      if (!useModifiers) return totalModifier;
 
       IModifierProvider[] providers = GetComponents<IModifierProvider>();
       foreach (var provider in providers)
@@ -103,7 +123,6 @@ namespace RPG.Stats
       if (experience == null) return startLevel;
 
       float currentExp = experience.GetExperiencePoints();
-      print("currentExp: " + currentExp);
       int maxLevel = progression.GetLevels(Stat.ExperienceToLevelUp, characterClass);
 
       for (int levels = 1; levels <= maxLevel; levels++)

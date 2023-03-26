@@ -16,16 +16,27 @@ namespace RPG.Attributes
     float maxHealth;
     bool isDead = false;
 
-    private void Start()
+    private void Awake()
     {
       baseStats = GetComponent<BaseStats>();
-      baseStats.onLevelUp += CalcHealthOnLevelUp;
-
+    }
+    private void Start()
+    {
       maxHealth = baseStats.GetStat(Stat.Health);
       if (currentHealth < 0)
       {
         currentHealth = maxHealth;
       }
+    }
+
+    private void OnEnable()
+    {
+      baseStats.onLevelUp += CalcHealthOnLevelUp;
+    }
+
+    private void OnDisable()
+    {
+      baseStats.onLevelUp -= CalcHealthOnLevelUp;
     }
 
     public void GainHealth(float hpGain)
@@ -71,7 +82,10 @@ namespace RPG.Attributes
       float newMax = baseStats.GetStat(Stat.Health);
       float maxHpDiff = newMax - maxHealth;
       maxHealth = newMax;
-      currentHealth += maxHpDiff;
+      if (maxHpDiff > 0) // bugfix for loading a save where your level is lower
+      {
+        currentHealth += maxHpDiff;
+      }
     }
     public float GetHPPercentage()
     {
@@ -108,7 +122,8 @@ namespace RPG.Attributes
       {
         DeathBehavior();
       }
-      else{
+      else
+      {
         Revive();
       }
     }
