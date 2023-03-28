@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using RPG.Movement;
 using RPG.Combat;
 using RPG.Attributes;
+using System;
 
 namespace RPG.Control
 {
@@ -35,10 +37,21 @@ namespace RPG.Control
 
     void Update()
     {
-      if (healthPoints.GetIsDead()) return;
+      if (InteractWithUI()) return;
+      if (healthPoints.GetIsDead())
+      {
+        SetCursor(CursorType.none);
+        return;
+      }
       if (InteractWithCombat()) return;
       if (InteractWithMovement()) return;
       SetCursor(CursorType.none);
+    }
+
+    private bool InteractWithUI()
+    {
+      SetCursor(CursorType.none);
+      return EventSystem.current.IsPointerOverGameObject();
     }
 
     private bool InteractWithCombat()
