@@ -14,19 +14,29 @@ namespace RPG.Attributes
   {
     BaseStats baseStats;
     LazyValue<float> currentHealth;
-    float maxHealth;
+    LazyValue<float> maxHealth;
     bool isDead = false;
 
     private void Awake()
     {
       baseStats = GetComponent<BaseStats>();
-      currentHealth = new LazyValue<float>(GetInitialHealth);
-      maxHealth = currentHealth.value;
+      maxHealth = new LazyValue<float>(GetMaxHealth);
+      currentHealth = new LazyValue<float>(SetCurrentHealthToMax);
     }
 
-    private float GetInitialHealth()
+    private void Start() {
+      maxHealth.ForceInit();
+      currentHealth.ForceInit();
+    }
+
+    private float GetMaxHealth()
     {
       return baseStats.GetStat(Stat.Health);
+    }
+
+    private float SetCurrentHealthToMax()
+    {
+      return maxHealth.value;
     }
 
     private void OnEnable()
@@ -42,9 +52,9 @@ namespace RPG.Attributes
     public void GainHealth(float hpGain)
     {
       currentHealth.value += hpGain;
-      if (currentHealth.value > maxHealth)
+      if (currentHealth.value > maxHealth.value)
       {
-        currentHealth.value = maxHealth;
+        currentHealth.value = maxHealth.value;
       }
     }
     public void LoseHealth(GameObject instigator, float damage)
@@ -70,18 +80,18 @@ namespace RPG.Attributes
     public void CalcHealthOnLevelUp()
     {
       // //// full heal ////
-      // maxHealth = baseStats.GetStat(Stat.Health);
-      // currentHealth = maxHealth;
+      // maxHealth.value = baseStats.GetStat(Stat.Health);
+      // currentHealth = maxHealth.value;
 
       // //// maintain current % ////
       // float currentHpPercent = GetHPPercentage()/100;
-      // maxHealth = baseStats.GetStat(Stat.Health);
-      // currentHealth = maxHealth * currentHpPercent;
+      // maxHealth.value = baseStats.GetStat(Stat.Health);
+      // currentHealth = maxHealth.value * currentHpPercent;
 
       //// add increase to current hp ////
       float newMax = baseStats.GetStat(Stat.Health);
-      float maxHpDiff = newMax - maxHealth;
-      maxHealth = newMax;
+      float maxHpDiff = newMax - maxHealth.value;
+      maxHealth.value = newMax;
       if (maxHpDiff > 0) // bugfix for loading a save where your level is lower
       {
         currentHealth.value += maxHpDiff;
@@ -89,12 +99,12 @@ namespace RPG.Attributes
     }
     public float GetHPPercentage()
     {
-      return (currentHealth.value / maxHealth) * 100;
+      return (currentHealth.value / maxHealth.value) * 100;
     }
 
     public string CurrentHealthAsString()
     {
-      return currentHealth.value.ToString() + " / " + maxHealth.ToString();
+      return currentHealth.value.ToString() + " / " + maxHealth.value.ToString();
     }
 
     private void DeathBehavior()
