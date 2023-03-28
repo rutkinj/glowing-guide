@@ -4560,6 +4560,30 @@ PrefabInstance:
       propertyPath: levelUpEffect
       value: 
       objectReference: {fileID: 8414569459872777687, guid: d903bfce37a8a4655b90067ae7ea72ce, type: 3}
+    - target: {fileID: 3661765369790479654, guid: 31e3cef9736c6403db84a6c5c1aa2341, type: 3}
+      propertyPath: cursorMappings.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3661765369790479654, guid: 31e3cef9736c6403db84a6c5c1aa2341, type: 3}
+      propertyPath: cursorMappings.Array.data[1].type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3661765369790479654, guid: 31e3cef9736c6403db84a6c5c1aa2341, type: 3}
+      propertyPath: cursorMappings.Array.data[2].type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3661765369790479654, guid: 31e3cef9736c6403db84a6c5c1aa2341, type: 3}
+      propertyPath: cursorMappings.Array.data[0].texture
+      value: 
+      objectReference: {fileID: 2800000, guid: 21628736160fcc9488493401da3ef621, type: 3}
+    - target: {fileID: 3661765369790479654, guid: 31e3cef9736c6403db84a6c5c1aa2341, type: 3}
+      propertyPath: cursorMappings.Array.data[1].texture
+      value: 
+      objectReference: {fileID: 2800000, guid: 8ea795c067613354898068091ffc7130, type: 3}
+    - target: {fileID: 3661765369790479654, guid: 31e3cef9736c6403db84a6c5c1aa2341, type: 3}
+      propertyPath: cursorMappings.Array.data[2].texture
+      value: 
+      objectReference: {fileID: 2800000, guid: 2d18e23e3ce249b4489b8bcdd02d3f48, type: 3}
     - target: {fileID: 4311156727549104990, guid: 31e3cef9736c6403db84a6c5c1aa2341, type: 3}
       propertyPath: m_IsActive
       value: 0
