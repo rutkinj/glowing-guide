@@ -30,6 +30,8 @@ namespace RPG.Control
     }
     [SerializeField] CursorMapping[] cursorMappings = null;
 
+    private CursorMapping cachedCursorMapping;
+
     private void Awake()
     {
       healthPoints = GetComponent<HealthPoints>();
@@ -44,7 +46,7 @@ namespace RPG.Control
         return;
       }
       if (InteractWithComponent()) return;
-      if (InteractWithCombat()) return;
+      // if (InteractWithCombat()) return;
       if (InteractWithMovement()) return;
       SetCursor(CursorType.none);
     }
@@ -74,24 +76,16 @@ namespace RPG.Control
       return EventSystem.current.IsPointerOverGameObject();
     }
 
-    private bool InteractWithCombat()
-    {
-      RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
-      foreach (RaycastHit hit in hits)
-      {
-        CombatTarget target = hit.transform.GetComponent<CombatTarget>();
-        if (target != null && !hit.transform.GetComponent<HealthPoints>().GetIsDead())
-        {
-          if (Input.GetMouseButtonDown(0))
-          {
-            GetComponent<Fighter>().Attack(target.gameObject);
-          }
-          SetCursor(CursorType.combat);
-          return true;
-        }
-      }
-      return false;
-    }
+    // private bool InteractWithCombat()
+    // {
+    //   RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
+    //   foreach (RaycastHit hit in hits)
+    //   {
+    //     CombatTarget target = hit.transform.GetComponent<CombatTarget>();
+        
+    //   }
+    //   return false;
+    // }
 
     private bool InteractWithMovement()
     {
@@ -118,8 +112,10 @@ namespace RPG.Control
 
     private void SetCursor(CursorType type)
     {
-      CursorMapping mapping = GetCursorMapping(type);
-      Cursor.SetCursor(mapping.texture, mapping.hotspot, CursorMode.Auto);
+      if(cachedCursorMapping.type == type) return;
+
+      cachedCursorMapping = GetCursorMapping(type);
+      Cursor.SetCursor(cachedCursorMapping.texture, cachedCursorMapping.hotspot, CursorMode.Auto);
     }
 
     private CursorMapping GetCursorMapping(CursorType type)
