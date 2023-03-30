@@ -9,6 +9,10 @@ namespace RPG.Combat
   [RequireComponent(typeof(HealthPoints))]
   public class CombatTarget : MonoBehaviour, IRaycastable
   {
+    public CursorType GetCursorType()
+    {
+      return CursorType.combat;
+    }
     public bool HandleRaycast(PlayerController callingController)
     {
 

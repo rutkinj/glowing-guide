@@ -40,14 +40,17 @@ namespace RPG.Combat
       }
     }
 
+    public CursorType GetCursorType(){
+      return CursorType.pickup;
+    }
+
     public bool HandleRaycast(PlayerController callingController)
     {
       if (Input.GetMouseButtonDown(0))
       {
         Pickup(callingController.GetComponent<Fighter>());
-        return true;
       }
-      return false;
+      return true;
     }
   }
 }
