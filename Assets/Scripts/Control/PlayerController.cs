@@ -58,7 +58,7 @@ namespace RPG.Control
 
         foreach (IRaycastable raycastable in raycastables)
         {
-          if (raycastable.HandleRaycast())
+          if (raycastable.HandleRaycast(this))
           {
             SetCursor(CursorType.combat);
             return true;

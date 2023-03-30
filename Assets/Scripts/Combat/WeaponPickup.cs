@@ -14,13 +14,13 @@ namespace RPG.Combat
     {
       if (other.CompareTag("Player"))
       {
-        Pickup(other);
+        Pickup(other.GetComponent<Fighter>());
       }
     }
 
-    private void Pickup(Collider other)
+    private void Pickup(Fighter fighter)
     {
-      other.GetComponent<Fighter>().EquipWeapon(weapon);
+      fighter.EquipWeapon(weapon);
       StartCoroutine(HideForSeconds(repawnTime));
     }
 
@@ -40,11 +40,11 @@ namespace RPG.Combat
       }
     }
 
-    public bool HandleRaycast()
+    public bool HandleRaycast(PlayerController callingController)
     {
       if (Input.GetMouseButtonDown(0))
       {
-        Pickup(FindObjectOfType<PlayerController>().GetComponent<Collider>());
+        Pickup(callingController.GetComponent<Fighter>());
         return true;
       }
       return false;
