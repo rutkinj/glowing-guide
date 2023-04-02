@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5216666020224659502}
   - component: {fileID: 8210527280602430598}
   m_Layer: 5
-  m_Name: Damage Text
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -150,8 +150,9 @@ GameObject:
   - component: {fileID: 986836403724907858}
   - component: {fileID: 944001148963502771}
   - component: {fileID: 4809923953206608672}
+  - component: {fileID: 249872494631371144}
   m_Layer: 5
-  m_Name: CharacterCanvas
+  m_Name: DamageText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -279,3 +280,15 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &249872494631371144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7440798683664178107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22ae880d8f5544babbb4842c12226906, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
