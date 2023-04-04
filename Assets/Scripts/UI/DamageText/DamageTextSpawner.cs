@@ -10,6 +10,6 @@ public class DamageTextSpawner : MonoBehaviour
 
     public void Spawn(float damageFloat){
         Canvas instance = Instantiate<Canvas>(damageText, transform);
-        damageText.GetComponentInChildren<TextMeshProUGUI>().SetText(damageFloat.ToString());
+        instance.GetComponentInChildren<TextMeshProUGUI>().SetText(damageFloat.ToString());
     }
 }
