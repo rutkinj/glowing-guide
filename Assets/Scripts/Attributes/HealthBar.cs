@@ -13,7 +13,7 @@ namespace RPG.Attributes
     void Update()
     {
       float percent = hpComponent.GetHPPercentage() / 100;
-      if (percent == 0)
+      if (percent == 0 || percent == 1)
       {
         canvas.enabled = false;
         return;
