@@ -422,6 +422,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7224787695126231948, guid: 8d97ae8d67e9f4c07a22e2a650c1c87c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7224787695126231948, guid: 8d97ae8d67e9f4c07a22e2a650c1c87c, type: 3}
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
@@ -454,6 +458,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpComponent: {fileID: -2881270095572792611}
   hpBar: {fileID: 4471089890418165487}
+  canvas: {fileID: 3476594743903573701}
+--- !u!223 &3476594743903573701 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 7224787695126231948, guid: 8d97ae8d67e9f4c07a22e2a650c1c87c, type: 3}
+  m_PrefabInstance: {fileID: 6087954508028079433}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4471089890418165487 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7669703625038850982, guid: 8d97ae8d67e9f4c07a22e2a650c1c87c, type: 3}
