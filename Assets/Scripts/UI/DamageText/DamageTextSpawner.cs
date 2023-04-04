@@ -11,6 +11,5 @@ public class DamageTextSpawner : MonoBehaviour
     public void Spawn(float damageFloat){
         Canvas instance = Instantiate(damageText, transform.position + offset, transform.rotation);
         damageText.GetComponentInChildren<TextMeshProUGUI>().SetText(damageFloat.ToString());
-        Destroy(instance, 5f);
     }
 }

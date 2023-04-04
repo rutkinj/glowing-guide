@@ -6,6 +6,8 @@ namespace RPG.UI.Damage
 {
   public class DamageText : MonoBehaviour
   {
-    // this is basically just a tag
+    public void DestoryText(){
+      Destroy(gameObject);
+    }
   }
 }
