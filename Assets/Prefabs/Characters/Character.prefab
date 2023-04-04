@@ -174,7 +174,7 @@ MonoBehaviour:
   takeDamage:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4740968656432424677}
+      - m_Target: {fileID: 3792953364017518101}
         m_TargetAssemblyTypeName: DamageTextSpawner, Assembly-CSharp
         m_MethodName: Spawn
         m_Mode: 4
@@ -407,22 +407,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5771306302610751219, guid: 47c52e3ddff1e434aa877f56e9fdf44d, type: 3}
   m_PrefabInstance: {fileID: 8460024143994777840}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &4233032135341069522 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5753009249128555554, guid: 47c52e3ddff1e434aa877f56e9fdf44d, type: 3}
+--- !u!114 &3792953364017518101 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4740968656432424677, guid: 47c52e3ddff1e434aa877f56e9fdf44d, type: 3}
   m_PrefabInstance: {fileID: 8460024143994777840}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4740968656432424677
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4233032135341069522}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e55a8be2908934e95846452fded8481b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageText: {fileID: 1085989232898956863, guid: 80d246e0dc991466dba2fb2a16e4d75a, type: 3}
-  offset: {x: 0, y: 0, z: 0}
