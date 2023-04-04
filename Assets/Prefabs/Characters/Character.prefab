@@ -405,6 +405,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1247094342916386035, guid: 8d97ae8d67e9f4c07a22e2a650c1c87c, type: 3}
+      propertyPath: hpComponent
+      value: 
+      objectReference: {fileID: -2881270095572792611}
     - target: {fileID: 1387542245945420426, guid: 8d97ae8d67e9f4c07a22e2a650c1c87c, type: 3}
       propertyPath: m_Name
       value: HealthBarBackground
@@ -439,36 +443,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d97ae8d67e9f4c07a22e2a650c1c87c, type: 3}
---- !u!1 &2138399877331356677 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5319275650456183116, guid: 8d97ae8d67e9f4c07a22e2a650c1c87c, type: 3}
-  m_PrefabInstance: {fileID: 6087954508028079433}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3803440280532869248
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2138399877331356677}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9eab63ddac15489dbc9bed5e10d0b30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hpComponent: {fileID: -2881270095572792611}
-  hpBar: {fileID: 4471089890418165487}
-  canvas: {fileID: 3476594743903573701}
---- !u!223 &3476594743903573701 stripped
-Canvas:
-  m_CorrespondingSourceObject: {fileID: 7224787695126231948, guid: 8d97ae8d67e9f4c07a22e2a650c1c87c, type: 3}
-  m_PrefabInstance: {fileID: 6087954508028079433}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &4471089890418165487 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7669703625038850982, guid: 8d97ae8d67e9f4c07a22e2a650c1c87c, type: 3}
-  m_PrefabInstance: {fileID: 6087954508028079433}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6709487102230093909 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 675575842427702556, guid: 8d97ae8d67e9f4c07a22e2a650c1c87c, type: 3}
