@@ -9,7 +9,7 @@ public class DamageTextSpawner : MonoBehaviour
     [SerializeField] Vector3 offset;
 
     public void Spawn(float damageFloat){
-        Canvas instance = Instantiate(damageText, transform.position + offset, transform.rotation);
+        Canvas instance = Instantiate<Canvas>(damageText, transform);
         damageText.GetComponentInChildren<TextMeshProUGUI>().SetText(damageFloat.ToString());
     }
 }
