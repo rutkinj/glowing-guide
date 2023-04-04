@@ -4424,18 +4424,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -139.58
       objectReference: {fileID: 0}
-    - target: {fileID: 673586814433411274, guid: 31e3cef9736c6403db84a6c5c1aa2341, type: 3}
-      propertyPath: field of view
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 673586814433411274, guid: 31e3cef9736c6403db84a6c5c1aa2341, type: 3}
-      propertyPath: m_FocalLength
-      value: 20.78461
-      objectReference: {fileID: 0}
-    - target: {fileID: 673586814433411274, guid: 31e3cef9736c6403db84a6c5c1aa2341, type: 3}
-      propertyPath: m_projectionMatrixMode
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 673586815072741362, guid: 31e3cef9736c6403db84a6c5c1aa2341, type: 3}
       propertyPath: m_Name
       value: Core
