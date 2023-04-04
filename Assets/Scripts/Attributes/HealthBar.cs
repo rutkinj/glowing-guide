@@ -1,0 +1,19 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace RPG.Attributes
+{
+  public class HealthBar : MonoBehaviour
+  {
+    [SerializeField] HealthPoints hpComponent = null;
+    [SerializeField] RectTransform hpBar = null;
+
+    void Update()
+    {
+        float percent = hpComponent.GetHPPercentage() / 100;
+        if (percent == 0) gameObject.SetActive(false);
+        hpBar.localScale = new Vector3(percent, 1, 1);
+    }
+  }
+}
