@@ -7,11 +7,13 @@ using UnityEngine;
 using Newtonsoft.Json.Linq;
 using System;
 using RPG.Utils;
+using UnityEngine.Events;
 
 namespace RPG.Attributes
 {
   public class HealthPoints : MonoBehaviour, IJsonSaveable
   {
+    [SerializeField] UnityEvent takeDamage;
     BaseStats baseStats;
     LazyValue<float> currentHealth;
     LazyValue<float> maxHealth;
@@ -60,6 +62,7 @@ namespace RPG.Attributes
     public void LoseHealth(GameObject instigator, float damage)
     {
       print(gameObject.name + " took damage: " + damage);
+      takeDamage.Invoke();
       if (gameObject.tag != "PunchingBag") currentHealth.value -= damage;
       if (currentHealth.value <= 0 && !isDead)
       {
