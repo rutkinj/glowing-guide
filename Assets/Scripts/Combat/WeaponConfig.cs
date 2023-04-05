@@ -30,7 +30,7 @@ namespace RPG.Combat
       {
         Transform hand = rightHandEquip ? rightHand : leftHand;
         Weapon weapon = Instantiate(equippedPrefab, hand);
-        weapon.name = weaponName;
+        weapon.gameObject.name = weaponName;
       }
       if (animationOverride != null)
       {
