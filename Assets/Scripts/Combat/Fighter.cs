@@ -19,20 +19,20 @@ namespace RPG.Combat
     [SerializeField] WeaponConfig defaultWeapon = null;
     HealthPoints target;
     Mover mover;
-    LazyValue<WeaponConfig> currentWeapon;
+    WeaponConfig currentWeaponConfig;
+    LazyValue<Weapon> currentWeapon;
     float timeSinceLastAttack = Mathf.Infinity;
 
     private void Awake()
     {
       mover = GetComponent<Mover>();
-      currentWeapon = new LazyValue<WeaponConfig>(SetupDefaultWeapon);
-      EquipWeapon(defaultWeapon);
+      currentWeaponConfig = defaultWeapon;
+      currentWeapon = new LazyValue<Weapon>(SetupDefaultWeapon);
     }
 
-    private WeaponConfig SetupDefaultWeapon()
+    private Weapon SetupDefaultWeapon()
     {
-      AttachWeapon(defaultWeapon);
-      return defaultWeapon;
+      return AttachWeapon(defaultWeapon);
     }
 
     private void Start()
@@ -73,14 +73,14 @@ namespace RPG.Combat
     public void EquipWeapon(WeaponConfig weapon)
     {
       // if(weapon == null) return;
-      currentWeapon.value = weapon;
-      AttachWeapon(weapon);
+      currentWeaponConfig = weapon;
+      currentWeapon.value = AttachWeapon(weapon);
     }
 
-    private void AttachWeapon(WeaponConfig weapon)
+    private Weapon AttachWeapon(WeaponConfig weapon)
     {
       Animator animator = GetComponent<Animator>();
-      weapon.Spawn(rightHandTransform, leftHandTransform, animator);
+      return weapon.Spawn(rightHandTransform, leftHandTransform, animator);
     }
 
     public HealthPoints GetTarget()
@@ -91,7 +91,7 @@ namespace RPG.Combat
     private void AttackBehavior()
     {
       transform.LookAt(target.transform.position);
-      if (timeSinceLastAttack >= currentWeapon.value.AttackDelay && !target.GetIsDead())
+      if (timeSinceLastAttack >= currentWeaponConfig.AttackDelay && !target.GetIsDead())
       {
         GetComponent<Animator>().ResetTrigger("cancelAttack");
         GetComponent<Animator>().SetTrigger("attack");
@@ -101,7 +101,7 @@ namespace RPG.Combat
 
     private bool GetIsInRange()
     {
-      return Vector3.Distance(transform.position, target.transform.position) < currentWeapon.value.WeaponRange;
+      return Vector3.Distance(transform.position, target.transform.position) < currentWeaponConfig.WeaponRange;
     }
 
     ///// ### Animation Events ###
@@ -109,9 +109,15 @@ namespace RPG.Combat
     {
       if (target == null) return;
       float damage = GetComponent<BaseStats>().GetStat(Stat.Damage);
-      if (currentWeapon.value.HasProjectile())
+
+      if (currentWeapon.value != null)
       {
-        currentWeapon.value.LaunchProjectile(rightHandTransform, leftHandTransform, target, gameObject, damage);
+        currentWeapon.value.OnHit();
+      }
+
+      if (currentWeaponConfig.HasProjectile())
+      {
+        currentWeaponConfig.LaunchProjectile(rightHandTransform, leftHandTransform, target, gameObject, damage);
       }
       else
       {
@@ -154,14 +160,14 @@ namespace RPG.Combat
     {
       if (stat == Stat.Damage)
       {
-        yield return currentWeapon.value.WeaponDamage;
+        yield return currentWeaponConfig.WeaponDamage;
       }
     }
     public IEnumerable<float> GetPercentileModifiers(Stat stat)
     {
       if (stat == Stat.Damage)
       {
-        yield return currentWeapon.value.DamagePercentMod;
+        yield return currentWeaponConfig.DamagePercentMod;
       }
     }
   }

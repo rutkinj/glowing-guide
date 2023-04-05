@@ -23,13 +23,15 @@ namespace RPG.Combat
     public float WeaponRange { get => weaponRange; }
     public float AttackDelay { get => attackDelay; }
 
-    public void Spawn(Transform rightHand, Transform leftHand, Animator animator)
+    public Weapon Spawn(Transform rightHand, Transform leftHand, Animator animator)
     {
       DestroyOldWeapon(rightHand, leftHand);
+
+      Weapon weapon = null;
       if (equippedPrefab != null)
       {
         Transform hand = rightHandEquip ? rightHand : leftHand;
-        Weapon weapon = Instantiate(equippedPrefab, hand);
+        weapon = Instantiate(equippedPrefab, hand);
         weapon.gameObject.name = weaponName;
       }
       if (animationOverride != null)
@@ -44,6 +46,7 @@ namespace RPG.Combat
           animator.runtimeAnimatorController = overrideController.runtimeAnimatorController;
         }
       }
+      return weapon;
     }
 
     private void DestroyOldWeapon(Transform rightHand, Transform leftHand)
