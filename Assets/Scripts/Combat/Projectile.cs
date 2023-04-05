@@ -9,6 +9,7 @@ public class Projectile : MonoBehaviour
   [SerializeField] float projectileSpeed;
   [SerializeField] float projectileLifetime = 10f;
   [SerializeField] bool isHoming = false;
+  [SerializeField] AudioClip hitSFX = null;
   HealthPoints target;
   GameObject instigator = null;
   float damage;
@@ -31,7 +32,14 @@ public class Projectile : MonoBehaviour
     }
     if (target.GetIsDead()) return;
     target.LoseHealth(instigator, damage);
-    Destroy(gameObject);
+
+    foreach (Transform child in transform)
+    {
+      child.gameObject.SetActive(false);
+    }
+
+    GetComponent<AudioSource>().PlayOneShot(hitSFX);
+    Destroy(gameObject, 2);
   }
 
   public void SetTarget(HealthPoints target, GameObject instigator, float damage)
