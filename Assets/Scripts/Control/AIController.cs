@@ -14,6 +14,8 @@ namespace RPG.Control
   {
     [SerializeField] float chaseDistance = 5f;
     [SerializeField] float suspicionTime = 2f;
+    [SerializeField] float aggroTimer = 4f;
+    [SerializeField] float callAlliesDist = 100f;
     [SerializeField] PatrolPath patrolPath;
     [SerializeField] float waypointTolerance = 1f;
     [SerializeField] float patrolResttime = .5f;
@@ -26,6 +28,7 @@ namespace RPG.Control
     int currentWaypointIndex = 0;
     float timeSinceSeenPlayer = Mathf.Infinity;
     float timeAtWaypoint = Mathf.Infinity;
+    float timeSinceAggro = Mathf.Infinity;
 
     private void Awake()
     {
@@ -49,10 +52,11 @@ namespace RPG.Control
     private void Update()
     {
       if (healthPoints.GetIsDead()) return;
-      if (InAttackRange(player) && fighter.CanAttack(player))
+      if (IsAggroed(player) && fighter.CanAttack(player))
       {
         timeSinceSeenPlayer = 0f;
         fighter.Attack(player);
+        AggroNearbyAllies();
       }
       else if (timeSinceSeenPlayer < suspicionTime)
       {
@@ -64,8 +68,13 @@ namespace RPG.Control
       }
       timeSinceSeenPlayer += Time.deltaTime;
       timeAtWaypoint += Time.deltaTime;
+      timeSinceAggro += Time.deltaTime;
     }
 
+    public void Aggro()
+    {
+      timeSinceAggro = 0;
+    }
     private void PatrolBehavior()
     {
       Vector3 nextPosition = guardPosition.value;
@@ -101,9 +110,23 @@ namespace RPG.Control
       return distance < waypointTolerance;
     }
 
-    private bool InAttackRange(GameObject player)
+    private bool IsAggroed(GameObject player)
     {
-      return Vector3.Distance(transform.position, player.transform.position) < chaseDistance;
+      if (Vector3.Distance(transform.position, player.transform.position) < chaseDistance ||
+          timeSinceAggro < aggroTimer)
+      {
+        return true;
+      }
+      return false;
+    }
+
+    private void AggroNearbyAllies(){
+      RaycastHit[] hits = Physics.SphereCastAll(transform.position, callAlliesDist, Vector3.forward, 0);
+      foreach(RaycastHit hit in hits){
+        if (hit.collider.CompareTag("Enemy")){
+          hit.collider.GetComponent<AIController>().Aggro();
+        }
+      }
     }
 
     private void OnDrawGizmosSelected()

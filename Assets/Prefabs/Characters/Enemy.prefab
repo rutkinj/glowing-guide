@@ -7,6 +7,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2881270095572792611, guid: 34f04cfd1ae2e48348d8d9e1aa9eaedc, type: 3}
+      propertyPath: eTakeDamage.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -2881270095572792611, guid: 34f04cfd1ae2e48348d8d9e1aa9eaedc, type: 3}
+      propertyPath: eTakeDamage.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2881270095572792611, guid: 34f04cfd1ae2e48348d8d9e1aa9eaedc, type: 3}
+      propertyPath: eTakeDamage.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: -1316638575117403803}
+    - target: {fileID: -2881270095572792611, guid: 34f04cfd1ae2e48348d8d9e1aa9eaedc, type: 3}
+      propertyPath: eTakeDamage.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -2881270095572792611, guid: 34f04cfd1ae2e48348d8d9e1aa9eaedc, type: 3}
+      propertyPath: eTakeDamage.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: Aggro
+      objectReference: {fileID: 0}
+    - target: {fileID: -2881270095572792611, guid: 34f04cfd1ae2e48348d8d9e1aa9eaedc, type: 3}
+      propertyPath: eTakeDamage.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: RPG.Control.AIController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: -2881270095572792611, guid: 34f04cfd1ae2e48348d8d9e1aa9eaedc, type: 3}
+      propertyPath: eTakeDamage.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1992414555, guid: 34f04cfd1ae2e48348d8d9e1aa9eaedc, type: 3}
       propertyPath: weapon
       value: 
@@ -75,9 +103,21 @@ PrefabInstance:
       propertyPath: m_Speed
       value: 2.6
       objectReference: {fileID: 0}
+    - target: {fileID: 3944893793047862343, guid: 34f04cfd1ae2e48348d8d9e1aa9eaedc, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4934901284857101262, guid: 34f04cfd1ae2e48348d8d9e1aa9eaedc, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5082601271718285999, guid: 34f04cfd1ae2e48348d8d9e1aa9eaedc, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6709487102230093909, guid: 34f04cfd1ae2e48348d8d9e1aa9eaedc, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6857735178471699350, guid: 34f04cfd1ae2e48348d8d9e1aa9eaedc, type: 3}
       propertyPath: maxSpeed
@@ -85,6 +125,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6890645859421257475, guid: 34f04cfd1ae2e48348d8d9e1aa9eaedc, type: 3}
       propertyPath: m_Name
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6890645859421257475, guid: 34f04cfd1ae2e48348d8d9e1aa9eaedc, type: 3}
+      propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 8346978098641046049, guid: 34f04cfd1ae2e48348d8d9e1aa9eaedc, type: 3}
@@ -113,6 +157,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chaseDistance: 5
   suspicionTime: 7
+  aggroTimer: 4
+  callAlliesDist: 6
   patrolPath: {fileID: 0}
   waypointTolerance: 1
   patrolResttime: 0.5
