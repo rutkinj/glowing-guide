@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class MovingSphere : MonoBehaviour
 {
+  public enum controlType
+  {
+    none,
+    fakePhysx,
+    physxRigidbody,
+    physxKinematic
+  }
+  [SerializeField] controlType currentControl = controlType.none;
   [Range(0, 25)][SerializeField] int maxSpeed = 2;
   [Range(0, 25)][SerializeField] int maxAcceleration = 2;
   [Range(0f, 1f)][SerializeField] float bounce = 0.5f;
@@ -15,7 +23,10 @@ public class MovingSphere : MonoBehaviour
   {
     Vector2 playerInput = GetInput();
 
-    MoveSphereSimulatePhys2D(playerInput);
+    if (currentControl == controlType.fakePhysx)
+    {
+      MoveSphereSimulatePhys2D(playerInput);
+    }
   }
 
   private Vector2 GetInput()
