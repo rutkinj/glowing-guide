@@ -4666,7 +4666,7 @@ PrefabInstance:
     - target: {fileID: 9033456546799599910, guid: 31e3cef9736c6403db84a6c5c1aa2341, type: 3}
       propertyPath: defaultWeapon
       value: 
-      objectReference: {fileID: 11400000, guid: 5d16be918d14c4f198748bcef1f02463, type: 2}
+      objectReference: {fileID: 11400000, guid: 961ed18f779ac4fc1a031fd5a1c730e3, type: 2}
     - target: {fileID: 9033456546799599910, guid: 31e3cef9736c6403db84a6c5c1aa2341, type: 3}
       propertyPath: defaultWeaponName
       value: Broken Sword
@@ -10375,6 +10375,63 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6cb56b5c70f4f14ebf96689fda29f2c, type: 3}
+--- !u!1001 &2126000989463943986
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1189210554345271040, guid: 9157115f891d34bef89f2b70b2d9203f, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1189210554345271040, guid: 9157115f891d34bef89f2b70b2d9203f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.346
+      objectReference: {fileID: 0}
+    - target: {fileID: 1189210554345271040, guid: 9157115f891d34bef89f2b70b2d9203f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.658
+      objectReference: {fileID: 0}
+    - target: {fileID: 1189210554345271040, guid: 9157115f891d34bef89f2b70b2d9203f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.787
+      objectReference: {fileID: 0}
+    - target: {fileID: 1189210554345271040, guid: 9157115f891d34bef89f2b70b2d9203f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1189210554345271040, guid: 9157115f891d34bef89f2b70b2d9203f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1189210554345271040, guid: 9157115f891d34bef89f2b70b2d9203f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1189210554345271040, guid: 9157115f891d34bef89f2b70b2d9203f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1189210554345271040, guid: 9157115f891d34bef89f2b70b2d9203f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1189210554345271040, guid: 9157115f891d34bef89f2b70b2d9203f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1189210554345271040, guid: 9157115f891d34bef89f2b70b2d9203f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5246236094439936267, guid: 9157115f891d34bef89f2b70b2d9203f, type: 3}
+      propertyPath: m_Name
+      value: HealthPickup
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9157115f891d34bef89f2b70b2d9203f, type: 3}
 --- !u!1001 &6994671813909660796
 PrefabInstance:
   m_ObjectHideFlags: 0
