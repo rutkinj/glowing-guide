@@ -7,7 +7,8 @@ public class MovingSphere : MonoBehaviour
   [SerializeField] controlType currentControl = controlType.none;
   [Range(0, 25)][SerializeField] int maxSpeed = 2;
   [Range(0, 25)][SerializeField] int maxAcceleration = 2;
-  [Range(0, 10)][SerializeField] float jumpHeight = 5f;
+  [Range(0, 25)][SerializeField] int maxAirAcceleration = 1;
+  [Range(0f, 10f)][SerializeField] float jumpHeight = 5f;
   [Range(0, 3)][SerializeField] int airJumps = 1;
   [Range(0f, 1f)][SerializeField] float bounce = 0.5f;
   [SerializeField] Rect allowedArea = new Rect(-5f, -5f, 10f, 10f);
@@ -125,13 +126,12 @@ public class MovingSphere : MonoBehaviour
 
   private void MoveSpherePhysxRigidBoy()
   {
-    float maxSpeedChange = maxAcceleration * Time.deltaTime;
+    float acceleration = isGrounded ? maxAcceleration : maxAirAcceleration;
+    float maxSpeedChange = acceleration * Time.deltaTime;
 
-    if (isGrounded)
-    {
-      velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
-      velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
-    }
+    velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
+    velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
+
   }
 
   private void Jump()
@@ -140,7 +140,8 @@ public class MovingSphere : MonoBehaviour
     {
       jumpsSinceGrounded += 1;
       float jumpValue = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
-      if(velocity.y > 0){
+      if (velocity.y > 0)
+      {
         jumpValue = Mathf.Max(jumpValue - velocity.y, 0f);
       }
       velocity.y += jumpValue;
