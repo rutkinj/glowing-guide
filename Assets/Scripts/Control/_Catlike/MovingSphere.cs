@@ -16,16 +16,29 @@ public class MovingSphere : MonoBehaviour
   [Range(0, 25)][SerializeField] int maxAcceleration = 2;
   [Range(0f, 1f)][SerializeField] float bounce = 0.5f;
   [SerializeField] Rect allowedArea = new Rect(-5f, -5f, 10f, 10f);
-
   Vector3 velocity;
+  Vector3 desiredVelocity;
+  Rigidbody rb;
 
+  private void Awake()
+  {
+    rb = GetComponent<Rigidbody>();
+  }
   private void Update()
   {
     Vector2 playerInput = GetInput();
+    desiredVelocity = new Vector3(playerInput.x, 0f, playerInput.y) * maxSpeed;
 
     if (currentControl == controlType.fakePhysx)
     {
-      MoveSphereSimulatePhys2D(playerInput);
+      MoveSphereSimulatePhys2D();
+    }
+  }
+  private void LateUpdate()
+  {
+    if (currentControl == controlType.physxRigidbody)
+    {
+      MoveSpherePhysxRigidBoy();
     }
   }
 
@@ -38,9 +51,8 @@ public class MovingSphere : MonoBehaviour
     return input;
   }
 
-  private void MoveSphereSimulatePhys2D(Vector2 playerInput)
+  private void MoveSphereSimulatePhys2D()
   {
-    Vector3 desiredVelocity = new Vector3(playerInput.x, 0f, playerInput.y) * maxSpeed;
     float maxSpeedChange = maxAcceleration * Time.deltaTime;
 
     velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
@@ -71,5 +83,16 @@ public class MovingSphere : MonoBehaviour
       velocity.z = -velocity.z * bounce;
     }
     transform.localPosition = newPos;
+  }
+
+  private void MoveSpherePhysxRigidBoy()
+  {
+    velocity = rb.velocity;
+    float maxSpeedChange = maxAcceleration * Time.deltaTime;
+
+    velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
+    velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
+
+    rb.velocity = velocity;
   }
 }
