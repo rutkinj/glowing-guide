@@ -4,41 +4,79 @@ using UnityEngine;
 
 public class MovingSphere : MonoBehaviour
 {
-  public enum controlType
-  {
-    none,
-    fakePhysx,
-    physxRigidbody,
-    physxKinematic
-  }
   [SerializeField] controlType currentControl = controlType.none;
   [Range(0, 25)][SerializeField] int maxSpeed = 2;
   [Range(0, 25)][SerializeField] int maxAcceleration = 2;
+  [Range(0, 10)][SerializeField] float jumpHeight = 5f;
+  [Range(0, 3)][SerializeField] int airJumps = 1;
   [Range(0f, 1f)][SerializeField] float bounce = 0.5f;
   [SerializeField] Rect allowedArea = new Rect(-5f, -5f, 10f, 10f);
   Vector3 velocity;
   Vector3 desiredVelocity;
   Rigidbody rb;
+  bool inputToJump;
+  bool isGrounded;
+  int jumpsSinceGrounded;
 
   private void Awake()
   {
     rb = GetComponent<Rigidbody>();
   }
+
   private void Update()
   {
     Vector2 playerInput = GetInput();
     desiredVelocity = new Vector3(playerInput.x, 0f, playerInput.y) * maxSpeed;
+
+    inputToJump |= Input.GetButtonDown("Jump");
 
     if (currentControl == controlType.fakePhysx)
     {
       MoveSphereSimulatePhys2D();
     }
   }
-  private void LateUpdate()
+
+  private void FixedUpdate()
   {
+    UpdateState();
+
     if (currentControl == controlType.physxRigidbody)
     {
       MoveSpherePhysxRigidBoy();
+    }
+
+    if (inputToJump)
+    {
+      inputToJump = false;
+      Jump();
+    }
+    isGrounded = false;
+    rb.velocity = velocity;
+  }
+
+  private void UpdateState()
+  {
+    velocity = rb.velocity;
+    if (isGrounded)
+    {
+      jumpsSinceGrounded = 0;
+    }
+  }
+
+  private void OnCollisionEnter(Collision other)
+  {
+    EvaluateCollision(other);
+  }
+  private void OnCollisionStay(Collision other)
+  {
+    EvaluateCollision(other);
+  }
+  private void EvaluateCollision(Collision collision)
+  {
+    for (int i = 0; i < collision.contactCount; i++)
+    {
+      Vector3 normal = collision.GetContact(i).normal;
+      isGrounded |= normal.y >= 0.9f;
     }
   }
 
@@ -87,12 +125,29 @@ public class MovingSphere : MonoBehaviour
 
   private void MoveSpherePhysxRigidBoy()
   {
-    velocity = rb.velocity;
     float maxSpeedChange = maxAcceleration * Time.deltaTime;
 
-    velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
-    velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
+    if (isGrounded)
+    {
+      velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
+      velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
+    }
+  }
 
-    rb.velocity = velocity;
+  private void Jump()
+  {
+    if (isGrounded || jumpsSinceGrounded < airJumps)
+    {
+      jumpsSinceGrounded += 1;
+      velocity.y += Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
+    }
+  }
+
+  public enum controlType
+  {
+    none,
+    fakePhysx,
+    physxRigidbody,
+    physxKinematic
   }
 }
