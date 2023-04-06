@@ -14,7 +14,7 @@ namespace RPG.Control
   {
     [SerializeField] float chaseDistance = 5f;
     [SerializeField] float suspicionTime = 2f;
-    [SerializeField] float aggroTimer = 4f;
+    [SerializeField] float aggroTimer = 2f;
     [SerializeField] float callAlliesDist = 100f;
     [SerializeField] PatrolPath patrolPath;
     [SerializeField] float waypointTolerance = 1f;
@@ -52,6 +52,8 @@ namespace RPG.Control
     private void Update()
     {
       if (healthPoints.GetIsDead()) return;
+      ManageTimers();
+
       if (IsAggroed(player) && fighter.CanAttack(player))
       {
         timeSinceSeenPlayer = 0f;
@@ -66,13 +68,19 @@ namespace RPG.Control
       {
         PatrolBehavior();
       }
+    }
+
+    private void ManageTimers()
+    {
       timeSinceSeenPlayer += Time.deltaTime;
       timeAtWaypoint += Time.deltaTime;
       timeSinceAggro += Time.deltaTime;
+      print(gameObject.name + " Aggro Time: " + timeSinceAggro);
     }
 
     public void Aggro()
     {
+      if(IsAggroed(player)) return;
       timeSinceAggro = 0;
     }
     private void PatrolBehavior()
