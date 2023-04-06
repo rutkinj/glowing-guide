@@ -139,7 +139,11 @@ public class MovingSphere : MonoBehaviour
     if (isGrounded || jumpsSinceGrounded < airJumps)
     {
       jumpsSinceGrounded += 1;
-      velocity.y += Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
+      float jumpValue = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
+      if(velocity.y > 0){
+        jumpValue = Mathf.Max(jumpValue - velocity.y, 0f);
+      }
+      velocity.y += jumpValue;
     }
   }
 
