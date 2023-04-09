@@ -52,7 +52,8 @@ public class MovingSphere : MonoBehaviour
 
     if (currentControl == controlType.physxRigidbody)
     {
-      MoveSpherePhysxRigidBoy();
+      //   MoveSpherePhysxRigidBoy();
+      AdjustVelocity();
     }
 
     if (inputToJump)
@@ -164,6 +165,28 @@ public class MovingSphere : MonoBehaviour
       }
       velocity += (jumpValue * contactNormal);
     }
+  }
+
+  private Vector3 ProjectOnContactPlane(Vector3 vector)
+  {
+    return vector - contactNormal * Vector3.Dot(vector, contactNormal);
+  }
+
+  private void AdjustVelocity()
+  {
+    Vector3 xAxis = ProjectOnContactPlane(Vector3.right).normalized;
+    Vector3 zAxis = ProjectOnContactPlane(Vector3.forward).normalized;
+
+    float currentX = Vector3.Dot(velocity, xAxis);
+    float currentZ = Vector3.Dot(velocity, zAxis);
+
+    float acceleration = isGrounded ? maxAcceleration : maxAirAcceleration;
+    float maxSpeedChange = acceleration * Time.deltaTime;
+
+    float newX = Mathf.MoveTowards(currentX, desiredVelocity.x, maxSpeedChange);
+    float newZ = Mathf.MoveTowards(currentZ, desiredVelocity.z, maxSpeedChange);
+
+    velocity += xAxis * (newX - currentX) + zAxis * (newZ - currentZ);
   }
 
   public enum controlType

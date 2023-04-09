@@ -131,7 +131,7 @@ MonoBehaviour:
   currentControl: 2
   maxSpeed: 10
   maxAcceleration: 10
-  maxAirAcceleration: 0
+  maxAirAcceleration: 1
   jumpHeight: 2
   airJumps: 1
   maxGroundAngle: 45
