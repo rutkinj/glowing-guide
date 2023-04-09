@@ -20,6 +20,7 @@ public class MovingSphere : MonoBehaviour
   bool isGrounded;
   int jumpsSinceGrounded;
   float minGroundDotProduct;
+  Vector3 contactNormal;
 
   private void OnValidate()
   {
@@ -70,6 +71,10 @@ public class MovingSphere : MonoBehaviour
     {
       jumpsSinceGrounded = 0;
     }
+    else
+    {
+      contactNormal = Vector3.up;
+    }
   }
 
   private void OnCollisionEnter(Collision other)
@@ -85,7 +90,11 @@ public class MovingSphere : MonoBehaviour
     for (int i = 0; i < collision.contactCount; i++)
     {
       Vector3 normal = collision.GetContact(i).normal;
-      isGrounded |= normal.y >= minGroundDotProduct;
+      if (normal.y >= minGroundDotProduct)
+      {
+        isGrounded = true;
+        contactNormal = normal;
+      }
     }
   }
 
@@ -148,11 +157,12 @@ public class MovingSphere : MonoBehaviour
     {
       jumpsSinceGrounded += 1;
       float jumpValue = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
-      if (velocity.y > 0)
+      float alignedSpeed = Vector3.Dot(velocity, contactNormal);
+      if (alignedSpeed > 0f)
       {
-        jumpValue = Mathf.Max(jumpValue - velocity.y, 0f);
+        jumpValue = Mathf.Max(jumpValue - alignedSpeed, 0f);
       }
-      velocity.y += jumpValue;
+      velocity += (jumpValue * contactNormal);
     }
   }
 
