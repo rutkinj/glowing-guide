@@ -61,6 +61,7 @@ public class MovingSphere : MonoBehaviour
       inputToJump = false;
       Jump();
     }
+
     isGrounded = false;
     rb.velocity = velocity;
   }
@@ -71,6 +72,7 @@ public class MovingSphere : MonoBehaviour
     if (isGrounded)
     {
       jumpsSinceGrounded = 0;
+      contactNormal.Normalize();
     }
     else
     {
@@ -78,14 +80,21 @@ public class MovingSphere : MonoBehaviour
     }
   }
 
+  private void ClearState(){
+    isGrounded = false;
+    contactNormal = Vector3.zero;
+  }
+
   private void OnCollisionEnter(Collision other)
   {
     EvaluateCollision(other);
   }
+
   private void OnCollisionStay(Collision other)
   {
     EvaluateCollision(other);
   }
+
   private void EvaluateCollision(Collision collision)
   {
     for (int i = 0; i < collision.contactCount; i++)
@@ -94,7 +103,7 @@ public class MovingSphere : MonoBehaviour
       if (normal.y >= minGroundDotProduct)
       {
         isGrounded = true;
-        contactNormal = normal;
+        contactNormal += normal;
       }
     }
   }
