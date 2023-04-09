@@ -134,6 +134,7 @@ MonoBehaviour:
   maxAirAcceleration: 0
   jumpHeight: 2
   airJumps: 1
+  maxGroundAngle: 45
   bounce: 0.5
   allowedArea:
     serializedVersion: 2
