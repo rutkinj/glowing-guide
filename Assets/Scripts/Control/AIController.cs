@@ -12,6 +12,7 @@ namespace RPG.Control
 {
   public class AIController : MonoBehaviour
   {
+    [SerializeField] bool showGizmos = true;
     [SerializeField] float chaseDistance = 5f;
     [SerializeField] float suspicionTime = 2f;
     [SerializeField] float aggroTimer = 2f;
@@ -75,12 +76,11 @@ namespace RPG.Control
       timeSinceSeenPlayer += Time.deltaTime;
       timeAtWaypoint += Time.deltaTime;
       timeSinceAggro += Time.deltaTime;
-      print(gameObject.name + " Aggro Time: " + timeSinceAggro);
     }
 
     public void Aggro()
     {
-      if(IsAggroed(player)) return;
+      if (IsAggroed(player)) return;
       timeSinceAggro = 0;
     }
     private void PatrolBehavior()
@@ -128,10 +128,13 @@ namespace RPG.Control
       return false;
     }
 
-    private void AggroNearbyAllies(){
+    private void AggroNearbyAllies()
+    {
       RaycastHit[] hits = Physics.SphereCastAll(transform.position, callAlliesDist, Vector3.forward, 0);
-      foreach(RaycastHit hit in hits){
-        if (hit.collider.CompareTag("Enemy")){
+      foreach (RaycastHit hit in hits)
+      {
+        if (hit.collider.CompareTag("Enemy"))
+        {
           hit.collider.GetComponent<AIController>().Aggro();
         }
       }
@@ -139,8 +142,14 @@ namespace RPG.Control
 
     private void OnDrawGizmosSelected()
     {
-      Gizmos.color = Color.blue;
-      Gizmos.DrawWireSphere(transform.position, chaseDistance);
+      if (showGizmos)
+      {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, chaseDistance);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, callAlliesDist);
+      }
     }
   }
 }
