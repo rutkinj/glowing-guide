@@ -476,10 +476,11 @@ MonoBehaviour:
   maxSpeed: 10
   maxAcceleration: 10
   maxAirAcceleration: 1
-  maxSnapSpeed: 15
+  maxSnapSpeed: 9
   jumpHeight: 5
   airJumps: 1
   maxGroundAngle: 25
+  snapProbeDistance: 1
   bounce: 0.5
   allowedArea:
     serializedVersion: 2
@@ -1049,12 +1050,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentControl: 2
   maxSpeed: 10
-  maxAcceleration: 25
+  maxAcceleration: 16.5
   maxAirAcceleration: 1
-  maxSnapSpeed: 15
+  maxSnapSpeed: 8
   jumpHeight: 2
   airJumps: 1
   maxGroundAngle: 45
+  snapProbeDistance: 2
   bounce: 0.5
   allowedArea:
     serializedVersion: 2
