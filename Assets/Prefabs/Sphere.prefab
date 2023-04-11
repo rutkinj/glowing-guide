@@ -125,16 +125,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 252693704093213069}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6e5621a7c50e4ac6aeeabad8a962963, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ed7d40fa26b14c95827499bf3d9f547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentControl: 2
-  maxSpeed: 10
-  maxAcceleration: 10
+  currentControl: 0
+  maxSpeed: 2
+  maxAcceleration: 2
   maxAirAcceleration: 1
-  jumpHeight: 2
+  maxSnapSpeed: 1
+  jumpHeight: 5
   airJumps: 1
-  maxGroundAngle: 45
+  maxGroundAngle: 25
+  snapProbeDistance: 1
   bounce: 0.5
   allowedArea:
     serializedVersion: 2
