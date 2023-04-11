@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingSphere : MonoBehaviour
+public class CatController : MonoBehaviour
 {
   [SerializeField] controlType currentControl = controlType.none;
-  [Range(0, 25)][SerializeField] int maxSpeed = 2;
-  [Range(0, 25)][SerializeField] int maxAcceleration = 2;
-  [Range(0, 25)][SerializeField] int maxAirAcceleration = 1;
+  [Range(0, 25)][SerializeField] float maxSpeed = 2;
+  [Range(0, 25)][SerializeField] float maxAcceleration = 2;
+  [Range(0, 25)][SerializeField] float maxAirAcceleration = 1;
+  [Range(0, 25)][SerializeField] float maxSnapSpeed = 15f;
   [Range(0f, 10f)][SerializeField] float jumpHeight = 5f;
   [Range(0, 3)][SerializeField] int airJumps = 1;
   [Range(0, 90)][SerializeField] float maxGroundAngle = 25f;
+
+  [Header("For fake physics controls")]
   [Range(0f, 1f)][SerializeField] float bounce = 0.5f;
   [SerializeField] Rect allowedArea = new Rect(-5f, -5f, 10f, 10f);
   Vector3 velocity;
@@ -19,6 +22,7 @@ public class MovingSphere : MonoBehaviour
   bool inputToJump;
   bool isGrounded;
   int jumpsSinceGrounded;
+  int stepsSinceGrounded;
   float minGroundDotProduct;
   Vector3 contactNormal;
 
@@ -68,10 +72,12 @@ public class MovingSphere : MonoBehaviour
 
   private void UpdateState()
   {
+    stepsSinceGrounded += 1;
     velocity = rb.velocity;
-    if (isGrounded)
+    if (isGrounded || SnapToGround())
     {
       jumpsSinceGrounded = 0;
+      stepsSinceGrounded = 0;
       contactNormal.Normalize();
     }
     else
@@ -80,7 +86,8 @@ public class MovingSphere : MonoBehaviour
     }
   }
 
-  private void ClearState(){
+  private void ClearState()
+  {
     isGrounded = false;
     contactNormal = Vector3.zero;
   }
@@ -196,6 +203,38 @@ public class MovingSphere : MonoBehaviour
     float newZ = Mathf.MoveTowards(currentZ, desiredVelocity.z, maxSpeedChange);
 
     velocity += xAxis * (newX - currentX) + zAxis * (newZ - currentZ);
+  }
+
+  private bool SnapToGround()
+  {
+    float speed = velocity.magnitude;
+    if (speed > maxSnapSpeed)
+    {
+      return false;
+    }
+
+    if (stepsSinceGrounded > 1)
+    {
+      return false;
+    }
+
+    if (!Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit))
+    {
+      return false;
+    }
+
+    if (hit.normal.y < minGroundDotProduct)
+    {
+      return false;
+    }
+
+    contactNormal = hit.normal;
+    float dot = Vector3.Dot(velocity, hit.normal);
+    if (dot > 0f)
+    {
+      velocity = (velocity - hit.normal * dot).normalized * speed;
+    }
+    return true;
   }
 
   public enum controlType
