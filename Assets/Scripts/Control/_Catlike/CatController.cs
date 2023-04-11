@@ -204,17 +204,23 @@ public class CatController : MonoBehaviour
 
   private void Jump()
   {
-    if (isGrounded || jumpsSinceGrounded < airJumps)
+    Vector3 jumpDir;
+
+    if(isGrounded) jumpDir = groundNormal;
+    else if(OnSteep) jumpDir = steepNormal;
+    else if(jumpsSinceGrounded < airJumps) jumpDir = groundNormal;
+    else return;
+
     {
       stepsSinceJumped = 0;
       jumpsSinceGrounded += 1;
       float jumpValue = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
-      float alignedSpeed = Vector3.Dot(velocity, groundNormal);
+      float alignedSpeed = Vector3.Dot(velocity, jumpDir);
       if (alignedSpeed > 0f)
       {
         jumpValue = Mathf.Max(jumpValue - alignedSpeed, 0f);
       }
-      velocity += (jumpValue * groundNormal);
+      velocity += (jumpValue * jumpDir);
     }
   }
 
