@@ -27,13 +27,17 @@ public class CatController : MonoBehaviour
   int stepsSinceGrounded;
   int stepsSinceJumped;
   float minGroundDotProduct;
-  Vector3 contactNormal;
+  Vector3 groundNormal;
+  Vector3 steepNormal;
+  int steepContactCount;
+  bool OnSteep => steepContactCount > 0;
 
   private void OnValidate()
   {
     minGroundDotProduct = Mathf.Cos(maxGroundAngle * Mathf.Deg2Rad);
-    if(maxSnapSpeed == maxSpeed){
-      if(maxSpeed == 0) return;
+    if (maxSnapSpeed == maxSpeed)
+    {
+      if (maxSpeed == 0) return;
       maxSnapSpeed = maxSpeed - 1;
     }
   }
@@ -73,8 +77,8 @@ public class CatController : MonoBehaviour
       Jump();
     }
 
-    isGrounded = false;
     rb.velocity = velocity;
+    ClearState();
   }
 
   private void UpdateState()
@@ -86,18 +90,20 @@ public class CatController : MonoBehaviour
     {
       stepsSinceGrounded = 0;
       jumpsSinceGrounded = 0;
-      contactNormal.Normalize();
+      groundNormal.Normalize();
     }
     else
     {
-      contactNormal = Vector3.up;
+      groundNormal = Vector3.up;
     }
   }
 
   private void ClearState()
   {
     isGrounded = false;
-    contactNormal = Vector3.zero;
+    groundNormal = Vector3.zero;
+    steepNormal = Vector3.zero;
+    steepContactCount = 0;
   }
 
   private void OnCollisionEnter(Collision other)
@@ -118,7 +124,12 @@ public class CatController : MonoBehaviour
       if (normal.y >= minGroundDotProduct)
       {
         isGrounded = true;
-        contactNormal += normal;
+        groundNormal += normal;
+      }
+      else if (normal.y > -0.01f)
+      {
+        steepContactCount += 1;
+        steepNormal += normal;
       }
     }
   }
@@ -183,18 +194,18 @@ public class CatController : MonoBehaviour
       stepsSinceJumped = 0;
       jumpsSinceGrounded += 1;
       float jumpValue = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
-      float alignedSpeed = Vector3.Dot(velocity, contactNormal);
+      float alignedSpeed = Vector3.Dot(velocity, groundNormal);
       if (alignedSpeed > 0f)
       {
         jumpValue = Mathf.Max(jumpValue - alignedSpeed, 0f);
       }
-      velocity += (jumpValue * contactNormal);
+      velocity += (jumpValue * groundNormal);
     }
   }
 
   private Vector3 ProjectOnContactPlane(Vector3 vector)
   {
-    return vector - contactNormal * Vector3.Dot(vector, contactNormal);
+    return vector - groundNormal * Vector3.Dot(vector, groundNormal);
   }
 
   private void AdjustVelocity()
@@ -241,7 +252,7 @@ public class CatController : MonoBehaviour
       return false;
     }
 
-    contactNormal = hit.normal;
+    groundNormal = hit.normal;
     float dot = Vector3.Dot(velocity, hit.normal);
     if (dot > 0f)
     {
