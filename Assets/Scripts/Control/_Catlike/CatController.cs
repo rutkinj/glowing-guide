@@ -89,7 +89,7 @@ public class CatController : MonoBehaviour
     if (isGrounded || SnapToGround() || CheckSteepContacts())
     {
       stepsSinceGrounded = 0;
-      jumpsSinceGrounded = 0;
+      if (stepsSinceJumped > 1) jumpsSinceGrounded = 0;
       groundNormal.Normalize();
     }
     else
@@ -206,22 +206,29 @@ public class CatController : MonoBehaviour
   {
     Vector3 jumpDir;
 
-    if(isGrounded) jumpDir = groundNormal;
-    else if(OnSteep) jumpDir = steepNormal;
-    else if(jumpsSinceGrounded < airJumps) jumpDir = groundNormal;
+    if (isGrounded) jumpDir = groundNormal;
+    else if (OnSteep)
+    {
+      jumpDir = steepNormal;
+      jumpsSinceGrounded = 0;
+    }
+    else if (airJumps > 0 && jumpsSinceGrounded <= airJumps)
+    {
+      if (jumpsSinceGrounded == 0) jumpsSinceGrounded = 1; //prevents an extra jump if you got into the air w/o jumping
+      jumpDir = groundNormal;
+    }
     else return;
 
+    stepsSinceJumped = 0;
+    jumpsSinceGrounded += 1;
+    float jumpValue = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
+    float alignedSpeed = Vector3.Dot(velocity, jumpDir);
+    if (alignedSpeed > 0f)
     {
-      stepsSinceJumped = 0;
-      jumpsSinceGrounded += 1;
-      float jumpValue = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
-      float alignedSpeed = Vector3.Dot(velocity, jumpDir);
-      if (alignedSpeed > 0f)
-      {
-        jumpValue = Mathf.Max(jumpValue - alignedSpeed, 0f);
-      }
-      velocity += (jumpValue * jumpDir);
+      jumpValue = Mathf.Max(jumpValue - alignedSpeed, 0f);
     }
+    velocity += (jumpValue * jumpDir);
+
   }
 
   private Vector3 ProjectOnContactPlane(Vector3 vector)
