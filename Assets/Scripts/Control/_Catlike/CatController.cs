@@ -86,7 +86,7 @@ public class CatController : MonoBehaviour
     stepsSinceGrounded += 1;
     stepsSinceJumped += 1;
     velocity = rb.velocity;
-    if (isGrounded || SnapToGround())
+    if (isGrounded || SnapToGround() || CheckSteepContacts())
     {
       stepsSinceGrounded = 0;
       jumpsSinceGrounded = 0;
@@ -132,6 +132,21 @@ public class CatController : MonoBehaviour
         steepNormal += normal;
       }
     }
+  }
+
+  private bool CheckSteepContacts() //this is a fix for getting stuck off the ground
+  {
+    if (steepContactCount > 1)
+    {
+      steepNormal.Normalize();
+      if (steepNormal.y >= minGroundDotProduct)
+      {
+        isGrounded = true;
+        groundNormal = steepNormal;
+        return true;
+      }
+    }
+    return false;
   }
 
   private Vector2 GetInput()
