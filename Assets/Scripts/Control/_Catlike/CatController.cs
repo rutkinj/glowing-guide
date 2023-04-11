@@ -221,8 +221,11 @@ public class CatController : MonoBehaviour
 
     stepsSinceJumped = 0;
     jumpsSinceGrounded += 1;
+
     float jumpValue = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
+    jumpDir = (jumpDir + Vector3.up).normalized; //adds upward direction to wall jumps
     float alignedSpeed = Vector3.Dot(velocity, jumpDir);
+
     if (alignedSpeed > 0f)
     {
       jumpValue = Mathf.Max(jumpValue - alignedSpeed, 0f);
