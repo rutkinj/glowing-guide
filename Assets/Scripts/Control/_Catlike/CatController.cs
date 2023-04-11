@@ -12,6 +12,8 @@ public class CatController : MonoBehaviour
   [Range(0f, 10f)][SerializeField] float jumpHeight = 5f;
   [Range(0, 3)][SerializeField] int airJumps = 1;
   [Range(0, 90)][SerializeField] float maxGroundAngle = 25f;
+  [SerializeField, Min(1f)] float snapProbeDistance = 2f;
+  [SerializeField] LayerMask probeMask = -1;
 
   [Header("For fake physics controls")]
   [Range(0f, 1f)][SerializeField] float bounce = 0.5f;
@@ -23,12 +25,17 @@ public class CatController : MonoBehaviour
   bool isGrounded;
   int jumpsSinceGrounded;
   int stepsSinceGrounded;
+  int stepsSinceJumped;
   float minGroundDotProduct;
   Vector3 contactNormal;
 
   private void OnValidate()
   {
     minGroundDotProduct = Mathf.Cos(maxGroundAngle * Mathf.Deg2Rad);
+    if(maxSnapSpeed == maxSpeed){
+      if(maxSpeed == 0) return;
+      maxSnapSpeed = maxSpeed - 1;
+    }
   }
 
   private void Awake()
@@ -73,11 +80,12 @@ public class CatController : MonoBehaviour
   private void UpdateState()
   {
     stepsSinceGrounded += 1;
+    stepsSinceJumped += 1;
     velocity = rb.velocity;
     if (isGrounded || SnapToGround())
     {
-      jumpsSinceGrounded = 0;
       stepsSinceGrounded = 0;
+      jumpsSinceGrounded = 0;
       contactNormal.Normalize();
     }
     else
@@ -172,6 +180,7 @@ public class CatController : MonoBehaviour
   {
     if (isGrounded || jumpsSinceGrounded < airJumps)
     {
+      stepsSinceJumped = 0;
       jumpsSinceGrounded += 1;
       float jumpValue = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHeight);
       float alignedSpeed = Vector3.Dot(velocity, contactNormal);
@@ -210,21 +219,25 @@ public class CatController : MonoBehaviour
     float speed = velocity.magnitude;
     if (speed > maxSnapSpeed)
     {
+      print("Too fast! no snap");
       return false;
     }
 
-    if (stepsSinceGrounded > 1)
+    if (stepsSinceGrounded > 1 || stepsSinceJumped <= 2)
     {
+      print("definitely off the ground, no snap");
       return false;
     }
 
-    if (!Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit))
+    if (!Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, snapProbeDistance, probeMask))
     {
+      print("raycast didn't hit any ground, no snap");
       return false;
     }
 
     if (hit.normal.y < minGroundDotProduct)
     {
+      print("ground is too steep, no snap");
       return false;
     }
 
@@ -234,6 +247,7 @@ public class CatController : MonoBehaviour
     {
       velocity = (velocity - hit.normal * dot).normalized * speed;
     }
+    print("we snappin now boyz!!");
     return true;
   }
 
