@@ -8,6 +8,7 @@ public class OrbitCamera : MonoBehaviour
   [SerializeField] Transform target;
   [SerializeField] float distance;
   [SerializeField, Min(0f)] float focusRadius = 1f;
+  [SerializeField, Range(0f, 0.99f)] float centeringFactor = 0.5f;
   Vector3 camFocus;
 
   private void Awake()
@@ -24,15 +25,21 @@ public class OrbitCamera : MonoBehaviour
 
   private void UpdateTargetPos()
   {
-    Vector3 targetPos = target.position;
+    Vector3 targetPosCurrent = target.position;
     if (focusRadius > 0f)
     {
-      float dist = Vector3.Distance(targetPos, camFocus);
+      float dist = Vector3.Distance(targetPosCurrent, camFocus);
+      float lerpTime = 1f;
+        if(dist > 0.01f && centeringFactor > 0f){
+            lerpTime = Mathf.Pow(1f - centeringFactor, Time.unscaledDeltaTime);
+        }
+
       if (dist > focusRadius)
       {
-        camFocus = Vector3.Lerp(targetPos, camFocus, focusRadius / dist);
+        lerpTime = Mathf.Min(lerpTime, focusRadius / dist);
       }
+        camFocus = Vector3.Lerp(targetPosCurrent, camFocus, lerpTime);
     }
-    else camFocus = targetPos;
+    else camFocus = targetPosCurrent;
   }
 }
