@@ -2568,6 +2568,10 @@ MonoBehaviour:
   target: {fileID: 628086470}
   distance: 5
   rotationSpeed: 90
+  minVertAngle: -3
+  maxVertAngle: 60
+  alignSmoothRange: 45
+  alignDelay: 2
   focusRadius: 1
   centeringFactor: 0.5
 --- !u!4 &628086470 stripped
