@@ -12,6 +12,7 @@ public class OrbitCamera : MonoBehaviour
   [SerializeField, Range(1f, 360f)] float rotationSpeed = 90f;
   [SerializeField, Range(-89f, 89f)] float minVertAngle = -30f;
   [SerializeField, Range(-89f, 89f)] float maxVertAngle = 60f;
+  [SerializeField, Min(0f)] float alignDelay = 2f;
 
   [Header("Focus")]
   [SerializeField, Min(0f)] float focusRadius = 1f;
@@ -19,6 +20,7 @@ public class OrbitCamera : MonoBehaviour
 
   Vector3 camFocus;
   Vector2 orbitAngles = new Vector2(45f, 0f);
+  float lastManualRotationTime;
 
   private void OnValidate()
   {
@@ -37,7 +39,7 @@ public class OrbitCamera : MonoBehaviour
   {
     UpdateTargetPos();
     Quaternion lookRotation;
-    if (ManualRotation())
+    if (ManualRotation() || AutoRotate())
     {
       ConstrainAngles();
       lookRotation = Quaternion.Euler(orbitAngles);
@@ -48,8 +50,8 @@ public class OrbitCamera : MonoBehaviour
     }
 
     Vector3 lookDirection = lookRotation * Vector3.forward;
-    Vector3 lookPosisition = camFocus - lookDirection * distance;
-    transform.SetPositionAndRotation(lookPosisition, lookRotation);
+    Vector3 lookPosition = camFocus - lookDirection * distance;
+    transform.SetPositionAndRotation(lookPosition, lookRotation);
   }
 
   private void UpdateTargetPos()
@@ -80,6 +82,7 @@ public class OrbitCamera : MonoBehaviour
     if (input.x < -deadZone || input.x > deadZone || input.y < -deadZone || input.y > deadZone)
     {
       orbitAngles += rotationSpeed * Time.unscaledDeltaTime * input;
+      lastManualRotationTime = Time.unscaledTime;
       return true;
     }
     return false;
@@ -97,5 +100,12 @@ public class OrbitCamera : MonoBehaviour
     {
       orbitAngles.y -= 360f;
     }
+  }
+
+  private bool AutoRotate(){
+    if(Time.unscaledTime - lastManualRotationTime < alignDelay){
+        return false;
+    }
+    return true;
   }
 }
