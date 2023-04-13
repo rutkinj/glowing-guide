@@ -19,6 +19,7 @@ public class OrbitCamera : MonoBehaviour
   [SerializeField, Range(0f, 0.99f)] float centeringFactor = 0.5f;
 
   Vector3 camFocus;
+  Vector3 previousCamFocus;
   Vector2 orbitAngles = new Vector2(45f, 0f);
   float lastManualRotationTime;
 
@@ -56,6 +57,7 @@ public class OrbitCamera : MonoBehaviour
 
   private void UpdateTargetPos()
   {
+    previousCamFocus = camFocus;
     Vector3 targetPosCurrent = target.position;
     if (focusRadius > 0f)
     {
@@ -102,10 +104,26 @@ public class OrbitCamera : MonoBehaviour
     }
   }
 
-  private bool AutoRotate(){
-    if(Time.unscaledTime - lastManualRotationTime < alignDelay){
+  private bool AutoRotate()
+  {
+    if (Time.unscaledTime - lastManualRotationTime < alignDelay)
+    {
+      return false;
+    }
+
+    Vector2 movement = new Vector2(camFocus.x - previousCamFocus.x, camFocus.z - previousCamFocus.z);
+    float movementDeltaSqr = movement.sqrMagnitude;
+    if (movementDeltaSqr < 0.0001f){
         return false;
     }
+
+    float headingAngle = GetAngle(movement / Mathf.Sqrt(movementDeltaSqr));
+    orbitAngles.y = headingAngle;
     return true;
+  }
+
+  static float GetAngle(Vector2 dir){
+    float angle = Mathf.Acos(dir.y) * Mathf.Rad2Deg;
+    return dir.x < 0f ? 360f - angle : angle;
   }
 }
