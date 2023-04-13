@@ -10,6 +10,8 @@ public class OrbitCamera : MonoBehaviour
 
   [Header("Orbit")]
   [SerializeField, Range(1f, 360f)] float rotationSpeed = 90f;
+  [SerializeField, Range(-89f, 89f)] float minVertAngle = -30f;
+  [SerializeField, Range(-89f, 89f)] float maxVertAngle = 60f;
 
   [Header("Focus")]
   [SerializeField, Min(0f)] float focusRadius = 1f;
@@ -18,17 +20,33 @@ public class OrbitCamera : MonoBehaviour
   Vector3 camFocus;
   Vector2 orbitAngles = new Vector2(45f, 0f);
 
+  private void OnValidate()
+  {
+    if (maxVertAngle < minVertAngle)
+    {
+      maxVertAngle = minVertAngle;
+    }
+  }
   private void Awake()
   {
     camFocus = target.position;
+    transform.localRotation = Quaternion.Euler(orbitAngles);
   }
 
   private void LateUpdate()
   {
     UpdateTargetPos();
-    ManualRotation();
+    Quaternion lookRotation;
+    if (ManualRotation())
+    {
+      ConstrainAngles();
+      lookRotation = Quaternion.Euler(orbitAngles);
+    }
+    else
+    {
+      lookRotation = transform.localRotation;
+    }
 
-    Quaternion lookRotation = Quaternion.Euler(orbitAngles);
     Vector3 lookDirection = lookRotation * Vector3.forward;
     Vector3 lookPosisition = camFocus - lookDirection * distance;
     transform.SetPositionAndRotation(lookPosisition, lookRotation);
@@ -55,13 +73,29 @@ public class OrbitCamera : MonoBehaviour
     else camFocus = targetPosCurrent;
   }
 
-  private void ManualRotation()
+  private bool ManualRotation()
   {
     Vector2 input = new Vector2(Input.GetAxis("Vertical Camera"), Input.GetAxis("Horizontal Camera"));
     const float deadZone = 0.001f;
     if (input.x < -deadZone || input.x > deadZone || input.y < -deadZone || input.y > deadZone)
     {
       orbitAngles += rotationSpeed * Time.unscaledDeltaTime * input;
+      return true;
+    }
+    return false;
+  }
+
+  private void ConstrainAngles()
+  {
+    orbitAngles.x = Mathf.Clamp(orbitAngles.x, minVertAngle, maxVertAngle);
+
+    if (orbitAngles.y < 0f)
+    {
+      orbitAngles.y += 360f;
+    }
+    else if (orbitAngles.y >= 360f)
+    {
+      orbitAngles.y -= 360f;
     }
   }
 }
