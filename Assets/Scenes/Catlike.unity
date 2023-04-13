@@ -245,14 +245,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentControl: 2
   playerInputSpace: {fileID: 587851840}
-  maxSpeed: 9.9
-  maxAcceleration: 8.1
+  maxSpeed: 10
+  maxAcceleration: 15
   maxAirAcceleration: 1
-  maxSnapSpeed: 15
+  maxSnapSpeed: 8
   jumpHeight: 2
   airJumps: 1
   maxGroundAngle: 45
-  snapProbeDistance: 2
+  snapProbeDistance: 1
   probeMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -288,7 +288,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
+  m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
