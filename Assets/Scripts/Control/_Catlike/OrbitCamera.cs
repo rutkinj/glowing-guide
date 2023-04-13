@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Camera))]
 public class OrbitCamera : MonoBehaviour
@@ -19,6 +20,9 @@ public class OrbitCamera : MonoBehaviour
   [SerializeField, Min(0f)] float focusRadius = 1f;
   [SerializeField, Range(0f, 0.99f)] float centeringFactor = 0.5f;
 
+  PlayerInput playerInput;
+  InputAction lookAction;
+  
   Vector3 camFocus;
   Vector3 previousCamFocus;
   Vector2 orbitAngles = new Vector2(45f, 0f);
@@ -35,6 +39,8 @@ public class OrbitCamera : MonoBehaviour
   {
     camFocus = target.position;
     transform.localRotation = Quaternion.Euler(orbitAngles);
+    playerInput = target.GetComponent<PlayerInput>();
+    lookAction = playerInput.actions["Look"];
   }
 
   private void LateUpdate()
@@ -82,7 +88,10 @@ public class OrbitCamera : MonoBehaviour
 
   private bool ManualRotation()
   {
-    Vector2 input = new Vector2(Input.GetAxis("Vertical Camera"), Input.GetAxis("Horizontal Camera"));
+    // Vector2 input = new Vector2(Input.GetAxis("Vertical Camera"), Input.GetAxis("Horizontal Camera"));
+    Vector2 rawInput = lookAction.ReadValue<Vector2>();
+    Vector2 input = new Vector2(rawInput.y, rawInput.x);
+
     const float deadZone = 0.001f;
 
     if (input.x < -deadZone || input.x > deadZone || input.y < -deadZone || input.y > deadZone)

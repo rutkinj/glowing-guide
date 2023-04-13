@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CatController : MonoBehaviour
+public class NewInputCatController : MonoBehaviour
 {
   [SerializeField] controlType currentControl = controlType.none;
   [SerializeField] Transform playerInputSpace;
@@ -20,6 +20,9 @@ public class CatController : MonoBehaviour
   [Header("For fake physics controls")]
   [Range(0f, 1f)][SerializeField] float bounce = 0.5f;
   [SerializeField] Rect allowedArea = new Rect(-5f, -5f, 10f, 10f);
+  PlayerInput playerInput;
+  InputAction moveAction;
+  InputAction jumpAction;
   Vector3 velocity;
   Vector3 desiredVelocity;
   Rigidbody rb;
@@ -47,6 +50,9 @@ public class CatController : MonoBehaviour
   private void Awake()
   {
     rb = GetComponent<Rigidbody>();
+    playerInput = GetComponent<PlayerInput>();
+    moveAction = playerInput.actions["Move"];
+    jumpAction = playerInput.actions["Jump"];
     OnValidate();
   }
 
@@ -71,7 +77,7 @@ public class CatController : MonoBehaviour
       desiredVelocity = new Vector3(playerInput.x, 0f, playerInput.y) * maxSpeed;
     }
 
-    inputToJump |= Input.GetButtonDown("Jump");
+    inputToJump |= jumpAction.ReadValue<float>() > 0;
 
     if (currentControl == controlType.fakePhysx)
     {
@@ -170,7 +176,10 @@ public class CatController : MonoBehaviour
   private Vector2 GetInput()
   {
     //get input and assign to vector2
-    Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+    // Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+    Vector2 input = moveAction.ReadValue<Vector2>();
+
     //normalize input; prevent diagonal input from exceeding 1
     input = Vector3.ClampMagnitude(input, 1f);
     return input;
