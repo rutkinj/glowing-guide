@@ -62,9 +62,17 @@ public class OrbitCamera : MonoBehaviour
     Vector3 lookDirection = lookRotation * Vector3.forward;
     Vector3 lookPosition = camFocus - lookDirection * distance;
 
-    if (Physics.BoxCast(camFocus, CameraHalfExtends, -lookDirection, out RaycastHit hitInfo, lookRotation, distance - cam.nearClipPlane))
+    Vector3 rectOffset = lookDirection * cam.nearClipPlane;
+    Vector3 rectPosition = lookPosition + rectOffset;
+    Vector3 castFrom = target.position;
+    Vector3 castLine = rectPosition - castFrom;
+    float castDistance = castLine.magnitude;
+    Vector3 castDirection = castLine / castDistance;
+
+    if (Physics.BoxCast(castFrom, CameraHalfExtends, castDirection, out RaycastHit hitInfo, lookRotation, castDistance))
     {
-      lookPosition = camFocus - lookDirection * (hitInfo.distance + cam.nearClipPlane);
+      rectPosition = castFrom + castDirection * hitInfo.distance;
+      lookPosition = rectPosition - rectOffset;
     }
 
     transform.SetPositionAndRotation(lookPosition, lookRotation);
