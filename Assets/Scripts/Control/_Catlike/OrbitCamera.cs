@@ -22,7 +22,8 @@ public class OrbitCamera : MonoBehaviour
 
   PlayerInput playerInput;
   InputAction lookAction;
-  
+
+  Camera cam;
   Vector3 camFocus;
   Vector3 previousCamFocus;
   Vector2 orbitAngles = new Vector2(45f, 0f);
@@ -37,6 +38,7 @@ public class OrbitCamera : MonoBehaviour
   }
   private void Awake()
   {
+    cam = GetComponent<Camera>();
     camFocus = target.position;
     transform.localRotation = Quaternion.Euler(orbitAngles);
     playerInput = target.GetComponent<PlayerInput>();
@@ -60,8 +62,9 @@ public class OrbitCamera : MonoBehaviour
     Vector3 lookDirection = lookRotation * Vector3.forward;
     Vector3 lookPosition = camFocus - lookDirection * distance;
 
-    if(Physics.Raycast(camFocus, -lookDirection, out RaycastHit hitInfo, distance)){
-      lookPosition = camFocus - lookDirection * hitInfo.distance;
+    if (Physics.BoxCast(camFocus, CameraHalfExtends, -lookDirection, out RaycastHit hitInfo, lookRotation, distance - cam.nearClipPlane))
+    {
+      lookPosition = camFocus - lookDirection * (hitInfo.distance + cam.nearClipPlane);
     }
 
     transform.SetPositionAndRotation(lookPosition, lookRotation);
@@ -151,6 +154,17 @@ public class OrbitCamera : MonoBehaviour
     return true;
   }
 
+  private Vector3 CameraHalfExtends
+  {
+    get
+    {
+      Vector3 halfExtends;
+      halfExtends.y = cam.nearClipPlane * Mathf.Tan(0.5f * Mathf.Deg2Rad * cam.fieldOfView);
+      halfExtends.x = halfExtends.y * cam.aspect;
+      halfExtends.z = 0f;
+      return halfExtends;
+    }
+  }
   static float GetAngle(Vector2 dir)
   {
     float angle = Mathf.Acos(dir.y) * Mathf.Rad2Deg;
