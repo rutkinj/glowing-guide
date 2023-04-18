@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class OrbitCamera : MonoBehaviour
 {
   [SerializeField] Transform target;
+  [SerializeField] Vector3 offset;
   [SerializeField] float distance;
 
   [Header("Orbit")]
@@ -106,7 +107,7 @@ public class OrbitCamera : MonoBehaviour
   {
     // Vector2 input = new Vector2(Input.GetAxis("Vertical Camera"), Input.GetAxis("Horizontal Camera"));
     Vector2 rawInput = lookAction.ReadValue<Vector2>();
-    Vector2 input = new Vector2(rawInput.y, rawInput.x);
+    Vector2 input = new Vector2(-rawInput.y, rawInput.x);
 
     const float deadZone = 0.001f;
 
