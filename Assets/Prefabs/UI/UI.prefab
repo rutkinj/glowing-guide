@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 7959537619175453882}
   - component: {fileID: 6917433385857542364}
   m_Layer: 0
-  m_Name: HUD
+  m_Name: HUDCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -243,10 +243,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 2000, y: 2000}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -808,66 +808,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2324057804574989409}
     m_Modifications:
-    - target: {fileID: 1322122895, guid: db87c708d90424681990ef2ca1665385, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 151
-      objectReference: {fileID: 0}
-    - target: {fileID: 1322122895, guid: db87c708d90424681990ef2ca1665385, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 32.598
-      objectReference: {fileID: 0}
-    - target: {fileID: 2064032303, guid: db87c708d90424681990ef2ca1665385, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 151
-      objectReference: {fileID: 0}
-    - target: {fileID: 2064032303, guid: db87c708d90424681990ef2ca1665385, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 190192257700288476, guid: db87c708d90424681990ef2ca1665385, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 582630255362481224, guid: db87c708d90424681990ef2ca1665385, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1059972910936966608, guid: db87c708d90424681990ef2ca1665385, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2126592281765861836, guid: db87c708d90424681990ef2ca1665385, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3210099931190587122, guid: db87c708d90424681990ef2ca1665385, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3451424104594112294, guid: db87c708d90424681990ef2ca1665385, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 136.9379
-      objectReference: {fileID: 0}
-    - target: {fileID: 3451424104594112294, guid: db87c708d90424681990ef2ca1665385, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 37.471
-      objectReference: {fileID: 0}
-    - target: {fileID: 5109510377340956722, guid: db87c708d90424681990ef2ca1665385, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 325.1821
-      objectReference: {fileID: 0}
-    - target: {fileID: 5856509078060691917, guid: db87c708d90424681990ef2ca1665385, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 57
-      objectReference: {fileID: 0}
-    - target: {fileID: 5856509078060691917, guid: db87c708d90424681990ef2ca1665385, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 46
-      objectReference: {fileID: 0}
-    - target: {fileID: 6972749994161135940, guid: db87c708d90424681990ef2ca1665385, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7261706456118187863, guid: db87c708d90424681990ef2ca1665385, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -955,18 +895,6 @@ PrefabInstance:
     - target: {fileID: 8447384528127097537, guid: db87c708d90424681990ef2ca1665385, type: 3}
       propertyPath: m_Name
       value: PanelsCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 9006655305868665242, guid: db87c708d90424681990ef2ca1665385, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 144.6591
-      objectReference: {fileID: 0}
-    - target: {fileID: 9006655305868665242, guid: db87c708d90424681990ef2ca1665385, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 37.4707
-      objectReference: {fileID: 0}
-    - target: {fileID: 9107704000245407935, guid: db87c708d90424681990ef2ca1665385, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db87c708d90424681990ef2ca1665385, type: 3}
