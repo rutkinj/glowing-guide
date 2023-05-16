@@ -1,21 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 namespace RPG.UI.Inventory
 {
+  [RequireComponent(typeof(Image))]
   public class ItemIcon : MonoBehaviour
   {
-    // Start is called before the first frame update
-    void Start()
+    public void SetItem(Sprite item)
     {
-
+      Image iconImage = GetComponent<Image>();
+      if (item == null)
+      {
+        iconImage.enabled = false;
+      }
+      else
+      {
+        iconImage.enabled = true;
+        iconImage.sprite = item;
+      }
     }
 
-    // Update is called once per frame
-    void Update()
+    public Sprite GetItem()
     {
-
+      Image iconImage = GetComponent<Image>();
+      if (!iconImage.enabled)
+      {
+        return null;
+      }
+      else
+      {
+        return iconImage.sprite;
+      }
     }
   }
 }
