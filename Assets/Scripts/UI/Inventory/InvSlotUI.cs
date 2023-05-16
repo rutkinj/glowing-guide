@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GameDevTV.Core.UI.Dragging;
 
 namespace RPG.UI.Inventory
 {
@@ -24,7 +23,7 @@ namespace RPG.UI.Inventory
 
     public Sprite GetItem()
     {
-      return null;
+      return icon.GetItem();
     }
 
     public int GetNumber()
