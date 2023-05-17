@@ -23,19 +23,6 @@ namespace RPG.UI.Inventories
         iconImage.sprite = item.GetIcon();
       }
     }
-
-    // public Sprite GetItem()
-    // {
-    //   Image iconImage = GetComponent<Image>();
-    //   if (!iconImage.enabled)
-    //   {
-    //     return null;
-    //   }
-    //   else
-    //   {
-    //     return iconImage.sprite;
-    //   }
-    // }
   }
 }
 
