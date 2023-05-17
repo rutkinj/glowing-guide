@@ -120,7 +120,6 @@ namespace RPG.Inventories
     /// <returns>True if the item was added anywhere in the inventory.</returns>
     public bool AddItemToSlot(int slot, InventoryItem item)
     {
-      print("bingbong");
       if (slots[slot] != null)
       {
         return AddToFirstEmptySlot(item); ;
@@ -139,8 +138,8 @@ namespace RPG.Inventories
     private void Awake()
     {
       slots = new InventoryItem[inventorySize];
-      slots[0] = InventoryItem.GetFromID("71e73607-4bac-4e42-b7d6-5e6f91e92dc4");
-      slots[1] = InventoryItem.GetFromID("0aa7c8b8-4796-42aa-89d0-9d100ea67d7b");
+      slots[0] = InventoryItem.GetFromID("5beb0a33-1ab8-4276-aa3f-7aa7db7366f7");
+      slots[1] = InventoryItem.GetFromID("bc1c5aa3-b194-4a9c-9534-d95f9e6d9e3a");
     }
 
     /// <summary>
