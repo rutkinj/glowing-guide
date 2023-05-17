@@ -200,12 +200,12 @@ namespace RPG.Inventories
     //   IDictionary<string, JToken> stateDict = state;
     //   for (int i = 0; i < inventorySize; i++)
     //   {
-    //     if (slots[i].item != null)
+    //     if (slots[i] != null)
     //     {
     //       JObject itemState = new JObject();
     //       IDictionary<string, JToken> itemStateDict = itemState;
-    //       itemState["item"] = JToken.FromObject(slots[i].item.GetItemID());
-    //       itemState["number"] = JToken.FromObject(slots[i].number);
+    //       itemState["item"] = JToken.FromObject(slots[i].GetItemID());
+    //     //   itemState["number"] = JToken.FromObject(slots[i].number);
     //       stateDict[i.ToString()] = itemState;
     //     }
     //   }
@@ -217,15 +217,15 @@ namespace RPG.Inventories
     // {
     //   if (state is JObject stateObject)
     //   {
-    //     slots = new InventorySlot[inventorySize];
+    //     slots = new InventoryItem[inventorySize];
     //     IDictionary<string, JToken> stateDict = stateObject;
     //     for (int i = 0; i < inventorySize; i++)
     //     {
     //       if (stateDict.ContainsKey(i.ToString()) && stateDict[i.ToString()] is JObject itemState)
     //       {
     //         IDictionary<string, JToken> itemStateDict = itemState;
-    //         slots[i].item = InventoryItem.GetFromID(itemStateDict["item"].ToObject<string>());
-    //         slots[i].number = itemStateDict["number"].ToObject<int>();
+    //         slots[i] = InventoryItem.GetFromID(itemStateDict["item"].ToObject<string>());
+    //         // slots[i].number = itemStateDict["number"].ToObject<int>();
     //       }
     //     }
     //     inventoryUpdated?.Invoke();
