@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Potion
   m_EditorClassIdentifier: 
   itemID: 5beb0a33-1ab8-4276-aa3f-7aa7db7366f7
-  displayName: 
-  description: 
-  icon: {fileID: 0}
-  stackable: 0
+  displayName: Potion
+  description: Potion that is white.
+  icon: {fileID: -1173530473, guid: cb0fb73fa7fad91478014c6512c11514, type: 3}
+  stackable: 1
