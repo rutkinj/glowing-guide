@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using RPG.Inventories;
 using UnityEngine;
 
-namespace RPG.UI.Inventory
+namespace RPG.UI.Inventories
 {
   public class InvDragItem : DragItem<InventoryItem>
   {

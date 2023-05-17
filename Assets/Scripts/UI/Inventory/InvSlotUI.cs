@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using RPG.Inventories;
 using UnityEngine;
 
-namespace RPG.UI.Inventory
+namespace RPG.UI.Inventories
 {
-  public class InvSlotUI : MonoBehaviour, IDragContainer<Sprite>
+  public class InvSlotUI : MonoBehaviour, IDragContainer<InventoryItem>
   {
     [SerializeField] ItemIcon icon = null;
+
+    int index;
+    InventoryItem item;
+    Inventory inv;
     public int MaxAcceptable(Sprite item)
     {
       if (GetItem() == null)
@@ -16,9 +21,9 @@ namespace RPG.UI.Inventory
       return 0;
     }
 
-    public void AddItems(Sprite item, int amount)
+    public void AddItems(InventoryItem item, int amount)
     {
-      icon.SetItem(item);
+      inve
     }
 
     public Sprite GetItem()

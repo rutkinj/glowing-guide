@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RPG.UI.Inventory
+namespace RPG.UI.Inventories
 {
     /// <summary>
     /// Components that implement this interfaces can act as the source for

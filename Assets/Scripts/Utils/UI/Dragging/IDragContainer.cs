@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RPG.UI.Inventory
+namespace RPG.UI.Inventories
 {
     /// <summary>
     /// Acts both as a source and destination for dragging. If we are dragging

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace RPG.UI.Inventory
+namespace RPG.UI.Inventories
 {
     /// <summary>
     /// Allows a UI element to be dragged and dropped from and to a container.
