@@ -14,24 +14,27 @@ namespace RPG.UI.Inventories
 
     void Awake()
     {
-        playerInv = Inventory.GetPlayerInventory();
-        playerInv.inventoryUpdated += Redraw;
+      playerInv = Inventory.GetPlayerInventory();
+      playerInv.inventoryUpdated += Redraw;
     }
 
     void Start()
     {
-        Redraw();
+      Redraw();
     }
 
-    void Redraw(){
-        foreach (Transform child in transform){
-            Destroy(child.gameObject);
-        }
+    void Redraw()
+    {
+      foreach (Transform child in transform)
+      {
+        Destroy(child.gameObject);
+      }
 
-        for( int i =0; i < playerInv.GetSize(); i++){
-            InvSlotUI slot = Instantiate(invItemPrefab, transform);
-            slot.Setup(playerInv, i);
-        }
+      for (int i = 0; i < playerInv.GetSize(); i++)
+      {
+        InvSlotUI slot = Instantiate(invItemPrefab, transform);
+        slot.Setup(playerInv, i);
+      }
     }
   }
 }

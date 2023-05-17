@@ -13,7 +13,8 @@ namespace RPG.UI.Inventories
     InventoryItem item;
     Inventory inv;
 
-    public void Setup(Inventory inv, int index){
+    public void Setup(Inventory inv, int index)
+    {
       this.inv = inv;
       this.index = index;
       icon.SetItem(inv.GetItemInSlot(index));
@@ -43,8 +44,9 @@ namespace RPG.UI.Inventories
       return 1;
     }
 
-    public void RemoveItems(int amount){
-        inv.RemoveFromSlot(index);
+    public void RemoveItems(int amount)
+    {
+      inv.RemoveFromSlot(index);
     }
   }
 }

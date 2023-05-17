@@ -120,7 +120,7 @@ namespace RPG.Inventories
     /// <returns>True if the item was added anywhere in the inventory.</returns>
     public bool AddItemToSlot(int slot, InventoryItem item)
     {
-        print("bingbong");
+      print("bingbong");
       if (slots[slot] != null)
       {
         return AddToFirstEmptySlot(item); ;
