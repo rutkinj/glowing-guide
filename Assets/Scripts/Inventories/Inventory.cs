@@ -168,32 +168,6 @@ namespace RPG.Inventories
       return -1;
     }
 
-    // object ISaveable.CaptureState()
-    // {
-    //   var slotStrings = new string[inventorySize];
-    //   for (int i = 0; i < inventorySize; i++)
-    //   {
-    //     if (slots[i] != null)
-    //     {
-    //       slotStrings[i] = slots[i].GetItemID();
-    //     }
-    //   }
-    //   return slotStrings;
-    // }
-
-    // void ISaveable.RestoreState(object state)
-    // {
-    //   var slotStrings = (string[])state;
-    //   for (int i = 0; i < inventorySize; i++)
-    //   {
-    //     slots[i] = InventoryItem.GetFromID(slotStrings[i]);
-    //   }
-    //   if (inventoryUpdated != null)
-    //   {
-    //     inventoryUpdated();
-    //   }
-    // }
-
     public JToken CaptureAsJToken()
     {
       JObject state = new JObject();
