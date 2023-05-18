@@ -72,7 +72,7 @@ namespace RPG.Combat
 
     public void EquipWeapon(WeaponConfig weapon)
     {
-      // if(weapon == null) return;
+      if(weapon == null) return;
       currentWeaponConfig = weapon;
       currentWeapon.value = AttachWeapon(weapon);
     }
