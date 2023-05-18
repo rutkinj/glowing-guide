@@ -3,6 +3,7 @@ using UnityEngine;
 using GameDevTV.Saving;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
+using RPG.Saving;
 
 namespace RPG.Inventories
 {
@@ -12,7 +13,7 @@ namespace RPG.Inventories
   ///
   /// This component should be placed on the GameObject tagged "Player".
   /// </summary>
-  public class Inventory : MonoBehaviour, ISaveable
+  public class Inventory : MonoBehaviour, IJsonSaveable
   {
     // CONFIG DATA
     [Tooltip("Allowed size")]
@@ -167,68 +168,69 @@ namespace RPG.Inventories
       return -1;
     }
 
-    object ISaveable.CaptureState()
-    {
-      var slotStrings = new string[inventorySize];
-      for (int i = 0; i < inventorySize; i++)
-      {
-        if (slots[i] != null)
-        {
-          slotStrings[i] = slots[i].GetItemID();
-        }
-      }
-      return slotStrings;
-    }
-
-    void ISaveable.RestoreState(object state)
-    {
-      var slotStrings = (string[])state;
-      for (int i = 0; i < inventorySize; i++)
-      {
-        slots[i] = InventoryItem.GetFromID(slotStrings[i]);
-      }
-      if (inventoryUpdated != null)
-      {
-        inventoryUpdated();
-      }
-    }
-
-    // public JToken CaptureAsJToken()
+    // object ISaveable.CaptureState()
     // {
-    //   JObject state = new JObject();
-    //   IDictionary<string, JToken> stateDict = state;
+    //   var slotStrings = new string[inventorySize];
     //   for (int i = 0; i < inventorySize; i++)
     //   {
     //     if (slots[i] != null)
     //     {
-    //       JObject itemState = new JObject();
-    //       IDictionary<string, JToken> itemStateDict = itemState;
-    //       itemState["item"] = JToken.FromObject(slots[i].GetItemID());
-    //     //   itemState["number"] = JToken.FromObject(slots[i].number);
-    //       stateDict[i.ToString()] = itemState;
+    //       slotStrings[i] = slots[i].GetItemID();
     //     }
     //   }
-    //   return state;
+    //   return slotStrings;
     // }
 
-
-    // public void RestoreFromJToken(JToken state)
+    // void ISaveable.RestoreState(object state)
     // {
-    //   if (state is JObject stateObject)
+    //   var slotStrings = (string[])state;
+    //   for (int i = 0; i < inventorySize; i++)
     //   {
-    //     slots = new InventoryItem[inventorySize];
-    //     IDictionary<string, JToken> stateDict = stateObject;
-    //     for (int i = 0; i < inventorySize; i++)
-    //     {
-    //       if (stateDict.ContainsKey(i.ToString()) && stateDict[i.ToString()] is JObject itemState)
-    //       {
-    //         IDictionary<string, JToken> itemStateDict = itemState;
-    //         slots[i] = InventoryItem.GetFromID(itemStateDict["item"].ToObject<string>());
-    //         // slots[i].number = itemStateDict["number"].ToObject<int>();
-    //       }
-    //     }
-    //     inventoryUpdated?.Invoke();
+    //     slots[i] = InventoryItem.GetFromID(slotStrings[i]);
+    //   }
+    //   if (inventoryUpdated != null)
+    //   {
+    //     inventoryUpdated();
     //   }
     // }
+
+    public JToken CaptureAsJToken()
+    {
+      JObject state = new JObject();
+      IDictionary<string, JToken> stateDict = state;
+      for (int i = 0; i < inventorySize; i++)
+      {
+        if (slots[i] != null)
+        {
+          print("Found and saving: " + slots[i].GetDisplayName());
+          JObject itemState = new JObject();
+          IDictionary<string, JToken> itemStateDict = itemState;
+          itemState["item"] = JToken.FromObject(slots[i].GetItemID());
+          // itemState["number"] = JToken.FromObject(slots[i].number);
+          stateDict[i.ToString()] = itemState;
+        }
+      }
+      return state;
+    }
+
+
+    public void RestoreFromJToken(JToken state)
+    {
+      if (state is JObject stateObject)
+      {
+        slots = new InventoryItem[inventorySize];
+        IDictionary<string, JToken> stateDict = stateObject;
+        for (int i = 0; i < inventorySize; i++)
+        {
+          if (stateDict.ContainsKey(i.ToString()) && stateDict[i.ToString()] is JObject itemState)
+          {
+            IDictionary<string, JToken> itemStateDict = itemState;
+            slots[i] = InventoryItem.GetFromID(itemStateDict["item"].ToObject<string>());
+            // slots[i].number = itemStateDict["number"].ToObject<int>();
+          }
+        }
+        inventoryUpdated?.Invoke();
+      }
+    }
   }
 }
