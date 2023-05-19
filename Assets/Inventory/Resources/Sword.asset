@@ -17,3 +17,4 @@ MonoBehaviour:
   description: Slashy sword.
   icon: {fileID: 124599805, guid: cb0fb73fa7fad91478014c6512c11514, type: 3}
   stackable: 0
+  pickup: {fileID: 8845234357752431023, guid: 4324f7b131c0f2541bc9d5ac493258ce, type: 3}
