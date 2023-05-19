@@ -9,26 +9,40 @@ namespace RPG.Inventories
   public class PickupSpawner : MonoBehaviour, IJsonSaveable
   {
     [SerializeField] InventoryItem item = null;
-    private Pickup pickup = null;
-    private bool spawned = false;
 
     void Awake(){
       Spawn();
     }
 
     private void Spawn(){
-      pickup = item.SpawnPickup(this.transform);
-      spawned = true;
+      item.SpawnPickup(this.transform);
+    }
+
+    public Pickup GetPickup(){
+      return GetComponentInChildren<Pickup>();
+    }
+
+    private void DestroyPickup(){
+      if(GetPickup()){
+        Destroy(GetPickup().gameObject);
+      }
     }
 
     public JToken CaptureAsJToken()
     {
-      throw new System.NotImplementedException();
+      return JToken.FromObject((bool)GetPickup());
     }
 
     public void RestoreFromJToken(JToken state)
     {
-      throw new System.NotImplementedException();
+      bool wasPresent = state.ToObject<bool>();
+
+      if(!wasPresent && GetPickup()){
+        DestroyPickup();
+      }
+      if(wasPresent && !GetPickup()){
+        Spawn();
+      }
     }
   }
 }
