@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,6 +25,7 @@ namespace RPG.Inventories
         [SerializeField] Sprite icon = null;
         [Tooltip("If true, multiple items of this type can be stacked in the same inventory slot.")]
         [SerializeField] bool stackable = false;
+        [SerializeField] Pickup pickup;
 
         // STATE
         static Dictionary<string, InventoryItem> itemLookupCache;
@@ -85,6 +86,12 @@ namespace RPG.Inventories
         public string GetDescription()
         {
             return description;
+        }
+
+        public Pickup SpawnPickup(Vector3 pos){
+            Pickup pickup = Instantiate(this.pickup);
+            pickup.transform.position = pos;
+            return pickup;
         }
 
         // PRIVATE
