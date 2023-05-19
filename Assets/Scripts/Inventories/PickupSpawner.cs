@@ -17,7 +17,7 @@ namespace RPG.Inventories
     }
 
     private void Spawn(){
-      pickup = item.SpawnPickup(this.transform.position);
+      pickup = item.SpawnPickup(this.transform);
     }
 
     public JToken CaptureAsJToken()
