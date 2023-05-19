@@ -12,6 +12,15 @@ namespace RPG.Inventories
     {
       this.item = item;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+      if (other.CompareTag("Player"))
+      {
+        other.gameObject.GetComponent<Inventory>().AddToFirstEmptySlot(item);
+        Destroy(gameObject);
+      }
+    }
   }
 }
 

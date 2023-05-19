@@ -10,7 +10,7 @@ namespace RPG.Inventories
   {
     [SerializeField] InventoryItem item = null;
     private Pickup pickup = null;
-    private bool isPickedUp = false;
+    private bool spawned = false;
 
     void Awake(){
       Spawn();
@@ -18,6 +18,7 @@ namespace RPG.Inventories
 
     private void Spawn(){
       pickup = item.SpawnPickup(this.transform);
+      spawned = true;
     }
 
     public JToken CaptureAsJToken()
