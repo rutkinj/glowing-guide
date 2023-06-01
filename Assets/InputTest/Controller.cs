@@ -13,7 +13,5 @@ public class Controller : MonoBehaviour
         
     }
 
-    private void OnJump(){
-        FindObjectOfType<SphereCollider>().GetComponent<MeshRenderer>().material = red;
-    }
+    
 }
