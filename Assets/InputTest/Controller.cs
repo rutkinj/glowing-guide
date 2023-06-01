@@ -7,11 +7,13 @@ public class Controller : MonoBehaviour
 {
     private PlayerInput playerInput;
 
+    [SerializeField] Material red;
+
     private void Awake() {
-        playerInput = GetComponent<PlayerInput>();
-        var actions = playerInput.actions;
-        foreach(var action in actions){
-            print(action.name);
-        }
+        
+    }
+
+    private void OnJump(){
+        FindObjectOfType<SphereCollider>().GetComponent<MeshRenderer>().material = red;
     }
 }
