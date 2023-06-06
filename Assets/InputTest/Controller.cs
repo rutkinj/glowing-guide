@@ -3,18 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(CharacterController))]
 public class Controller : MonoBehaviour
 {
+  [SerializeField] private InputActionReference moveControl;
+  [SerializeField] private InputActionReference jumpControl;
+  [SerializeField] private float playerSpeed = 2.0f;
+  [SerializeField] private float jumpHeight = 1.0f;
+  [SerializeField] private float gravityValue = -9.81f;
+
   private CharacterController controller;
   private Vector3 playerVelocity;
   private bool groundedPlayer;
-  private float playerSpeed = 2.0f;
-  private float jumpHeight = 1.0f;
-  private float gravityValue = -9.81f;
+  private Transform cameraMain;
+
+  private void OnEnable() {
+    moveControl.action.Enable();
+    jumpControl.action.Enable();
+  }
+
+  private void OnDisable()
+  {
+    moveControl.action.Disable();
+    jumpControl.action.Disable();
+  }
 
   private void Start()
   {
-    controller = gameObject.AddComponent<CharacterController>();
+    controller = gameObject.GetComponent<CharacterController>();
+    cameraMain = Camera.main.transform;
   }
 
   void Update()
@@ -25,16 +42,14 @@ public class Controller : MonoBehaviour
       playerVelocity.y = 0f;
     }
 
-    Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+    Vector2 moveInput = moveControl.action.ReadValue<Vector2>();
+    Vector3 move = new Vector3(moveInput.x, 0, moveInput.y);
+    move = cameraMain.transform.forward * move.z + cameraMain.right * move.x;
+    move.y = 0;
     controller.Move(move * Time.deltaTime * playerSpeed);
 
-    if (move != Vector3.zero)
-    {
-      gameObject.transform.forward = move;
-    }
-
     // Changes the height position of the player..
-    if (Input.GetButtonDown("Jump") && groundedPlayer)
+    if (jumpControl.action.triggered && groundedPlayer)
     {
       playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
     }

@@ -7,7 +7,7 @@
             "actions": [
                 {
                     "name": "Move",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "d7b19ab2-1652-48df-8418-25ec9d14ce06",
                     "expectedControlType": "Vector2",
                     "processors": "",
@@ -16,7 +16,7 @@
                 },
                 {
                     "name": "Look",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "d2943110-3bf0-4ae7-ace0-0629270bb48a",
                     "expectedControlType": "Vector2",
                     "processors": "",
@@ -101,7 +101,7 @@
                 {
                     "name": "",
                     "id": "865d1ec0-fe58-4889-9764-14e6662dd550",
-                    "path": "<Gamepad>/rightStick",
+                    "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -110,7 +110,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "2D Vector",
+                    "name": "WASD",
                     "id": "d02797cd-802d-4164-81f8-95ad2c920d8a",
                     "path": "2DVector",
                     "interactions": "",
