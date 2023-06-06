@@ -1853,7 +1853,7 @@ GameObject:
   - component: {fileID: 1542551770}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2082,6 +2082,7 @@ GameObject:
   - component: {fileID: 1601723363}
   - component: {fileID: 1601723362}
   - component: {fileID: 1601723364}
+  - component: {fileID: 1601723365}
   m_Layer: 0
   m_Name: CM FreeLook1
   m_TagString: Untagged
@@ -2227,6 +2228,36 @@ MonoBehaviour:
   AutoEnableInputs: 1
   XYAxis: {fileID: 3939774211151641367, guid: 129d9c4d0e6dcfb47876e47b2e0382b1, type: 3}
   ZAxis: {fileID: 0}
+--- !u!114 &1601723365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1601723361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e501d18bb52cf8c40b1853ca4904654f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CollideAgainst:
+    serializedVersion: 2
+    m_Bits: 1
+  m_IgnoreTag: Player
+  m_TransparentLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_MinimumDistanceFromTarget: 0.1
+  m_AvoidObstacles: 1
+  m_DistanceLimit: 0
+  m_MinimumOcclusionTime: 0
+  m_CameraRadius: 0.1
+  m_Strategy: 0
+  m_MaximumEffort: 4
+  m_SmoothingTime: 0
+  m_Damping: 0.7
+  m_DampingWhenOccluded: 0.3
+  m_OptimalTargetDistance: 0
 --- !u!1 &1718378220
 GameObject:
   m_ObjectHideFlags: 0
