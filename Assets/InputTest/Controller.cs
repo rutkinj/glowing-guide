@@ -9,6 +9,7 @@ public class Controller : MonoBehaviour
   [SerializeField] private InputActionReference moveControl;
   [SerializeField] private InputActionReference jumpControl;
   [SerializeField] private float playerSpeed = 2.0f;
+  [SerializeField] private float rotationSpeed = 1.0f;
   [SerializeField] private float jumpHeight = 1.0f;
   [SerializeField] private float gravityValue = -9.81f;
 
@@ -56,5 +57,11 @@ public class Controller : MonoBehaviour
 
     playerVelocity.y += gravityValue * Time.deltaTime;
     controller.Move(playerVelocity * Time.deltaTime);
+
+    if (moveInput != Vector2.zero){
+      float targetAngle = Mathf.Atan2(moveInput.x, moveInput.y) * Mathf.Rad2Deg + cameraMain.eulerAngles.y;
+      Quaternion targetRotation = Quaternion.Euler(0f, targetAngle, 0f);
+      transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+    }
   }
 }
