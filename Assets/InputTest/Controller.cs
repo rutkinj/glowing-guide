@@ -5,49 +5,41 @@ using UnityEngine.InputSystem;
 
 public class Controller : MonoBehaviour
 {
-  private PlayerInput playerInput;
-  private InputAction jump;
+  private CharacterController controller;
+  private Vector3 playerVelocity;
+  private bool groundedPlayer;
+  private float playerSpeed = 2.0f;
+  private float jumpHeight = 1.0f;
+  private float gravityValue = -9.81f;
 
-  [SerializeField] Material red;
-  [SerializeField] Material green;
-  [SerializeField] Material regular;
-
-  private void Awake()
+  private void Start()
   {
-    playerInput = GetComponent<PlayerInput>();
-    jump = playerInput.actions["Jump"];
+    controller = gameObject.AddComponent<CharacterController>();
   }
 
-  private void OnEnable()
+  void Update()
   {
-    jump.started += Jump;
-    jump.performed += Jump;
-    jump.canceled += Jump;
-  }
-
-  private void OnDisable()
-  {
-    jump.performed -= Jump;
-  }
-
-  private void Jump(InputAction.CallbackContext ctx)
-  {
-    if (ctx.started)
+    groundedPlayer = controller.isGrounded;
+    if (groundedPlayer && playerVelocity.y < 0)
     {
-      FindObjectOfType<SphereCollider>().GetComponent<MeshRenderer>().material = green;
+      playerVelocity.y = 0f;
     }
-    else if (ctx.performed)
+
+    Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+    controller.Move(move * Time.deltaTime * playerSpeed);
+
+    if (move != Vector3.zero)
     {
-      FindObjectOfType<SphereCollider>().GetComponent<MeshRenderer>().material = red;
+      gameObject.transform.forward = move;
     }
-    else if(ctx.canceled){
-      FindObjectOfType<SphereCollider>().GetComponent<MeshRenderer>().material = regular;
 
+    // Changes the height position of the player..
+    if (Input.GetButtonDown("Jump") && groundedPlayer)
+    {
+      playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
     }
+
+    playerVelocity.y += gravityValue * Time.deltaTime;
+    controller.Move(playerVelocity * Time.deltaTime);
   }
-
-  //   private void OnJump()
-  //   {
-  //     FindObjectOfType<SphereCollider>().GetComponent<MeshRenderer>().material = red;
-  //   }
 }
