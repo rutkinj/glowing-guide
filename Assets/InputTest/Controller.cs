@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using RPG.Core;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
-public class Controller : MonoBehaviour
+public class Controller : MonoBehaviour, IAction
 {
   [SerializeField] private InputActionReference moveControl;
   [SerializeField] private InputActionReference jumpControl;
@@ -17,6 +18,8 @@ public class Controller : MonoBehaviour
   private Vector3 playerVelocity;
   private bool groundedPlayer;
   private Transform cameraMain;
+
+  Animator anim;
 
   private void OnEnable() {
     moveControl.action.Enable();
@@ -33,6 +36,7 @@ public class Controller : MonoBehaviour
   {
     controller = gameObject.GetComponent<CharacterController>();
     cameraMain = Camera.main.transform;
+    anim = GetComponent<Animator>();
   }
 
   void Update()
@@ -63,5 +67,12 @@ public class Controller : MonoBehaviour
       Quaternion targetRotation = Quaternion.Euler(0f, targetAngle, 0f);
       transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
     }
+
+    anim.SetFloat("forwardSpeed", controller.velocity.x + controller.velocity.z);
+  }
+
+  public void Cancel()
+  {
+    throw new System.NotImplementedException();
   }
 }
