@@ -17,8 +17,10 @@ namespace RPG.Inventories
     {
       if (other.CompareTag("Player"))
       {
-        other.gameObject.GetComponent<Inventory>().AddToFirstEmptySlot(item);
-        Destroy(gameObject);
+        if (other.gameObject.GetComponent<Inventory>().AddToFirstEmptySlot(item))
+        {
+          Destroy(gameObject);
+        }
       }
     }
   }

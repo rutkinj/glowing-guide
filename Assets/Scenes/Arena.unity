@@ -2608,7 +2608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19fc28a888c18ce4a82d521912c49df1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventorySize: 8
+  inventorySize: 3
 --- !u!4 &335456524 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 419854, guid: 67f6358a70929f943ae115f8b4bcf075, type: 3}
@@ -4649,7 +4649,7 @@ PrefabInstance:
       objectReference: {fileID: 8414569459872777687, guid: d903bfce37a8a4655b90067ae7ea72ce, type: 3}
     - target: {fileID: 2521229884806327166, guid: 31e3cef9736c6403db84a6c5c1aa2341, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3661765369790479654, guid: 31e3cef9736c6403db84a6c5c1aa2341, type: 3}
       propertyPath: cursorMappings.Array.size
@@ -6030,6 +6030,10 @@ PrefabInstance:
     - target: {fileID: 3144702879136369244, guid: 51d3c4062c6aa41778022b96ff88fde1, type: 3}
       propertyPath: m_Name
       value: PlayerWInputSystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 3144702879136369244, guid: 51d3c4062c6aa41778022b96ff88fde1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4289744136457198596, guid: 51d3c4062c6aa41778022b96ff88fde1, type: 3}
       propertyPath: m_Enabled
