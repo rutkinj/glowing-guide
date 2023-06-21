@@ -34,7 +34,8 @@ namespace RPG.Inventories
     /// <returns>The location the drop should be spawned.</returns>
     protected virtual Vector3 GetDropLocation()
     {
-      return transform.position;
+      return transform.position + Vector3.back + Vector3.up;
+      //offset so player doesnt immediately pickup what they drop
     }
 
     // PRIVATE
@@ -49,7 +50,7 @@ namespace RPG.Inventories
     private struct DropRecord
     {
       public string itemID;
-      public SerializableVector3 position;
+      public Vector3 position;
     }
 
     // object ISaveable.CaptureState()
@@ -78,6 +79,16 @@ namespace RPG.Inventories
     public JToken CaptureAsJToken()
     {
       throw new System.NotImplementedException();
+
+      //   RemoveDestroyedDrops();
+      //   JArray state = new JArray();
+      //   var droppedItemsList = new DropRecord[droppedItems.Count];
+      //   for (int i = 0; i < droppedItemsList.Length; i++)
+      //   {
+      //     droppedItemsList[i].itemID = droppedItems[i].item.GetItemID();
+      //     droppedItemsList[i].position = droppedItems[i].transform.position;
+      //   }
+      //   return;
     }
 
     public void RestoreFromJToken(JToken state)

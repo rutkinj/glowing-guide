@@ -15,7 +15,7 @@ namespace RPG.Inventories
     }
 
     private void Spawn(){
-      item.SpawnPickup(this.transform);
+      item.SpawnPickup(this.transform.position);
     }
 
     public Pickup GetPickup(){

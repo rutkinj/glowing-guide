@@ -88,8 +88,9 @@ namespace RPG.Inventories
             return description;
         }
 
-        public Pickup SpawnPickup(Transform parent){
-            Pickup pickup = Instantiate(this.pickup, parent);
+        public Pickup SpawnPickup(Vector3 position){
+            Pickup pickup = Instantiate(this.pickup);
+            pickup.transform.position = position;
             pickup.Setup(this);
             return pickup;
         }
