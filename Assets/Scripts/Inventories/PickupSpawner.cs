@@ -15,7 +15,8 @@ namespace RPG.Inventories
     }
 
     private void Spawn(){
-      item.SpawnPickup(this.transform.position);
+      Pickup pickUp = item.SpawnPickup(this.transform.position);
+      pickUp.transform.SetParent(this.transform);
     }
 
     public Pickup GetPickup(){
