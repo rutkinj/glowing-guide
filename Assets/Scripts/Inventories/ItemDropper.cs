@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using RPG.Saving;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace RPG.Inventories
 {
@@ -13,9 +14,7 @@ namespace RPG.Inventories
   public class ItemDropper : MonoBehaviour, IJsonSaveable
   {
     // STATE
-    private List<Pickup> droppedItems = new List<Pickup>();
-
-    // PUBLIC
+    public List<Pickup> droppedItems = new List<Pickup>();
 
     /// <summary>
     /// Create a pickup at the current position.
@@ -25,8 +24,6 @@ namespace RPG.Inventories
     {
       SpawnPickup(item, GetDropLocation());
     }
-
-    // PROTECTED
 
     /// <summary>
     /// Override to set a custom method for locating a drop.
@@ -38,20 +35,18 @@ namespace RPG.Inventories
       //offset so player doesnt immediately pickup what they drop
     }
 
-    // PRIVATE
-
     public void SpawnPickup(InventoryItem item, Vector3 spawnLocation)
     {
       var pickup = item.SpawnPickup(spawnLocation);
       droppedItems.Add(pickup);
     }
 
-    [System.Serializable]
-    private struct DropRecord
-    {
-      public string itemID;
-      public Vector3 position;
-    }
+    // [System.Serializable]
+    // private struct DropRecord
+    // {
+    //   public string itemID;
+    //   public Vector3 position;
+    // }
 
     // object ISaveable.CaptureState()
     // {
@@ -76,24 +71,96 @@ namespace RPG.Inventories
     //   }
     // }
 
+    // Save Structure
+    class otherSceneDropRecord
+    {
+      public string id;
+      //   public int number;
+      public Vector3 location;
+      public int scene;
+    }
+
+    private List<otherSceneDropRecord> otherSceneDrops = new List<otherSceneDropRecord>();
+
+    private List<otherSceneDropRecord> MergeDroppedItemsLists()
+    {
+      List<otherSceneDropRecord> mergedList = new List<otherSceneDropRecord>();
+      mergedList.AddRange(otherSceneDrops);
+      foreach (var item in droppedItems)
+      {
+        otherSceneDropRecord drop = new otherSceneDropRecord();
+        drop.id = item.item.GetItemID();
+        // drop.number = item.item.GetNumber();
+        drop.location = item.transform.position;
+        drop.scene = SceneManager.GetActiveScene().buildIndex;
+        mergedList.Add(drop);
+      }
+      return mergedList;
+    }
+
     public JToken CaptureAsJToken()
     {
-      throw new System.NotImplementedException();
+      RemoveDestroyedDrops();
+      var drops = MergeDroppedItemsLists();
+      JArray state = new JArray();
+      IList<JToken> stateList = state;
 
-      //   RemoveDestroyedDrops();
-      //   JArray state = new JArray();
-      //   var droppedItemsList = new DropRecord[droppedItems.Count];
-      //   for (int i = 0; i < droppedItemsList.Length; i++)
-      //   {
-      //     droppedItemsList[i].itemID = droppedItems[i].item.GetItemID();
-      //     droppedItemsList[i].position = droppedItems[i].transform.position;
-      //   }
-      //   return;
+      foreach (var drop in drops)
+      {
+        JObject dropState = new JObject();
+        IDictionary<string, JToken> dropStateDict = dropState;
+        dropStateDict["id"] = JToken.FromObject(drop.id);
+        // dropStateDict["number"] = ;
+        dropStateDict["location"] = drop.location.ToToken();
+        dropStateDict["scene"] = drop.scene;
+        stateList.Add(dropState);
+      }
+      return state;
+    }
+
+    private void ClearExistingDrops()
+    {
+      foreach (var oldDrop in droppedItems)
+      {
+        if (oldDrop != null) Destroy(oldDrop.gameObject);
+      }
+
+      otherSceneDrops.Clear();
     }
 
     public void RestoreFromJToken(JToken state)
     {
-      throw new System.NotImplementedException();
+      if (state is JArray stateArray)
+      {
+        int currentScene = SceneManager.GetActiveScene().buildIndex;
+        IList<JToken> stateList = stateArray;
+        ClearExistingDrops();
+        foreach (var entry in stateList)
+        {
+          if (entry is JObject dropState)
+          {
+            IDictionary<string, JToken> dropStateDict = dropState;
+            int scene = dropStateDict["scene"].ToObject<int>();
+            InventoryItem item = InventoryItem.GetFromID(dropStateDict["id"].ToObject<string>());
+            // int number = ;
+            Vector3 location = dropStateDict["location"].ToVector3();
+            if (scene == currentScene)
+            {
+              SpawnPickup(item, location);
+              print("spawned " + item.name);
+            }
+            else
+            {
+              var otherDrop = new otherSceneDropRecord();
+              otherDrop.id = item.GetItemID();
+              // otherDrop.number = ;
+              otherDrop.location = location;
+              otherDrop.scene = scene;
+              otherSceneDrops.Add(otherDrop);
+            }
+          }
+        }
+      }
     }
 
     /// <summary>

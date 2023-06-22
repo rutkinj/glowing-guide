@@ -2621,6 +2621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09c97abd4a1cd0c418bd8ed8f466a680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  droppedItems: []
 --- !u!4 &335456524 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 419854, guid: 67f6358a70929f943ae115f8b4bcf075, type: 3}
