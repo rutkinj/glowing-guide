@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using RPG.Inventories;
+using TMPro;
 using UnityEngine;
 
 namespace RPG.UI
@@ -7,16 +9,12 @@ namespace RPG.UI
 
   public class ItemTooltip : MonoBehaviour
   {
-    // Start is called before the first frame update
-    void Start()
-    {
+    [SerializeField] TextMeshProUGUI title = null;
+    [SerializeField] TextMeshProUGUI body = null;
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+    public void Setup(InventoryItem item){
+        title.text = item.GetDisplayName();
+        body.text = item.GetDescription();
     }
   }
 }
