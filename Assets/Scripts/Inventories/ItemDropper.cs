@@ -75,7 +75,7 @@ namespace RPG.Inventories
     class otherSceneDropRecord
     {
       public string id;
-      //   public int number;
+      //   public int number; TODO
       public Vector3 location;
       public int scene;
     }
@@ -110,7 +110,7 @@ namespace RPG.Inventories
         JObject dropState = new JObject();
         IDictionary<string, JToken> dropStateDict = dropState;
         dropStateDict["id"] = JToken.FromObject(drop.id);
-        // dropStateDict["number"] = ;
+        // dropStateDict["number"] = ; TODO
         dropStateDict["location"] = drop.location.ToToken();
         dropStateDict["scene"] = drop.scene;
         stateList.Add(dropState);
@@ -146,7 +146,8 @@ namespace RPG.Inventories
             Vector3 location = dropStateDict["location"].ToVector3();
             if (scene == currentScene)
             {
-              SpawnPickup(item, location);
+              //TODO
+              SpawnPickup(item, location, 1);
               print("spawned " + item.name);
             }
             else
