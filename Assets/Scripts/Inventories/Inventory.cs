@@ -20,7 +20,12 @@ namespace RPG.Inventories
     [SerializeField] int inventorySize = 16;
 
     // STATE
-    InventoryItem[] slots;
+    InventorySlot[] slots;
+
+    public struct InventorySlot{
+      public InventoryItem item;
+      public int itemCount;
+    }
 
     // PUBLIC
 
@@ -59,7 +64,7 @@ namespace RPG.Inventories
     /// </summary>
     /// <param name="item">The item to add.</param>
     /// <returns>Whether or not the item could be added.</returns>
-    public bool AddToFirstEmptySlot(InventoryItem item)
+    public bool AddToFirstEmptySlot(InventoryItem item, int count)
     {
       int i = FindSlot(item);
 
@@ -68,7 +73,9 @@ namespace RPG.Inventories
         return false;
       }
 
-      slots[i] = item;
+      slots[i].item = item;
+      slots[i].itemCount = count;
+
       if (inventoryUpdated != null)
       {
         inventoryUpdated();
@@ -138,7 +145,7 @@ namespace RPG.Inventories
 
     private void Awake()
     {
-      slots = new InventoryItem[inventorySize];
+      slots = new InventorySlot[inventorySize];
       slots[0] = InventoryItem.GetFromID("5beb0a33-1ab8-4276-aa3f-7aa7db7366f7");
       slots[1] = InventoryItem.GetFromID("bc1c5aa3-b194-4a9c-9534-d95f9e6d9e3a");
     }
