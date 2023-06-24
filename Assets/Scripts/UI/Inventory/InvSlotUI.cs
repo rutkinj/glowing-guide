@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace RPG.UI.Inventories
 {
-  public class InvSlotUI : MonoBehaviour, IDragContainer<InventoryItem>
+  public class InvSlotUI : MonoBehaviour, IItemHolder, IDragContainer<InventoryItem>
   {
     [SerializeField] ItemIcon icon = null;
 
