@@ -152,8 +152,8 @@ namespace RPG.Inventories
     private void Awake()
     {
       slots = new InventorySlot[inventorySize];
-      slots[0] = InventoryItem.GetFromID("5beb0a33-1ab8-4276-aa3f-7aa7db7366f7");
-      slots[1] = InventoryItem.GetFromID("bc1c5aa3-b194-4a9c-9534-d95f9e6d9e3a");
+      slots[0].item = InventoryItem.GetFromID("5beb0a33-1ab8-4276-aa3f-7aa7db7366f7");
+      slots[1].item = InventoryItem.GetFromID("bc1c5aa3-b194-4a9c-9534-d95f9e6d9e3a");
     }
 
     /// <summary>
@@ -173,7 +173,7 @@ namespace RPG.Inventories
     {
       for (int i = 0; i < slots.Length; i++)
       {
-        if (slots[i] == null)
+        if (slots[i].item == null)
         {
           return i;
         }
@@ -187,33 +187,31 @@ namespace RPG.Inventories
       IDictionary<string, JToken> stateDict = state;
       for (int i = 0; i < inventorySize; i++)
       {
-        if (slots[i] != null)
+        if (slots[i].item != null)
         {
-          print("Found and saving: " + slots[i].GetDisplayName());
           JObject itemState = new JObject();
           IDictionary<string, JToken> itemStateDict = itemState;
-          itemState["item"] = JToken.FromObject(slots[i].GetItemID());
-          // itemState["number"] = JToken.FromObject(slots[i].number);
+          itemState["item"] = JToken.FromObject(slots[i].item.GetItemID());
+          itemState["number"] = JToken.FromObject(slots[i].itemCount);
           stateDict[i.ToString()] = itemState;
         }
       }
       return state;
     }
 
-
     public void RestoreFromJToken(JToken state)
     {
       if (state is JObject stateObject)
       {
-        slots = new InventoryItem[inventorySize];
+        slots = new InventorySlot[inventorySize];
         IDictionary<string, JToken> stateDict = stateObject;
         for (int i = 0; i < inventorySize; i++)
         {
           if (stateDict.ContainsKey(i.ToString()) && stateDict[i.ToString()] is JObject itemState)
           {
             IDictionary<string, JToken> itemStateDict = itemState;
-            slots[i] = InventoryItem.GetFromID(itemStateDict["item"].ToObject<string>());
-            // slots[i].number = itemStateDict["number"].ToObject<int>();
+            slots[i].item = InventoryItem.GetFromID(itemStateDict["item"].ToObject<string>());
+            slots[i].itemCount = itemStateDict["number"].ToObject<int>();
           }
         }
         inventoryUpdated?.Invoke();
