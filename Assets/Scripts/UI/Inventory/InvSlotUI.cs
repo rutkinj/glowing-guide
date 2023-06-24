@@ -29,9 +29,9 @@ namespace RPG.UI.Inventories
       return 0;
     }
 
-    public void AddItems(InventoryItem item, int amount)
+    public void AddItems(InventoryItem item, int itemCount)
     {
-      inv.AddItemToSlot(index, item);
+      inv.AddItemToSlot(index, item, itemCount);
     }
 
     public InventoryItem GetItem()
@@ -44,7 +44,7 @@ namespace RPG.UI.Inventories
       return 1;
     }
 
-    public void RemoveItems(int amount)
+    public void RemoveItems(int itemCount)
     {
       inv.RemoveFromSlot(index);
     }

@@ -112,7 +112,9 @@ namespace RPG.Inventories
     /// </summary>
     public void RemoveFromSlot(int slot)
     {
-      slots[slot] = null;
+      slots[slot].item = null;
+      // slots[slot].itemCount = 0; TODO
+    
       if (inventoryUpdated != null)
       {
         inventoryUpdated();
@@ -127,14 +129,17 @@ namespace RPG.Inventories
     /// <param name="slot">The slot to attempt to add to.</param>
     /// <param name="item">The item type to add.</param>
     /// <returns>True if the item was added anywhere in the inventory.</returns>
-    public bool AddItemToSlot(int slot, InventoryItem item)
+    public bool AddItemToSlot(int slot, InventoryItem item, int itemCount)
     {
-      if (slots[slot] != null)
+      //TODO need logic change
+      if (slots[slot].item != null)
       {
-        return AddToFirstEmptySlot(item); ;
+        return AddToFirstEmptySlot(item, itemCount); ;
       }
 
-      slots[slot] = item;
+      slots[slot].item = item;
+      slots[slot].itemCount = itemCount;
+
       if (inventoryUpdated != null)
       {
         inventoryUpdated();
