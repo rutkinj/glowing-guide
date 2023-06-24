@@ -103,7 +103,8 @@ namespace RPG.Inventories
     /// </summary>
     public InventoryItem GetItemInSlot(int slot)
     {
-      return slots[slot];
+      //TODO
+      return slots[slot].item;
     }
 
     /// <summary>
