@@ -74,7 +74,7 @@ namespace RPG.Inventories
       }
 
       slots[i].item = item;
-      slots[i].itemCount = count;
+      slots[i].itemCount += count;
 
       if (inventoryUpdated != null)
       {
@@ -110,10 +110,13 @@ namespace RPG.Inventories
     /// <summary>
     /// Remove the item from the given slot.
     /// </summary>
-    public void RemoveFromSlot(int slot)
+    public void RemoveFromSlot(int slot, int itemCount)
     {
-      slots[slot].item = null;
-      // slots[slot].itemCount = 0; TODO
+      slots[slot].itemCount -= itemCount;
+      if(slots[slot].itemCount <= 0){
+        slots[slot].itemCount = 0;
+        slots[slot].item = null;
+      }
     
       if (inventoryUpdated != null)
       {
@@ -138,7 +141,7 @@ namespace RPG.Inventories
       }
 
       slots[slot].item = item;
-      slots[slot].itemCount = itemCount;
+      slots[slot].itemCount += itemCount;
 
       if (inventoryUpdated != null)
       {

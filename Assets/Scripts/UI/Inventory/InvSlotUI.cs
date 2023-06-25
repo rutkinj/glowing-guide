@@ -46,7 +46,7 @@ namespace RPG.UI.Inventories
 
     public void RemoveItems(int itemCount)
     {
-      inv.RemoveFromSlot(index);
+      inv.RemoveFromSlot(index, itemCount);
     }
   }
 }
