@@ -22,7 +22,8 @@ namespace RPG.Inventories
     // STATE
     InventorySlot[] slots;
 
-    public struct InventorySlot{
+    public struct InventorySlot
+    {
       public InventoryItem item;
       public int itemCount;
     }
@@ -106,7 +107,8 @@ namespace RPG.Inventories
       return slots[slot].item;
     }
 
-    public int GetItemCountInSlot(int slot){
+    public int GetItemCountInSlot(int slot)
+    {
       return slots[slot].itemCount;
     }
 
@@ -116,11 +118,12 @@ namespace RPG.Inventories
     public void RemoveFromSlot(int slot, int itemCount)
     {
       slots[slot].itemCount -= itemCount;
-      if(slots[slot].itemCount <= 0){
+      if (slots[slot].itemCount <= 0)
+      {
         slots[slot].itemCount = 0;
         slots[slot].item = null;
       }
-    
+
       if (inventoryUpdated != null)
       {
         inventoryUpdated();
@@ -158,8 +161,15 @@ namespace RPG.Inventories
     private void Awake()
     {
       slots = new InventorySlot[inventorySize];
-      slots[0].item = InventoryItem.GetFromID("5beb0a33-1ab8-4276-aa3f-7aa7db7366f7");
-      slots[1].item = InventoryItem.GetFromID("bc1c5aa3-b194-4a9c-9534-d95f9e6d9e3a");
+    }
+
+    private int FindStack(InventoryItem item){
+      for(int i = 0; i < slots.Length; i++){
+        if(slots[i].item == null) continue;
+
+        if(slots[i].item == item) return i;
+      }
+      return -1;
     }
 
     /// <summary>
@@ -168,7 +178,14 @@ namespace RPG.Inventories
     /// <returns>-1 if no slot is found.</returns>
     private int FindSlot(InventoryItem item)
     {
-      return FindEmptySlot();
+      if (!item.IsStackable()) return FindEmptySlot();
+
+      int i = FindStack(item);
+      if (i < 0)
+      {
+        i = FindEmptySlot();
+      }
+      return i;
     }
 
     /// <summary>
