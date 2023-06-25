@@ -41,7 +41,7 @@ namespace RPG.UI.Inventories
 
     public int GetNumber()
     {
-      return 1;
+      return inv.GetItemCountInSlot(index);
     }
 
     public void RemoveItems(int itemCount)
