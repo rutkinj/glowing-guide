@@ -20,9 +20,9 @@ namespace RPG.Inventories
     /// Create a pickup at the current position.
     /// </summary>
     /// <param name="item">The item type for the pickup.</param>
-    public void DropItem(InventoryItem item)
+    public void DropItem(InventoryItem item, int itemCount)
     {
-      SpawnPickup(item, GetDropLocation());
+      SpawnPickup(item, GetDropLocation(), itemCount);
     }
 
     /// <summary>
@@ -35,9 +35,9 @@ namespace RPG.Inventories
       //offset so player doesnt immediately pickup what they drop
     }
 
-    public void SpawnPickup(InventoryItem item, Vector3 spawnLocation)
+    public void SpawnPickup(InventoryItem item, Vector3 spawnLocation, int itemCount)
     {
-      var pickup = item.SpawnPickup(spawnLocation);
+      var pickup = item.SpawnPickup(spawnLocation, itemCount);
       droppedItems.Add(pickup);
     }
 
@@ -146,9 +146,7 @@ namespace RPG.Inventories
             Vector3 location = dropStateDict["location"].ToVector3();
             if (scene == currentScene)
             {
-              //TODO
               SpawnPickup(item, location, count);
-              print("spawned " + item.name);
             }
             else
             {

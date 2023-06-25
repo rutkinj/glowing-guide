@@ -412,6 +412,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: InvItem
       objectReference: {fileID: 0}
+    - target: {fileID: 4248819459931001454, guid: 85a0d34281073604ab65bfeafbb30ef3, type: 3}
+      propertyPath: countText
+      value: 
+      objectReference: {fileID: 6622419307409284250}
+    - target: {fileID: 4248819459931001454, guid: 85a0d34281073604ab65bfeafbb30ef3, type: 3}
+      propertyPath: countContainer
+      value: 
+      objectReference: {fileID: 2431309866397862355}
     - target: {fileID: 6149571699420929246, guid: 85a0d34281073604ab65bfeafbb30ef3, type: 3}
       propertyPath: m_Enabled
       value: 0

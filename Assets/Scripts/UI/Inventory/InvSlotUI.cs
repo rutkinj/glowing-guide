@@ -17,7 +17,7 @@ namespace RPG.UI.Inventories
     {
       this.inv = inv;
       this.index = index;
-      icon.SetItem(inv.GetItemInSlot(index));
+      icon.SetItem(inv.GetItemInSlot(index), inv.GetItemCountInSlot(index));
     }
 
     public int MaxAcceptable(InventoryItem item)
@@ -29,9 +29,9 @@ namespace RPG.UI.Inventories
       return 0;
     }
 
-    public void AddItems(InventoryItem item, int amount)
+    public void AddItems(InventoryItem item, int itemCount)
     {
-      inv.AddItemToSlot(index, item);
+      inv.AddItemToSlot(index, item, itemCount);
     }
 
     public InventoryItem GetItem()
@@ -41,12 +41,12 @@ namespace RPG.UI.Inventories
 
     public int GetNumber()
     {
-      return 1;
+      return inv.GetItemCountInSlot(index);
     }
 
-    public void RemoveItems(int amount)
+    public void RemoveItems(int itemCount)
     {
-      inv.RemoveFromSlot(index);
+      inv.RemoveFromSlot(index, itemCount);
     }
   }
 }

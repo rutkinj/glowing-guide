@@ -10,17 +10,26 @@ namespace RPG.UI.Inventories
   [RequireComponent(typeof(Image))]
   public class ItemIcon : MonoBehaviour
   {
-    public void SetItem(InventoryItem item)
+    [SerializeField] GameObject countContainer = null;
+    [SerializeField] TextMeshProUGUI countText = null;
+
+    public void SetItem(InventoryItem item, int itemCount)
     {
       Image iconImage = GetComponent<Image>();
       if (item == null)
       {
         iconImage.enabled = false;
+        countContainer.SetActive(false);
       }
       else
       {
         iconImage.enabled = true;
         iconImage.sprite = item.GetIcon();
+
+        if(itemCount > 1){
+          countContainer.SetActive(true);
+          countText.SetText(itemCount.ToString());
+        }
       }
     }
   }

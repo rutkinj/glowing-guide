@@ -20,7 +20,13 @@ namespace RPG.Inventories
     [SerializeField] int inventorySize = 16;
 
     // STATE
-    InventoryItem[] slots;
+    InventorySlot[] slots;
+
+    public struct InventorySlot
+    {
+      public InventoryItem item;
+      public int itemCount;
+    }
 
     // PUBLIC
 
@@ -59,7 +65,7 @@ namespace RPG.Inventories
     /// </summary>
     /// <param name="item">The item to add.</param>
     /// <returns>Whether or not the item could be added.</returns>
-    public bool AddToFirstEmptySlot(InventoryItem item)
+    public bool AddToFirstEmptySlot(InventoryItem item, int count)
     {
       int i = FindSlot(item);
 
@@ -68,7 +74,9 @@ namespace RPG.Inventories
         return false;
       }
 
-      slots[i] = item;
+      slots[i].item = item;
+      slots[i].itemCount += count;
+
       if (inventoryUpdated != null)
       {
         inventoryUpdated();
@@ -96,15 +104,26 @@ namespace RPG.Inventories
     /// </summary>
     public InventoryItem GetItemInSlot(int slot)
     {
-      return slots[slot];
+      return slots[slot].item;
+    }
+
+    public int GetItemCountInSlot(int slot)
+    {
+      return slots[slot].itemCount;
     }
 
     /// <summary>
     /// Remove the item from the given slot.
     /// </summary>
-    public void RemoveFromSlot(int slot)
+    public void RemoveFromSlot(int slot, int itemCount)
     {
-      slots[slot] = null;
+      slots[slot].itemCount -= itemCount;
+      if (slots[slot].itemCount <= 0)
+      {
+        slots[slot].itemCount = 0;
+        slots[slot].item = null;
+      }
+
       if (inventoryUpdated != null)
       {
         inventoryUpdated();
@@ -119,14 +138,22 @@ namespace RPG.Inventories
     /// <param name="slot">The slot to attempt to add to.</param>
     /// <param name="item">The item type to add.</param>
     /// <returns>True if the item was added anywhere in the inventory.</returns>
-    public bool AddItemToSlot(int slot, InventoryItem item)
+    public bool AddItemToSlot(int slot, InventoryItem item, int itemCount)
     {
-      if (slots[slot] != null)
+      //TODO need logic change
+      if (slots[slot].item != null)
       {
-        return AddToFirstEmptySlot(item); ;
+        return AddToFirstEmptySlot(item, itemCount); ;
       }
 
-      slots[slot] = item;
+      int i = FindStack(item);
+      if(i >= 0){
+        slot = i;
+      }
+
+      slots[slot].item = item;
+      slots[slot].itemCount += itemCount;
+
       if (inventoryUpdated != null)
       {
         inventoryUpdated();
@@ -138,9 +165,16 @@ namespace RPG.Inventories
 
     private void Awake()
     {
-      slots = new InventoryItem[inventorySize];
-      slots[0] = InventoryItem.GetFromID("5beb0a33-1ab8-4276-aa3f-7aa7db7366f7");
-      slots[1] = InventoryItem.GetFromID("bc1c5aa3-b194-4a9c-9534-d95f9e6d9e3a");
+      slots = new InventorySlot[inventorySize];
+    }
+
+    private int FindStack(InventoryItem item){
+      for(int i = 0; i < slots.Length; i++){
+        if(slots[i].item == null) continue;
+
+        if(slots[i].item == item) return i;
+      }
+      return -1;
     }
 
     /// <summary>
@@ -149,7 +183,14 @@ namespace RPG.Inventories
     /// <returns>-1 if no slot is found.</returns>
     private int FindSlot(InventoryItem item)
     {
-      return FindEmptySlot();
+      if (!item.IsStackable()) return FindEmptySlot();
+
+      int i = FindStack(item);
+      if (i < 0)
+      {
+        i = FindEmptySlot();
+      }
+      return i;
     }
 
     /// <summary>
@@ -160,7 +201,7 @@ namespace RPG.Inventories
     {
       for (int i = 0; i < slots.Length; i++)
       {
-        if (slots[i] == null)
+        if (slots[i].item == null)
         {
           return i;
         }
@@ -174,33 +215,31 @@ namespace RPG.Inventories
       IDictionary<string, JToken> stateDict = state;
       for (int i = 0; i < inventorySize; i++)
       {
-        if (slots[i] != null)
+        if (slots[i].item != null)
         {
-          print("Found and saving: " + slots[i].GetDisplayName());
           JObject itemState = new JObject();
           IDictionary<string, JToken> itemStateDict = itemState;
-          itemState["item"] = JToken.FromObject(slots[i].GetItemID());
-          // itemState["number"] = JToken.FromObject(slots[i].number);
+          itemState["item"] = JToken.FromObject(slots[i].item.GetItemID());
+          itemState["number"] = JToken.FromObject(slots[i].itemCount);
           stateDict[i.ToString()] = itemState;
         }
       }
       return state;
     }
 
-
     public void RestoreFromJToken(JToken state)
     {
       if (state is JObject stateObject)
       {
-        slots = new InventoryItem[inventorySize];
+        slots = new InventorySlot[inventorySize];
         IDictionary<string, JToken> stateDict = stateObject;
         for (int i = 0; i < inventorySize; i++)
         {
           if (stateDict.ContainsKey(i.ToString()) && stateDict[i.ToString()] is JObject itemState)
           {
             IDictionary<string, JToken> itemStateDict = itemState;
-            slots[i] = InventoryItem.GetFromID(itemStateDict["item"].ToObject<string>());
-            // slots[i].number = itemStateDict["number"].ToObject<int>();
+            slots[i].item = InventoryItem.GetFromID(itemStateDict["item"].ToObject<string>());
+            slots[i].itemCount = itemStateDict["number"].ToObject<int>();
           }
         }
         inventoryUpdated?.Invoke();
