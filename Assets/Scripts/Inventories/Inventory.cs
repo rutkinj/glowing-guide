@@ -146,10 +146,16 @@ namespace RPG.Inventories
         return AddToFirstEmptySlot(item, itemCount); ;
       }
 
-      int i = FindStack(item);
-      if(i >= 0){
-        slot = i;
-      }
+      // auto-merge stackables when moving inv items
+      // is there any scenario where you want this to happen???
+      // if (item.IsStackable())
+      // {
+      //   int i = FindStack(item);
+      //   if (i >= 0)
+      //   {
+      //     slot = i;
+      //   }
+      // }
 
       slots[slot].item = item;
       slots[slot].itemCount += itemCount;
@@ -168,11 +174,13 @@ namespace RPG.Inventories
       slots = new InventorySlot[inventorySize];
     }
 
-    private int FindStack(InventoryItem item){
-      for(int i = 0; i < slots.Length; i++){
-        if(slots[i].item == null) continue;
+    private int FindStack(InventoryItem item)
+    {
+      for (int i = 0; i < slots.Length; i++)
+      {
+        if (slots[i].item == null) continue;
 
-        if(slots[i].item == item) return i;
+        if (slots[i].item == item) return i;
       }
       return -1;
     }
