@@ -146,6 +146,11 @@ namespace RPG.Inventories
         return AddToFirstEmptySlot(item, itemCount); ;
       }
 
+      int i = FindStack(item);
+      if(i >= 0){
+        slot = i;
+      }
+
       slots[slot].item = item;
       slots[slot].itemCount += itemCount;
 
