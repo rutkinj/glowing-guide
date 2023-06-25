@@ -9,13 +9,14 @@ namespace RPG.Inventories
   public class PickupSpawner : MonoBehaviour, IJsonSaveable
   {
     [SerializeField] InventoryItem item = null;
+    [SerializeField] int itemCount = 1;
 
     void Awake(){
       Spawn();
     }
 
     private void Spawn(){
-      Pickup pickUp = item.SpawnPickup(this.transform.position);
+      Pickup pickUp = item.SpawnPickup(this.transform.position, itemCount);
       pickUp.transform.SetParent(this.transform);
     }
 
