@@ -75,7 +75,7 @@ namespace RPG.Inventories
     class otherSceneDropRecord
     {
       public string id;
-      //   public int number; TODO
+      public int number;
       public Vector3 location;
       public int scene;
     }
@@ -90,7 +90,7 @@ namespace RPG.Inventories
       {
         otherSceneDropRecord drop = new otherSceneDropRecord();
         drop.id = item.item.GetItemID();
-        // drop.number = item.item.GetNumber();
+        drop.number = item.itemCount;
         drop.location = item.transform.position;
         drop.scene = SceneManager.GetActiveScene().buildIndex;
         mergedList.Add(drop);
@@ -110,7 +110,7 @@ namespace RPG.Inventories
         JObject dropState = new JObject();
         IDictionary<string, JToken> dropStateDict = dropState;
         dropStateDict["id"] = JToken.FromObject(drop.id);
-        // dropStateDict["number"] = ; TODO
+        dropStateDict["number"] = drop.number;
         dropStateDict["location"] = drop.location.ToToken();
         dropStateDict["scene"] = drop.scene;
         stateList.Add(dropState);
@@ -142,7 +142,7 @@ namespace RPG.Inventories
             IDictionary<string, JToken> dropStateDict = dropState;
             int scene = dropStateDict["scene"].ToObject<int>();
             InventoryItem item = InventoryItem.GetFromID(dropStateDict["id"].ToObject<string>());
-            // int number = ;
+            int number = dropStateDict["number"].ToObject<int>();
             Vector3 location = dropStateDict["location"].ToVector3();
             if (scene == currentScene)
             {
@@ -154,7 +154,7 @@ namespace RPG.Inventories
             {
               var otherDrop = new otherSceneDropRecord();
               otherDrop.id = item.GetItemID();
-              // otherDrop.number = ;
+              otherDrop.number = number;
               otherDrop.location = location;
               otherDrop.scene = scene;
               otherSceneDrops.Add(otherDrop);
