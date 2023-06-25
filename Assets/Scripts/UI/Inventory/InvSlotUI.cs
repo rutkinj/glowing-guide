@@ -17,7 +17,7 @@ namespace RPG.UI.Inventories
     {
       this.inv = inv;
       this.index = index;
-      icon.SetItem(inv.GetItemInSlot(index));
+      icon.SetItem(inv.GetItemInSlot(index), inv.GetItemCountInSlot(index));
     }
 
     public int MaxAcceptable(InventoryItem item)
