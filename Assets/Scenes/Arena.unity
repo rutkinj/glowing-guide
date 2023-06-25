@@ -2450,6 +2450,10 @@ PrefabInstance:
       propertyPath: item
       value: 
       objectReference: {fileID: 11400000, guid: f3dd0964ee03f4245aa8df9080bf6c3a, type: 2}
+    - target: {fileID: 4582490401442305312, guid: 6e394d6fb7ffc3b498a2214e9c20c7dd, type: 3}
+      propertyPath: itemCount
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5992310436244496484, guid: 6e394d6fb7ffc3b498a2214e9c20c7dd, type: 3}
       propertyPath: m_Name
       value: PickupSpawner (1)
@@ -11882,7 +11886,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4556370675946944423, guid: c69077d07c30942a2a38f2e573921c0a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000030517578
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4741557493556629110, guid: c69077d07c30942a2a38f2e573921c0a, type: 3}
       propertyPath: m_Sprite
