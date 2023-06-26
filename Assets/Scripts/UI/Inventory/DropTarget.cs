@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using RPG.UI.Inventories;
+using RPG.Inventories;
 using UnityEngine;
 
-namespace RPG.Inventories
+namespace RPG.UI.Inventories
 {
   public class DropTarget : MonoBehaviour, IDragDestination<InventoryItem>
   {
