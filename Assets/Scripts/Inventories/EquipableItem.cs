@@ -4,18 +4,14 @@ using UnityEngine;
 
 namespace RPG.Inventories
 {
-  public class EquipableItem : MonoBehaviour
+  [CreateAssetMenu(menuName = ("Inventory/EquipableItem"))]
+  public class EquipableItem : InventoryItem
   {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] EquipLocation equipLocation;
+
+    public EquipLocation GetEquipLocation()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+      return equipLocation;
     }
   }
 }

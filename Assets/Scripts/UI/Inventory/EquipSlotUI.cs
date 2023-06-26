@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using RPG.Inventories;
@@ -13,11 +14,25 @@ namespace RPG.UI.Inventories
     EquipableItem item = null;
     Equipment equipment;
 
+    private void Awake() {
+      equipment = GameObject.FindGameObjectWithTag("Player").GetComponent<Equipment>();
+      equipment.equipmentUpdated += RedrawEquipment;
+    }
+
+    private void Start() {
+      RedrawEquipment();
+    }
+
+    private void RedrawEquipment()
+    {
+      icon.SetItem(equipment.GetItemInSlot(equipLocation));
+    }
+
     public void AddItems(InventoryItem item, int number)
     {
       //if the item matches the slot TODO
       this.item = item as EquipableItem;
-      icon.SetItem(item, 1);
+      icon.SetItem(item, number);
     }
 
     public InventoryItem GetItem()
@@ -40,23 +55,23 @@ namespace RPG.UI.Inventories
       {
         return 0;
       }
-      // EquipableItem equipableItem = item as EquipableItem;
-      // if (equipableItem.GetEquipLocation() != equipLocation)
-      // {
-      //   return 0;
-      // }
+      EquipableItem equipableItem = item as EquipableItem;
+      if (equipableItem.GetEquipLocation() != equipLocation)
+      {
+        return 0;
+      }
       return 1;
     }
 
     public void RemoveItems(int number)
     {
       this.item = null;
-      icon.SetItem(null);
+      icon.SetItem(null, number);
     }
 
     InventoryItem IItemHolder.GetItem()
     {
-      throw new System.NotImplementedException();
+      return item as InventoryItem;
     }
   }
 }
