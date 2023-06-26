@@ -10,7 +10,7 @@ namespace RPG.Inventories
   public class Equipment : MonoBehaviour, IJsonSaveable
   {
 
-    public Dictionary<EquipLocation, EquipableItem> equippedItems = new Dictionary<EquipLocation, EquipableItem>();
+    Dictionary<EquipLocation, EquipableItem> equippedItems = new Dictionary<EquipLocation, EquipableItem>();
 
     public event Action equipmentUpdated;
 
