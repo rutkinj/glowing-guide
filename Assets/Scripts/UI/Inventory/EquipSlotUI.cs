@@ -14,35 +14,35 @@ namespace RPG.UI.Inventories
     EquipableItem item = null;
     Equipment equipment;
 
-    private void Awake() {
+    private void Awake()
+    {
       equipment = GameObject.FindGameObjectWithTag("Player").GetComponent<Equipment>();
       equipment.equipmentUpdated += RedrawEquipment;
     }
 
-    private void Start() {
+    private void Start()
+    {
       RedrawEquipment();
     }
 
     private void RedrawEquipment()
     {
-      icon.SetItem(equipment.GetItemInSlot(equipLocation),1);
+      icon.SetItem(equipment.GetItemInSlot(equipLocation), 1);
     }
 
     public void AddItems(InventoryItem item, int number)
     {
-      //if the item matches the slot TODO
-      this.item = item as EquipableItem;
-      icon.SetItem(item, number);
+      equipment.AddItem(equipLocation, (EquipableItem)item);
     }
 
     public InventoryItem GetItem()
     {
-      return item;
+      return equipment.GetItemInSlot(equipLocation);
     }
 
     public int GetNumber()
     {
-      if (item == null)
+      if (GetItem() == null)
       {
         return 0;
       }
@@ -65,8 +65,7 @@ namespace RPG.UI.Inventories
 
     public void RemoveItems(int number)
     {
-      this.item = null;
-      icon.SetItem(null, number);
+      equipment.RemoveItem(equipLocation);
     }
 
     InventoryItem IItemHolder.GetItem()
