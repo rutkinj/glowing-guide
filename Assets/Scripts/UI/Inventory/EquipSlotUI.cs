@@ -25,7 +25,7 @@ namespace RPG.UI.Inventories
 
     private void RedrawEquipment()
     {
-      icon.SetItem(equipment.GetItemInSlot(equipLocation));
+      icon.SetItem(equipment.GetItemInSlot(equipLocation),1);
     }
 
     public void AddItems(InventoryItem item, int number)
@@ -51,11 +51,11 @@ namespace RPG.UI.Inventories
 
     public int MaxAcceptable(InventoryItem item)
     {
-      if (!(item is EquipableItem) || this.item != null)
+      EquipableItem equipableItem = item as EquipableItem;
+      if (equipableItem == null || this.item != null)
       {
         return 0;
       }
-      EquipableItem equipableItem = item as EquipableItem;
       if (equipableItem.GetEquipLocation() != equipLocation)
       {
         return 0;
