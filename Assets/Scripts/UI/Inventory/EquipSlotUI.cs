@@ -60,6 +60,7 @@ namespace RPG.UI.Inventories
       {
         return 0;
       }
+      if(GetItem() && item.GetItemID().Equals(GetItem().GetItemID())) return 0;
       return 1;
     }
 
