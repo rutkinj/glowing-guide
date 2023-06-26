@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ebe11f2d606586a458ebe93bbb2dafe2, type: 3}
-  m_Name: Sword
+  m_Name: Pants
   m_EditorClassIdentifier: 
   itemID: f2862de4-9180-4f72-9e19-bafe51d238f1
-  displayName: Sword
-  description: Slashy sword.
-  icon: {fileID: 124599805, guid: cb0fb73fa7fad91478014c6512c11514, type: 3}
+  displayName: Pants
+  description: Don't want to forget these!
+  icon: {fileID: -1082540205, guid: cb0fb73fa7fad91478014c6512c11514, type: 3}
   stackable: 0
   pickup: {fileID: 8845234357752431023, guid: 4324f7b131c0f2541bc9d5ac493258ce, type: 3}
-  equipLocation: 0
+  equipLocation: 7
