@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe11f2d606586a458ebe93bbb2dafe2, type: 3}
   m_Name: Wizard Hat
   m_EditorClassIdentifier: 
-  itemID: f2862de4-9180-4f72-9e19-bafe51d238f1
+  itemID: 850392d8-0713-4dc4-ad02-b040e6558e11
   displayName: Wizard Hat
   description: Point Hat.
   icon: {fileID: -1551123612, guid: cb0fb73fa7fad91478014c6512c11514, type: 3}

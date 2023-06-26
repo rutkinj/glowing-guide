@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe11f2d606586a458ebe93bbb2dafe2, type: 3}
   m_Name: Helmet
   m_EditorClassIdentifier: 
-  itemID: f2862de4-9180-4f72-9e19-bafe51d238f1
+  itemID: 6c49a3ad-e681-472c-97e9-3042fbaece17
   displayName: Helmet
   description: A bucket with eyeholes.
   icon: {fileID: 1367869843, guid: cb0fb73fa7fad91478014c6512c11514, type: 3}
