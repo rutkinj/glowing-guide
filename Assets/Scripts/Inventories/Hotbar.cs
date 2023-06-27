@@ -63,7 +63,7 @@ namespace RPG.Inventories
 
     public int MaxAcceptable(InventoryItem item, int index)
     {
-      var hotItem = (HotbarItem)item;
+      var hotItem = item as HotbarItem;
       if (hotItem == null) return 0;
 
       if (hotbarItems.ContainsKey(index) && !object.ReferenceEquals(item, hotbarItems[index].item))
