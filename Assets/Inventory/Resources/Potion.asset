@@ -9,12 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7dc047c233344664c9996be4c36379e2, type: 3}
+  m_Script: {fileID: 11500000, guid: fa927d45c5bbe1a4c8ef096b49849356, type: 3}
   m_Name: Potion
   m_EditorClassIdentifier: 
-  itemID: 5beb0a33-1ab8-4276-aa3f-7aa7db7366f7
+  itemID: be6f334b-b0c7-49fc-a472-224346f56bfd
   displayName: Potion
   description: Potion that is white.
   icon: {fileID: -1173530473, guid: cb0fb73fa7fad91478014c6512c11514, type: 3}
   stackable: 1
   pickup: {fileID: 8845234357752431023, guid: 4324f7b131c0f2541bc9d5ac493258ce, type: 3}
+  consumable: 1
