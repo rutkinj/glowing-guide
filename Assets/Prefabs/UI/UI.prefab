@@ -918,6 +918,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5962096505562948556}
     m_Modifications:
+    - target: {fileID: 1769749896132145404, guid: babedb26abde34a49b988bcbccf7bdf0, type: 3}
+      propertyPath: index
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6632504442219168230, guid: babedb26abde34a49b988bcbccf7bdf0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1138,6 +1142,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5962096505562948556}
     m_Modifications:
+    - target: {fileID: 1769749896132145404, guid: babedb26abde34a49b988bcbccf7bdf0, type: 3}
+      propertyPath: index
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6632504442219168230, guid: babedb26abde34a49b988bcbccf7bdf0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2270,6 +2278,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5962096505562948556}
     m_Modifications:
+    - target: {fileID: 1769749896132145404, guid: babedb26abde34a49b988bcbccf7bdf0, type: 3}
+      propertyPath: index
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6632504442219168230, guid: babedb26abde34a49b988bcbccf7bdf0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2380,6 +2392,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5962096505562948556}
     m_Modifications:
+    - target: {fileID: 1769749896132145404, guid: babedb26abde34a49b988bcbccf7bdf0, type: 3}
+      propertyPath: index
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6632504442219168230, guid: babedb26abde34a49b988bcbccf7bdf0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2490,6 +2506,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5962096505562948556}
     m_Modifications:
+    - target: {fileID: 1769749896132145404, guid: babedb26abde34a49b988bcbccf7bdf0, type: 3}
+      propertyPath: index
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6632504442219168230, guid: babedb26abde34a49b988bcbccf7bdf0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

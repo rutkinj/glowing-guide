@@ -223,8 +223,8 @@ GameObject:
   - component: {fileID: 6632504442219168230}
   - component: {fileID: 1606320792695651033}
   - component: {fileID: 7053842776669502094}
-  - component: {fileID: 1791523844259001168}
   - component: {fileID: 829581427990558583}
+  - component: {fileID: 1769749896132145404}
   m_Layer: 5
   m_Name: HotbarSlot
   m_TagString: Untagged
@@ -291,19 +291,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1791523844259001168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8906195099724404908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab501fdd2aaad004fa50ddb5ab1d4ac1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  icon: {fileID: 32278264819685900}
 --- !u!114 &829581427990558583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,6 +304,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipPrefab: {fileID: 1319293932427130133, guid: ce690ab74e9d99b459ee27333d7b3269, type: 3}
+--- !u!114 &1769749896132145404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8906195099724404908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a0809fcf49de44fab587e4b7e7cd6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 0
+  icon: {fileID: 32278264819685900}
 --- !u!1001 &4216629431994632290
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -420,6 +421,10 @@ PrefabInstance:
       propertyPath: countContainer
       value: 
       objectReference: {fileID: 2431309866397862355}
+    - target: {fileID: 6149571699420929246, guid: 85a0d34281073604ab65bfeafbb30ef3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1796563142, guid: cb0fb73fa7fad91478014c6512c11514, type: 3}
     - target: {fileID: 6149571699420929246, guid: 85a0d34281073604ab65bfeafbb30ef3, type: 3}
       propertyPath: m_Enabled
       value: 0
