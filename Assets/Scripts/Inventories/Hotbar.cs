@@ -61,6 +61,27 @@ namespace RPG.Inventories
 
     }
 
+    public int MaxAcceptable(InventoryItem item, int index)
+    {
+      var hotItem = (HotbarItem)item;
+      if (hotItem == null) return 0;
+
+      if (hotbarItems.ContainsKey(index) && !object.ReferenceEquals(item, hotbarItems[index].item))
+      {
+        return 0;
+      }
+
+      if (hotItem.isConsumable())
+      {
+        return int.MaxValue;
+      }
+
+      if(hotbarItems.ContainsKey(index)){
+        return 0;
+      }
+      return 1;
+    }
+
     public event Action hotbarUpdated;
 
     public JToken CaptureAsJToken()
