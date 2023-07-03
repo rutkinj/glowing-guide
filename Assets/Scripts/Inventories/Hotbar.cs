@@ -76,7 +76,8 @@ namespace RPG.Inventories
         return int.MaxValue;
       }
 
-      if(hotbarItems.ContainsKey(index)){
+      if (hotbarItems.ContainsKey(index))
+      {
         return 0;
       }
       return 1;
@@ -86,12 +87,40 @@ namespace RPG.Inventories
 
     public JToken CaptureAsJToken()
     {
-      throw new System.NotImplementedException();
+      JObject state = new JObject();
+      IDictionary<string, JToken> stateDict = state;
+
+      foreach (var kv in hotbarItems)
+      {
+        JObject hotbarState = new JObject();
+        IDictionary<string, JToken> hotbarStateDict = hotbarState;
+        hotbarStateDict["item"] = JToken.FromObject(kv.Value.item.GetItemID());
+        hotbarStateDict["count"] = JToken.FromObject(kv.Value.itemCount);
+        stateDict[kv.Key.ToString()] = hotbarState;
+      }
+      return state;
     }
 
     public void RestoreFromJToken(JToken state)
     {
-      throw new System.NotImplementedException();
+      if (state is JObject stateObject)
+      {
+        hotbarItems.Clear();
+
+        IDictionary<string, JToken> stateDict = stateObject;
+        foreach (var kv in stateDict)
+        {
+          if (kv.Value is JObject hotbarState)
+          {
+            int key = Int32.Parse(kv.Key);
+            IDictionary<string, JToken> hotbarStateDict = hotbarState;
+            var item = InventoryItem.GetFromID(hotbarStateDict["item"].ToObject<string>());
+            int count = hotbarStateDict["count"].ToObject<int>();
+
+            AddItem(item, key, count);
+          }
+        }
+      }
     }
 
   }
