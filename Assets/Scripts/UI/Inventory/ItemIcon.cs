@@ -26,9 +26,14 @@ namespace RPG.UI.Inventories
         iconImage.enabled = true;
         iconImage.sprite = item.GetIcon();
 
-        if(itemCount > 1){
+        if (itemCount > 1)
+        {
           countContainer.SetActive(true);
           countText.SetText(itemCount.ToString());
+        }
+        else
+        {
+          countContainer.SetActive(false);
         }
       }
     }
