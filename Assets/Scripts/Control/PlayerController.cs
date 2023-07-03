@@ -7,12 +7,14 @@ using RPG.Combat;
 using RPG.Attributes;
 using System;
 using UnityEngine.AI;
+using RPG.Inventories;
 
 namespace RPG.Control
 {
   public class PlayerController : MonoBehaviour
   {
     HealthPoints healthPoints;
+    Hotbar hotbar;
 
     [System.Serializable]
     struct CursorMapping
@@ -31,10 +33,12 @@ namespace RPG.Control
     private void Awake()
     {
       healthPoints = GetComponent<HealthPoints>();
+      hotbar = GetComponent<Hotbar>();
     }
 
     void Update()
     {
+      CheckHotbarKeys();
       if (InteractWithUI()) return;
       if (healthPoints.GetIsDead())
       {
@@ -45,6 +49,33 @@ namespace RPG.Control
       // if (InteractWithCombat()) return;
       if (InteractWithMovement()) return;
       SetCursor(CursorType.none);
+    }
+
+    private void CheckHotbarKeys(){
+      if(Input.GetKeyDown(KeyCode.Alpha1)){
+        hotbar.UseItem(0, gameObject);
+      }
+      if (Input.GetKeyDown(KeyCode.Alpha2))
+      {
+        hotbar.UseItem(1, gameObject);
+      }
+      if (Input.GetKeyDown(KeyCode.Alpha3))
+      {
+        hotbar.UseItem(2, gameObject);
+      }
+      if (Input.GetKeyDown(KeyCode.Alpha4))
+      {
+        hotbar.UseItem(3, gameObject);
+      }
+      if (Input.GetKeyDown(KeyCode.Alpha5))
+      {
+        hotbar.UseItem(4, gameObject);
+      }
+      if (Input.GetKeyDown(KeyCode.Alpha6))
+      {
+        hotbar.UseItem(5, gameObject);
+      }
+      
     }
 
     private bool InteractWithComponent()
