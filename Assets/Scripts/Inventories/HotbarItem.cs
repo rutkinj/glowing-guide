@@ -13,5 +13,10 @@ namespace RPG.Inventories
     {
       return consumable;
     }
+
+    public virtual void Use(GameObject player)
+    {
+      Debug.Log("Using item: " + this);
+    }
   }
 }

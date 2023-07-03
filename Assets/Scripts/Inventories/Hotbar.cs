@@ -61,6 +61,37 @@ namespace RPG.Inventories
 
     }
 
+    public void RemoveItem(int index, int count)
+    {
+      if (hotbarItems.ContainsKey(index))
+      {
+        hotbarItems[index].itemCount -= count;
+        if (hotbarItems[index].itemCount <= 0)
+        {
+          hotbarItems.Remove(index);
+        }
+      }
+
+      if (hotbarUpdated != null)
+      {
+        hotbarUpdated();
+      }
+    }
+
+    public bool UseItem(int index, GameObject player)
+    {
+      if (hotbarItems.ContainsKey(index))
+      {
+        hotbarItems[index].item.Use(player);
+        if (hotbarItems[index].item.isConsumable())
+        {
+          RemoveItem(index, 1);
+        }
+        return true;
+      }
+      return false;
+    }
+
     public int MaxAcceptable(InventoryItem item, int index)
     {
       var hotItem = item as HotbarItem;

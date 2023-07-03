@@ -27,7 +27,7 @@ namespace RPG.UI.Inventories
 
     private void RedrawHotbar()
     {
-      icon.SetItem(hotbar.GetItem(index), hotbar.GetNumber(index));
+      icon.SetItem(GetItem(), GetNumber());
     }
 
     public void AddItems(InventoryItem item, int number)
@@ -42,11 +42,7 @@ namespace RPG.UI.Inventories
 
     public int GetNumber()
     {
-      if (GetItem() == null)
-      {
-        return 0;
-      }
-      return 1;
+      return hotbar.GetNumber(index);
     }
 
     public int MaxAcceptable(InventoryItem item)
@@ -67,7 +63,7 @@ namespace RPG.UI.Inventories
 
     public void RemoveItems(int number)
     {
-      // hotbar.RemoveItem(index);
+      hotbar.RemoveItem(index, number);
     }
 
     InventoryItem IItemHolder.GetItem()
