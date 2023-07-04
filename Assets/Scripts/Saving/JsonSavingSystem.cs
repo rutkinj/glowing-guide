@@ -31,7 +31,7 @@ namespace RPG.Saving
       CaptureAsToken(state);
       SaveFileAsJson(saveName, state);
     }
-    public void Load(string saveName)
+    private void Load(string saveName)
     {
       RestoreFromToken(LoadJsonFromFile(saveName));
     }

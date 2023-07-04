@@ -20,6 +20,7 @@ namespace RPG.Saving
     {
       yield return saveSys.LoadLastScene(defaultSaveFile);
     }
+    
     private void Update()
     {
       if (Input.GetKeyDown(KeyCode.S))
@@ -35,13 +36,15 @@ namespace RPG.Saving
         Delete();
       }
     }
+
     public void Save()
     {
       saveSys.Save(defaultSaveFile);
     }
+
     public void Load()
     {
-      saveSys.Load(defaultSaveFile);
+      StartCoroutine(saveSys.LoadLastScene(defaultSaveFile));
     }
 
     public void Delete()
