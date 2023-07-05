@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b08226a0947dd4822b7df570fb4bc955, type: 3}
   m_Name: Unarmed
   m_EditorClassIdentifier: 
+  itemID: 3ee7d004-c8e3-48f9-8306-c786fad34297
+  displayName: Fist
+  description: In what scenario will this be visible??
+  icon: {fileID: 1436665804, guid: cb0fb73fa7fad91478014c6512c11514, type: 3}
+  stackable: 0
+  pickup: {fileID: 0}
+  equipLocation: 0
   animationOverride: {fileID: 0}
   equippedPrefab: {fileID: 6540435007081904238, guid: 2d2acdf77bc104fc8a0d567e83693dbd, type: 3}
   rightHandEquip: 1

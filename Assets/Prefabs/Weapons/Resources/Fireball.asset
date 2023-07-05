@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b08226a0947dd4822b7df570fb4bc955, type: 3}
   m_Name: Fireball
   m_EditorClassIdentifier: 
+  itemID: 7067d331-76b7-4038-a3a1-4699ae3b9d3f
+  displayName: Fireball
+  description: Great balls of fire!
+  icon: {fileID: 1855591813, guid: cb0fb73fa7fad91478014c6512c11514, type: 3}
+  stackable: 0
+  pickup: {fileID: 3906498326083721185, guid: 6b4376606b3084bb092c55be6cf43753, type: 3}
+  equipLocation: 0
   animationOverride: {fileID: 22100000, guid: 45b17fbd599b64c6581145283ced9de6, type: 2}
   equippedPrefab: {fileID: 0}
   rightHandEquip: 0
