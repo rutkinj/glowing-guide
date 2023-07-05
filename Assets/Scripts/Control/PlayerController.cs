@@ -30,6 +30,8 @@ namespace RPG.Control
 
     private CursorMapping cachedCursorMapping;
 
+    private bool isDraggingUI = false;
+
     private void Awake()
     {
       healthPoints = GetComponent<HealthPoints>();
@@ -51,8 +53,10 @@ namespace RPG.Control
       SetCursor(CursorType.none);
     }
 
-    private void CheckHotbarKeys(){
-      if(Input.GetKeyDown(KeyCode.Alpha1)){
+    private void CheckHotbarKeys()
+    {
+      if (Input.GetKeyDown(KeyCode.Alpha1))
+      {
         hotbar.UseItem(0, gameObject);
       }
       if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -75,7 +79,7 @@ namespace RPG.Control
       {
         hotbar.UseItem(5, gameObject);
       }
-      
+
     }
 
     private bool InteractWithComponent()
@@ -112,8 +116,19 @@ namespace RPG.Control
 
     private bool InteractWithUI()
     {
-      SetCursor(CursorType.none);
-      return EventSystem.current.IsPointerOverGameObject();
+      if (EventSystem.current.IsPointerOverGameObject())
+      {
+        SetCursor(CursorType.none);
+        if(Input.GetMouseButtonDown(0)){
+          isDraggingUI = true;
+        }
+      }
+
+      if(Input.GetMouseButtonUp(0)){
+        isDraggingUI = false;
+      }
+
+      return isDraggingUI;
     }
 
     // private bool InteractWithCombat()
