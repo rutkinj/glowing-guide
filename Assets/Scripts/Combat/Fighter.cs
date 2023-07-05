@@ -8,6 +8,7 @@ using RPG.Saving;
 using RPG.Stats;
 using Newtonsoft.Json.Linq;
 using RPG.Utils;
+using RPG.Inventories;
 using System;
 
 namespace RPG.Combat
@@ -18,6 +19,7 @@ namespace RPG.Combat
     [SerializeField] Transform leftHandTransform = null;
     [SerializeField] WeaponConfig defaultWeapon = null;
     HealthPoints target;
+    Equipment equipment;
     Mover mover;
     WeaponConfig currentWeaponConfig;
     LazyValue<Weapon> currentWeapon;
@@ -26,8 +28,15 @@ namespace RPG.Combat
     private void Awake()
     {
       mover = GetComponent<Mover>();
+      equipment = GetComponent<Equipment>();
+
       currentWeaponConfig = defaultWeapon;
       currentWeapon = new LazyValue<Weapon>(SetupDefaultWeapon);
+
+      if (equipment)
+      {
+        equipment.equipmentUpdated += UpdateWeapon;
+      }
     }
 
     private Weapon SetupDefaultWeapon()
@@ -70,9 +79,22 @@ namespace RPG.Combat
       return testTarget != null && !testTarget.GetIsDead();
     }
 
+    private void UpdateWeapon()
+    {
+      var weaponInSlot = equipment.GetItemInSlot(EquipLocation.PrimaryHand);
+      if (weaponInSlot)
+      {
+        EquipWeapon(weaponInSlot as WeaponConfig);
+      }
+      else
+      {
+        EquipWeapon(defaultWeapon);
+      }
+    }
+
     public void EquipWeapon(WeaponConfig weapon)
     {
-      if(weapon == null) return;
+      if (weapon == null) return;
       currentWeaponConfig = weapon;
       currentWeapon.value = AttachWeapon(weapon);
     }
