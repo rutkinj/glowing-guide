@@ -13,7 +13,7 @@ using System;
 
 namespace RPG.Combat
 {
-  public class Fighter : MonoBehaviour, IAction, IJsonSaveable, IModifierProvider
+  public class Fighter : MonoBehaviour, IAction, IJsonSaveable
   {
     [SerializeField] Transform rightHandTransform = null;
     [SerializeField] Transform leftHandTransform = null;
@@ -175,22 +175,6 @@ namespace RPG.Combat
       string weaponName = state.ToObject<string>();
       WeaponConfig weapon = UnityEngine.Resources.Load<WeaponConfig>(weaponName);
       EquipWeapon(weapon);
-    }
-
-    ///// IModifierProvider
-    public IEnumerable<float> GetAdditiveModifiers(Stat stat)
-    {
-      if (stat == Stat.Damage)
-      {
-        yield return currentWeaponConfig.WeaponDamage;
-      }
-    }
-    public IEnumerable<float> GetPercentileModifiers(Stat stat)
-    {
-      if (stat == Stat.Damage)
-      {
-        yield return currentWeaponConfig.DamagePercentMod;
-      }
     }
   }
 }
