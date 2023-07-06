@@ -17,18 +17,19 @@ namespace RPG.Attributes
     [SerializeField] UnityEvent eDie;
     BaseStats baseStats;
     LazyValue<float> currentHealth;
-    LazyValue<float> maxHealth;
+    // LazyValue<float> maxHealth;
     bool isDead = false;
 
     private void Awake()
     {
       baseStats = GetComponent<BaseStats>();
-      maxHealth = new LazyValue<float>(GetMaxHealth);
-      currentHealth = new LazyValue<float>(SetCurrentHealthToMax);
+      currentHealth = new LazyValue<float>(GetMaxHealth);
+      // maxHealth = new LazyValue<float>(GetMaxHealth);
+      // currentHealth = new LazyValue<float>(SetCurrentHealthToMax);
     }
 
     private void Start() {
-      maxHealth.ForceInit();
+      // maxHealth.ForceInit();
       currentHealth.ForceInit();
     }
 
@@ -37,10 +38,10 @@ namespace RPG.Attributes
       return baseStats.GetStat(Stat.Health);
     }
 
-    private float SetCurrentHealthToMax()
-    {
-      return maxHealth.value;
-    }
+    // private float SetCurrentHealthToMax()
+    // {
+    //   return GetMaxHealth();
+    // }
 
     private void OnEnable()
     {
@@ -55,9 +56,9 @@ namespace RPG.Attributes
     public void GainHealth(float hpGain)
     {
       currentHealth.value += hpGain;
-      if (currentHealth.value > maxHealth.value)
+      if (currentHealth.value > GetMaxHealth())
       {
-        currentHealth.value = maxHealth.value;
+        currentHealth.value = GetMaxHealth();
       }
     }
     public void LoseHealth(GameObject instigator, float damage)
@@ -94,8 +95,8 @@ namespace RPG.Attributes
 
       //// add increase to current hp ////
       float newMax = baseStats.GetStat(Stat.Health);
-      float maxHpDiff = newMax - maxHealth.value;
-      maxHealth.value = newMax;
+      float maxHpDiff = newMax - GetMaxHealth();
+      // maxHealth.value = newMax;
       if (maxHpDiff > 0) // bugfix for loading a save where your level is lower
       {
         currentHealth.value += maxHpDiff;
@@ -103,12 +104,12 @@ namespace RPG.Attributes
     }
     public float GetHPPercentage()
     {
-      return (currentHealth.value / maxHealth.value) * 100;
+      return (currentHealth.value / GetMaxHealth()) * 100;
     }
 
     public string CurrentHealthAsString()
     {
-      return currentHealth.value.ToString() + " / " + maxHealth.value.ToString();
+      return currentHealth.value.ToString() + " / " + GetMaxHealth().ToString();
     }
 
     private void DeathBehavior()
