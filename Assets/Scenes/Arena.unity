@@ -2556,19 +2556,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventorySize: 16
---- !u!114 &331139137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 331139107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09c97abd4a1cd0c418bd8ed8f466a680, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  droppedItems: []
 --- !u!114 &331139138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2593,6 +2580,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35fb0c7ee12efe5469c616f61f9815d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &331139168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 331139107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50e482e9210680949b92d7ff2e7f6cfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  droppedItems: []
+  scatterDist: 3
+  dropList: []
+  maxDrops: 1
 --- !u!4 &335456524 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 419854, guid: 67f6358a70929f943ae115f8b4bcf075, type: 3}
@@ -7907,6 +7910,34 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4315577015239592712, guid: 49c093db9455c41fe9b679d71af09582, type: 3}
+      propertyPath: eDie.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4315577015239592712, guid: 49c093db9455c41fe9b679d71af09582, type: 3}
+      propertyPath: eDie.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4315577015239592712, guid: 49c093db9455c41fe9b679d71af09582, type: 3}
+      propertyPath: eDie.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1568795127}
+    - target: {fileID: 4315577015239592712, guid: 49c093db9455c41fe9b679d71af09582, type: 3}
+      propertyPath: eDie.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4315577015239592712, guid: 49c093db9455c41fe9b679d71af09582, type: 3}
+      propertyPath: eDie.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: DropLoot
+      objectReference: {fileID: 0}
+    - target: {fileID: 4315577015239592712, guid: 49c093db9455c41fe9b679d71af09582, type: 3}
+      propertyPath: eDie.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: RPG.Inventories.ItemDropperRandom, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4315577015239592712, guid: 49c093db9455c41fe9b679d71af09582, type: 3}
+      propertyPath: eDie.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4343673004850298582, guid: 49c093db9455c41fe9b679d71af09582, type: 3}
       propertyPath: m_Name
       value: Enemy (1)
@@ -9167,6 +9198,30 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 492316, guid: 07f4a007d7093a64bbbdc962a82b494a, type: 3}
   m_PrefabInstance: {fileID: 1560548412}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1568795113 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4343673004850298582, guid: 49c093db9455c41fe9b679d71af09582, type: 3}
+  m_PrefabInstance: {fileID: 1355855999}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1568795127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568795113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50e482e9210680949b92d7ff2e7f6cfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  droppedItems: []
+  scatterDist: 1
+  dropList:
+  - {fileID: 11400000, guid: d1e86dc98469e48db83be00dcf564b10, type: 2}
+  - {fileID: 11400000, guid: 5d16be918d14c4f198748bcef1f02463, type: 2}
+  - {fileID: 11400000, guid: 8cf8147da80612d40ac4c2d972171f0d, type: 2}
+  maxDrops: 10
 --- !u!1001 &1590986873
 PrefabInstance:
   m_ObjectHideFlags: 0
