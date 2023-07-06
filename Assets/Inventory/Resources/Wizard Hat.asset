@@ -19,3 +19,7 @@ MonoBehaviour:
   stackable: 0
   pickup: {fileID: 8845234357752431023, guid: 4324f7b131c0f2541bc9d5ac493258ce, type: 3}
   equipLocation: 2
+  additiveMods:
+  - stat: 0
+    value: 17
+  percentileMods: []

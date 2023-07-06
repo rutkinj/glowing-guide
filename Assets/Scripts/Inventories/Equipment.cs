@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using RPG.Saving;
+using RPG.Stats;
 using UnityEngine;
 
 namespace RPG.Inventories
 {
-  public class Equipment : MonoBehaviour, IJsonSaveable
+  public class Equipment : MonoBehaviour, IJsonSaveable, IModifierProvider
   {
 
     Dictionary<EquipLocation, EquipableItem> equippedItems = new Dictionary<EquipLocation, EquipableItem>();
@@ -44,6 +45,43 @@ namespace RPG.Inventories
         equipmentUpdated();
       }
     }
+
+    public IEnumerable<EquipLocation> GetPopulatedSlots()
+    {
+      return equippedItems.Keys;
+    }
+
+    ///MODIFIER PROVIDER
+
+    public IEnumerable<float> GetAdditiveModifiers(Stat stat)
+    {
+      foreach (var kv in equippedItems)
+      {
+        var item = GetItemInSlot(kv.Key) as IModifierProvider;
+        if (item == null) continue;
+
+        foreach (float mod in item.GetAdditiveModifiers(stat))
+        {
+          yield return mod;
+        }
+      }
+    }
+
+    public IEnumerable<float> GetPercentileModifiers(Stat stat)
+    {
+      foreach (var kv in equippedItems)
+      {
+        var item = GetItemInSlot(kv.Key) as IModifierProvider;
+        if (item == null) continue;
+
+        foreach (float mod in item.GetPercentileModifiers(stat))
+        {
+          yield return mod;
+        }
+      }
+    }
+
+    ///SAVING
 
     public JToken CaptureAsJToken()
     {
