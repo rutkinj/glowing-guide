@@ -19,6 +19,10 @@ MonoBehaviour:
   stackable: 0
   pickup: {fileID: 1260629993, guid: 3cde9213923244eb698e24a5c8c37dfb, type: 3}
   equipLocation: 0
+  additiveMods:
+  - stat: 3
+    value: 5
+  percentileMods: []
   animationOverride: {fileID: 22100000, guid: 901d851302ec74d67a6f9875d712df28, type: 2}
   equippedPrefab: {fileID: -844091751689615097, guid: 6bf559628148b431fb11087c75f21d5e, type: 3}
   rightHandEquip: 1
