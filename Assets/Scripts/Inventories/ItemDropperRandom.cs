@@ -9,8 +9,7 @@ namespace RPG.Inventories
   {
     [SerializeField] float scatterDist = 1f;
 
-    [SerializeField] InventoryItem[] dropList;
-    [SerializeField] int maxDrops = 1;
+    [SerializeField] DropLibrary dropList;
 
     const int ATTEMPTS = 15;
 
@@ -31,11 +30,12 @@ namespace RPG.Inventories
 
     public void DropLoot()
     {
-      float numOfDrops = Random.Range(0, maxDrops);
-      for (int i = 0; i < numOfDrops; i++)
+      var drops = dropList.GetRandomDrops();
+      foreach (var drop in drops)
       {
-        DropItem(dropList[Random.Range(0, dropList.Length)], 1);
+        DropItem(drop.item, drop.count);
       }
+
     }
   }
 }

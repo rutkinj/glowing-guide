@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ac292330ffce4aadaa2835e895edc41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  showGizmos: 1
   chaseDistance: 5
   suspicionTime: 7
   aggroTimer: 4
@@ -163,6 +164,21 @@ MonoBehaviour:
   waypointTolerance: 1
   patrolResttime: 0.5
   patrolSpeedFraction: 0.5
+--- !u!114 &1005713256476596524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4343673004850298582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50e482e9210680949b92d7ff2e7f6cfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  droppedItems: []
+  scatterDist: 1
+  dropList: {fileID: 11400000, guid: d345ec145d1920141a93f6fc62ce4f7a, type: 2}
 --- !u!4 &7889832869086184531 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1052152647207519622, guid: 34f04cfd1ae2e48348d8d9e1aa9eaedc, type: 3}
