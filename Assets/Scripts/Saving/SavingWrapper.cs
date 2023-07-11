@@ -44,7 +44,7 @@ namespace RPG.Saving
 
     public void Load()
     {
-      StartCoroutine(saveSys.LoadLastScene(defaultSaveFile));
+      saveSys.Load(defaultSaveFile);
     }
 
     public void Delete()

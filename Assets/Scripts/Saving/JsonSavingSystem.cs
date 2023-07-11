@@ -25,13 +25,15 @@ namespace RPG.Saving
       yield return SceneManager.LoadSceneAsync(buildIndex);
       RestoreFromToken(state);
     }
+
     public void Save(string saveName)
     {
       JObject state = LoadJsonFromFile(saveName);
       CaptureAsToken(state);
       SaveFileAsJson(saveName, state);
     }
-    private void Load(string saveName)
+
+    public void Load(string saveName)
     {
       RestoreFromToken(LoadJsonFromFile(saveName));
     }
