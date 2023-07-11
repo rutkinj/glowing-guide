@@ -24,7 +24,7 @@ MonoBehaviour:
     value: 7
   percentileMods: []
   animationOverride: {fileID: 22100000, guid: 45b17fbd599b64c6581145283ced9de6, type: 2}
-  equippedPrefab: {fileID: 0}
+  equippedPrefab: {fileID: 6540435007081904238, guid: 2d2acdf77bc104fc8a0d567e83693dbd, type: 3}
   rightHandEquip: 0
   weaponDamage: 7
   weaponRange: 15
