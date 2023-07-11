@@ -9,13 +9,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebe11f2d606586a458ebe93bbb2dafe2, type: 3}
+  m_Script: {fileID: 11500000, guid: b08226a0947dd4822b7df570fb4bc955, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  itemID: dd5a04fa-816c-4878-b56e-f12fefed015f
+  itemID: b7288295-05f7-4139-bf1c-a4653adc9922
   displayName: Sword
   description: Slashy sword.
   icon: {fileID: 124599805, guid: cb0fb73fa7fad91478014c6512c11514, type: 3}
   stackable: 0
   pickup: {fileID: 8845234357752431023, guid: 4324f7b131c0f2541bc9d5ac493258ce, type: 3}
   equipLocation: 0
+  additiveMods:
+  - stat: 3
+    value: 7
+  percentileMods: []
+  animationOverride: {fileID: 22100000, guid: 901d851302ec74d67a6f9875d712df28, type: 2}
+  equippedPrefab: {fileID: -844091751689615097, guid: 645ae6658fce3064cbff7432f0800573, type: 3}
+  rightHandEquip: 1
+  weaponDamage: 5
+  weaponRange: 2
+  attackDelay: 1
+  projectile: {fileID: 0}
+  DamagePercentMod: 0

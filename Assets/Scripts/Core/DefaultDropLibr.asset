@@ -17,7 +17,7 @@ MonoBehaviour:
     relativeChance: 3
     minCount: 1
     maxCount: 5
-  - item: {fileID: 11400000, guid: f3dd0964ee03f4245aa8df9080bf6c3a, type: 2}
+  - item: {fileID: 11400000, guid: c57f5dcebe5e423468c26a2414bedfa6, type: 2}
     relativeChance: 1
     minCount: 1
     maxCount: 1

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7169161099492000358}
   - component: {fileID: -844091751689615097}
   m_Layer: 0
-  m_Name: EquippedSword
+  m_Name: EquippedBrokenSword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -272,12 +272,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -99.07
       objectReference: {fileID: 0}
-    - target: {fileID: 3336502, guid: 4b12cbf8230d02b4890f46dba29baeff, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 4300000, guid: 1b5a637a2abea174d9aff7195a85a687, type: 3}
-    m_RemovedComponents:
-    - {fileID: 64136517186920942, guid: 4b12cbf8230d02b4890f46dba29baeff, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b12cbf8230d02b4890f46dba29baeff, type: 3}
 --- !u!4 &7629987425227523930 stripped
 Transform:
