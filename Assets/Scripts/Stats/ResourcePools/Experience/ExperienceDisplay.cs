@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-namespace RPG.Stats
+namespace RPG.Stats.ResourcePools
 {
   public class ExperienceDisplay : MonoBehaviour
   {

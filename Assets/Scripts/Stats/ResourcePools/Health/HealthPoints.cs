@@ -9,7 +9,7 @@ using System;
 using RPG.Utils;
 using UnityEngine.Events;
 
-namespace RPG.Attributes
+namespace RPG.Stats.ResourcePools
 {
   public class HealthPoints : MonoBehaviour, IJsonSaveable
   {

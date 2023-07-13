@@ -5,7 +5,7 @@ using Newtonsoft.Json.Linq;
 using RPG.Saving;
 using UnityEngine;
 
-namespace RPG.Stats
+namespace RPG.Stats.ResourcePools
 {
   public class Experience : MonoBehaviour, IJsonSaveable
   {
