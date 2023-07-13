@@ -5,7 +5,7 @@ using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 using RPG.Core;
-using RPG.Attributes;
+using RPG.Stats.ResourcePools;
 using RPG.Saving;
 
 namespace RPG.Movement

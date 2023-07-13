@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using RPG.Utils;
+using RPG.Stats.ResourcePools;
 using UnityEngine;
 
 namespace RPG.Stats
