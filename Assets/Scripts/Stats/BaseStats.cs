@@ -10,11 +10,13 @@ namespace RPG.Stats
   public class BaseStats : MonoBehaviour
   {
     [SerializeField] Progression progression = null;
+    [SerializeField] ProgressionTEST attProgression = null;
     [SerializeField] CharacterClass characterClass;
     [SerializeField] GameObject levelUpEffect;
     [Range(1, 3)][SerializeField] int startLevel = 1;
     [SerializeField] bool useModifiers;
     Experience experience = null;
+    BaseAttributes baseAttributes = null;
     LazyValue<int> currentLevel;
 
     public event Action onLevelUp;
@@ -22,6 +24,7 @@ namespace RPG.Stats
     private void Awake()
     {
       experience = GetComponent<Experience>();
+      baseAttributes = GetComponent<BaseAttributes>();
       currentLevel = new LazyValue<int>(CalculateLevel);
     }
 
@@ -74,7 +77,7 @@ namespace RPG.Stats
 
     private float GetBaseStat(Stat stat)
     {
-      return progression.GetStat(stat, characterClass, GetLevel());
+      return progression.GetStat(stat, characterClass, GetLevel()) + attProgression.GetStat(stat, baseAttributes);
     }
 
     private float GetAdditiveMods(Stat stat)
