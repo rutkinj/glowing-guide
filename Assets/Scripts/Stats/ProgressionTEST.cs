@@ -10,15 +10,19 @@ namespace RPG.Stats
     [SerializeField] ProgressionAttribute[] attributes;
     Dictionary<E_Attribute, Dictionary<Stat, float[]>> lookupTable = null;
 
-    // public float GetStat(Stat stat, CharacterClass characterClass, int level)
-    // {
-    //   BuildLookup();
-    //   var statTable = lookupTable[characterClass];
-    //   float[] lvlArr = statTable[stat];
-
-    //   if (lvlArr.Length < level) return 0;
-    //   return lvlArr[level - 1];
-    // }
+    public float GetStat(Stat stat, BaseAttributes baseAtt)
+    {
+      BuildLookup();
+      float result = 0;
+      foreach (var kv in lookupTable)
+      { // check if the attribute affects the given stat
+        if (kv.Value.TryGetValue(stat, out float[] lvlArr))
+        { // if it does, find the attributes level and add the related amount
+          result += lvlArr[baseAtt.GetAttributeLevel(kv.Key) - 1];
+        }
+      }
+      return result;
+    }
 
     // public int GetLevels(Stat stat, CharacterClass characterClass)
     // {
