@@ -8,21 +8,27 @@ namespace RPG.Stats
     // configured in the inspector
     // accessed by base stats (?)
     // access point for attribute progression SO (?)
-    // will have to be saveable
+    // will have to be saveable (?)
+    // find way to make this a dictionary instead of a list
   public class BaseAttributes : MonoBehaviour
   {
     [SerializeField] AttributeLevel[] attributeTable;
-    Dictionary<E_Attribute, int> attributeDictionary;
+    // Dictionary<E_Attribute, int> attributeDictionary;
 
     [System.Serializable]
     class AttributeLevel
     {
-      [SerializeField] E_Attribute name;
-      [SerializeField] int level;
+      public E_Attribute name;
+      public int level;
     }
 
     public int GetAttributeLevel(E_Attribute attribute){
-        return 1;
+        foreach(AttributeLevel att in attributeTable){
+            if (att.name == attribute){
+                return att.level;
+            }
+        }
+        return 0;
     }
 
 
