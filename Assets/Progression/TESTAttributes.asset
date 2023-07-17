@@ -12,4 +12,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b0dc2c92c0e06b4097c3bd47835ce09, type: 3}
   m_Name: TESTAttributes
   m_EditorClassIdentifier: 
-  attributes: []
+  attributes:
+  - attribute: 0
+    stats:
+    - stat: 3
+      levels:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 10
+    - stat: 0
+      levels:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 10
+  - attribute: 1
+    stats:
+    - stat: 0
+      levels:
+      - 2
+      - 4
+      - 6
+      - 8
+      - 10
+      - 12
+      - 14
+      - 16
+      - 18
+      - 20
