@@ -10,7 +10,7 @@ namespace RPG.Stats
   public class BaseStats : MonoBehaviour
   {
     [SerializeField] Progression progression = null;
-    [SerializeField] ProgressionTEST attProgression = null;
+    [SerializeField] AttributeTable attProgression = null;
     [SerializeField] CharacterClass characterClass;
     [SerializeField] GameObject levelUpEffect;
     [Range(1, 3)][SerializeField] int startLevel = 1;
