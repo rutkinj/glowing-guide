@@ -2595,23 +2595,6 @@ MonoBehaviour:
   droppedItems: []
   scatterDist: 3
   dropList: {fileID: 0}
---- !u!114 &331139171
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 331139107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75b76686e50e1b44fa7f743f69004e1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attributeTable:
-  - name: 0
-    level: 3
-  - name: 1
-    level: 4
 --- !u!4 &335456524 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 419854, guid: 67f6358a70929f943ae115f8b4bcf075, type: 3}
@@ -4184,7 +4167,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &702152569
 Transform:
   m_ObjectHideFlags: 0
@@ -4741,6 +4724,14 @@ PrefabInstance:
       propertyPath: attProgression
       value: 
       objectReference: {fileID: 11400000, guid: 2ae7670ac1540ff40845728acbd04f49, type: 2}
+    - target: {fileID: 1327134112367569273, guid: 31e3cef9736c6403db84a6c5c1aa2341, type: 3}
+      propertyPath: attributeTable.Array.data[0].level
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1327134112367569273, guid: 31e3cef9736c6403db84a6c5c1aa2341, type: 3}
+      propertyPath: attributeTable.Array.data[1].level
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2521229884806327166, guid: 31e3cef9736c6403db84a6c5c1aa2341, type: 3}
       propertyPath: m_IsActive
       value: 1
