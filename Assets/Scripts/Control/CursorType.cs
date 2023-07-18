@@ -4,6 +4,7 @@ namespace RPG.Control{
     none,
     move,
     combat,
-    pickup
+    pickup,
+    ui
   }
 }

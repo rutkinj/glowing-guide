@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using RPG.Movement;
-using RPG.Stats.ResourcePools;
-using System;
 using UnityEngine.AI;
+using RPG.Movement;
+using RPG.Combat;
 using RPG.Inventories;
+using RPG.Stats.ResourcePools;
 
 namespace RPG.Control
 {
@@ -21,8 +22,8 @@ namespace RPG.Control
       public CursorType type;
       public Texture2D texture;
       public Vector2 hotspot;
-
     }
+
     [SerializeField] CursorMapping[] cursorMappings = null;
     [SerializeField] float distToNavMeshTolerance = 1f;
     [SerializeField] float maxDistNavMeshPath = 40f;
@@ -47,7 +48,7 @@ namespace RPG.Control
         return;
       }
       if (InteractWithComponent()) return;
-      // if (InteractWithCombat()) return;
+      if (InteractWithCombat()) return;
       if (InteractWithMovement()) return;
       SetCursor(CursorType.none);
     }
@@ -100,7 +101,7 @@ namespace RPG.Control
       return false;
     }
 
-    RaycastHit[] RaycastHitsSorted()
+    private RaycastHit[] RaycastHitsSorted()
     {
       RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
       float[] distances = new float[hits.Length];
@@ -117,7 +118,7 @@ namespace RPG.Control
     {
       if (EventSystem.current.IsPointerOverGameObject())
       {
-        SetCursor(CursorType.none);
+        SetCursor(CursorType.ui);
         if(Input.GetMouseButtonDown(0)){
           isDraggingUI = true;
         }
@@ -130,16 +131,15 @@ namespace RPG.Control
       return isDraggingUI;
     }
 
-    // private bool InteractWithCombat()
-    // {
-    //   RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
-    //   foreach (RaycastHit hit in hits)
-    //   {
-    //     CombatTarget target = hit.transform.GetComponent<CombatTarget>();
-
-    //   }
-    //   return false;
-    // }
+    private bool InteractWithCombat()
+    {
+      RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
+      foreach (RaycastHit hit in hits)
+      {
+        CombatTarget target = hit.transform.GetComponent<CombatTarget>();
+      }
+      return false;
+    }
 
     private bool InteractWithMovement()
     {
