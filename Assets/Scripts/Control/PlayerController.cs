@@ -44,7 +44,7 @@ namespace RPG.Control
         return;
       }
       if (InteractWithComponent()) return;
-      if (InteractWithCombat()) return;
+      // if (InteractWithCombat()) return;
       if (InteractWithMovement()) return;
       SetCursor(CursorType.none);
     }
@@ -112,33 +112,36 @@ namespace RPG.Control
 
     private bool InteractWithUI()
     {
+      if (Input.GetMouseButtonUp(0))
+      {
+        isDraggingUI = false;
+      }
+
       if (EventSystem.current.IsPointerOverGameObject())
       {
         SetCursor(CursorType.ui);
         if (Input.GetMouseButtonDown(0))
         {
           isDraggingUI = true;
-          return isDraggingUI;
         }
-      }
-
-      if (Input.GetMouseButtonUp(0))
-      {
-        isDraggingUI = false;
+        else
+        {
+          return true;
+        }
       }
 
       return isDraggingUI;
     }
 
-    private bool InteractWithCombat()
-    {
-      RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
-      foreach (RaycastHit hit in hits)
-      {
-        CombatTarget target = hit.transform.GetComponent<CombatTarget>();
-      }
-      return false;
-    }
+    // private bool InteractWithCombat()
+    // {
+    //   RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
+    //   foreach (RaycastHit hit in hits)
+    //   {
+    //     CombatTarget target = hit.transform.GetComponent<CombatTarget>();
+    //   }
+    //   return false;
+    // }
 
     private bool InteractWithMovement()
     {
