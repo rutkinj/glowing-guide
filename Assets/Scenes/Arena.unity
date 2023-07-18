@@ -4722,6 +4722,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1047971492049722972, guid: 31e3cef9736c6403db84a6c5c1aa2341, type: 3}
+      propertyPath: attTable
+      value: 
+      objectReference: {fileID: 11400000, guid: 2ae7670ac1540ff40845728acbd04f49, type: 2}
+    - target: {fileID: 1047971492049722972, guid: 31e3cef9736c6403db84a6c5c1aa2341, type: 3}
       propertyPath: startLevel
       value: 1
       objectReference: {fileID: 0}
@@ -4736,7 +4740,7 @@ PrefabInstance:
     - target: {fileID: 1047971492049722972, guid: 31e3cef9736c6403db84a6c5c1aa2341, type: 3}
       propertyPath: attProgression
       value: 
-      objectReference: {fileID: 11400000, guid: f832984cb851a3b49aac4b608c4ef533, type: 2}
+      objectReference: {fileID: 11400000, guid: 2ae7670ac1540ff40845728acbd04f49, type: 2}
     - target: {fileID: 2521229884806327166, guid: 31e3cef9736c6403db84a6c5c1aa2341, type: 3}
       propertyPath: m_IsActive
       value: 1
