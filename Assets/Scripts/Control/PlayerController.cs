@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -13,9 +11,6 @@ namespace RPG.Control
 {
   public class PlayerController : MonoBehaviour
   {
-    HealthPoints healthPoints;
-    Hotbar hotbar;
-
     [System.Serializable]
     struct CursorMapping
     {
@@ -28,8 +23,9 @@ namespace RPG.Control
     [SerializeField] float distToNavMeshTolerance = 1f;
     [SerializeField] float maxDistNavMeshPath = 40f;
 
+    private HealthPoints healthPoints;
+    private Hotbar hotbar;
     private CursorMapping cachedCursorMapping;
-
     private bool isDraggingUI = false;
 
     private void Awake()
@@ -119,12 +115,15 @@ namespace RPG.Control
       if (EventSystem.current.IsPointerOverGameObject())
       {
         SetCursor(CursorType.ui);
-        if(Input.GetMouseButtonDown(0)){
+        if (Input.GetMouseButtonDown(0))
+        {
           isDraggingUI = true;
+          return isDraggingUI;
         }
       }
 
-      if(Input.GetMouseButtonUp(0)){
+      if (Input.GetMouseButtonUp(0))
+      {
         isDraggingUI = false;
       }
 

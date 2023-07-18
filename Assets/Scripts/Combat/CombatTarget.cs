@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using RPG.Stats.ResourcePools;
 using RPG.Control;
@@ -13,6 +11,7 @@ namespace RPG.Combat
     {
       return CursorType.combat;
     }
+
     public bool HandleRaycast(PlayerController callingController)
     {
 
