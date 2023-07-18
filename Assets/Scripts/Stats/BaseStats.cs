@@ -10,7 +10,7 @@ namespace RPG.Stats
   public class BaseStats : MonoBehaviour
   {
     [SerializeField] Progression progression = null;
-    [SerializeField] AttributeTable attProgression = null;
+    [SerializeField] AttributeTable attTable = null;
     [SerializeField] CharacterClass characterClass;
     [SerializeField] GameObject levelUpEffect;
     [Range(1, 3)][SerializeField] int startLevel = 1;
@@ -77,7 +77,7 @@ namespace RPG.Stats
 
     private float GetBaseStat(Stat stat)
     {
-      return progression.GetStat(stat, characterClass, GetLevel()) + attProgression.GetStat(stat, baseAttributes);
+      return progression.GetStat(stat, characterClass, GetLevel()) + attTable.GetStat(stat, baseAttributes);
     }
 
     private float GetAdditiveMods(Stat stat)
