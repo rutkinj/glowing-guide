@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using RPG.Control;
 using UnityEngine;
 
 namespace RPG.Inventories
 {
-  public class Pickup : MonoBehaviour
+  public class Pickup : MonoBehaviour, IRaycastable
   {
     public InventoryItem item = null;
     public int itemCount = 0;
@@ -24,6 +25,21 @@ namespace RPG.Inventories
           Destroy(gameObject);
         }
       }
+    }
+    
+    /// IRaycastable
+    public CursorType GetCursorType()
+    {
+      return CursorType.pickup;
+    }
+
+    public bool HandleRaycast(PlayerController callingController)
+    {
+      if (Input.GetMouseButtonDown(0))
+      {
+        return false;
+      }
+      return true;
     }
   }
 }
