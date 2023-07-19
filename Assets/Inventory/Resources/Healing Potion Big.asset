@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b3b542d1674e8b45979bd14c4aca421, type: 3}
+  m_Name: Healing Potion Big
+  m_EditorClassIdentifier: 
+  itemID: c70746f8-ea4b-43f3-ade1-803972360409
+  displayName: Big Healing Potion
+  description: For major bonks and hemmorages.
+  icon: {fileID: -1173530473, guid: cb0fb73fa7fad91478014c6512c11514, type: 3}
+  iconColor: {r: 0.07008722, g: 0.7075472, b: 0.31079376, a: 1}
+  stackable: 1
+  pickup: {fileID: 8845234357752431023, guid: 4324f7b131c0f2541bc9d5ac493258ce, type: 3}
+  consumable: 1
+  healAmount: 25

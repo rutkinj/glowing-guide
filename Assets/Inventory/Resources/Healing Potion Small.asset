@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b3b542d1674e8b45979bd14c4aca421, type: 3}
-  m_Name: Small Healing Potion
+  m_Name: Healing Potion Small
   m_EditorClassIdentifier: 
   itemID: c763a69e-43cf-4427-93d7-138440cd2a60
   displayName: Small Healing Potion
   description: For minor scrapes and owies.
   icon: {fileID: -1173530473, guid: cb0fb73fa7fad91478014c6512c11514, type: 3}
-  iconColor: {r: 1, g: 1, b: 1, a: 1}
+  iconColor: {r: 0.31185475, g: 0.9056604, b: 0.3508835, a: 1}
   stackable: 1
   pickup: {fileID: 8845234357752431023, guid: 4324f7b131c0f2541bc9d5ac493258ce, type: 3}
   consumable: 1
-  healAmount: 25
+  healAmount: 5
