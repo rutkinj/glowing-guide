@@ -25,6 +25,7 @@ namespace RPG.UI.Inventories
       {
         iconImage.enabled = true;
         iconImage.sprite = item.GetIcon();
+        iconImage.color = item.GetIconColor();
 
         if (itemCount > 1)
         {

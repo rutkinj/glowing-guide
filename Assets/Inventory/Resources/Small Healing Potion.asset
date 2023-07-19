@@ -16,6 +16,7 @@ MonoBehaviour:
   displayName: Small Healing Potion
   description: For minor scrapes and owies.
   icon: {fileID: -1173530473, guid: cb0fb73fa7fad91478014c6512c11514, type: 3}
+  iconColor: {r: 1, g: 1, b: 1, a: 1}
   stackable: 1
   pickup: {fileID: 8845234357752431023, guid: 4324f7b131c0f2541bc9d5ac493258ce, type: 3}
   consumable: 1
