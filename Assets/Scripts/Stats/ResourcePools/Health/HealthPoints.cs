@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using RPG.Core;
-using RPG.Stats;
-using RPG.Saving;
+
 using UnityEngine;
-using Newtonsoft.Json.Linq;
-using System;
-using RPG.Utils;
 using UnityEngine.Events;
+using RPG.Core;
+using RPG.Utils;
+using RPG.Saving;
+using Newtonsoft.Json.Linq;
 
 namespace RPG.Stats.ResourcePools
 {
@@ -17,31 +14,21 @@ namespace RPG.Stats.ResourcePools
     [SerializeField] UnityEvent eDie;
     BaseStats baseStats;
     LazyValue<float> currentHealth;
-    // LazyValue<float> maxHealth;
+    LazyValue<float> maxHealthCached;
     bool isDead = false;
 
     private void Awake()
     {
       baseStats = GetComponent<BaseStats>();
       currentHealth = new LazyValue<float>(GetMaxHealth);
-      // maxHealth = new LazyValue<float>(GetMaxHealth);
-      // currentHealth = new LazyValue<float>(SetCurrentHealthToMax);
+      maxHealthCached = new LazyValue<float>(GetMaxHealth);
     }
 
-    private void Start() {
-      // maxHealth.ForceInit();
-      currentHealth.ForceInit();
-    }
-
-    private float GetMaxHealth()
+    private void Start()
     {
-      return baseStats.GetStat(Stat.Health);
+      currentHealth.ForceInit();
+      maxHealthCached.ForceInit();
     }
-
-    // private float SetCurrentHealthToMax()
-    // {
-    //   return GetMaxHealth();
-    // }
 
     private void OnEnable()
     {
@@ -53,6 +40,11 @@ namespace RPG.Stats.ResourcePools
       baseStats.onLevelUp -= CalcHealthOnLevelUp;
     }
 
+    private float GetMaxHealth()
+    {
+      return baseStats.GetStat(Stat.Health);
+    }
+
     public void GainHealth(float hpGain)
     {
       currentHealth.value += hpGain;
@@ -61,6 +53,7 @@ namespace RPG.Stats.ResourcePools
         currentHealth.value = GetMaxHealth();
       }
     }
+
     public void LoseHealth(GameObject instigator, float damage)
     {
       print(gameObject.name + " took damage: " + damage);
@@ -82,26 +75,28 @@ namespace RPG.Stats.ResourcePools
         experience.GainExperience(expAmount);
       }
     }
+
     public void CalcHealthOnLevelUp()
     {
       // //// full heal ////
-      // maxHealth.value = baseStats.GetStat(Stat.Health);
-      // currentHealth = maxHealth.value;
+      // maxHealthCached.value = GetMaxHealth();
+      // currentHealth = GetMaxHealth();
 
-      // //// maintain current % ////
+      // //// maintain current % //// WONT WORK IN CURRENT STATE
       // float currentHpPercent = GetHPPercentage()/100;
       // maxHealth.value = baseStats.GetStat(Stat.Health);
-      // currentHealth = maxHealth.value * currentHpPercent;
+      // currentHealth.value = maxHealth.value * currentHpPercent;
 
       //// add increase to current hp ////
-      float newMax = baseStats.GetStat(Stat.Health);
-      float maxHpDiff = newMax - GetMaxHealth();
-      // maxHealth.value = newMax;
+      float newMax = GetMaxHealth();
+      float maxHpDiff = newMax - maxHealthCached.value;
       if (maxHpDiff > 0) // bugfix for loading a save where your level is lower
       {
         currentHealth.value += maxHpDiff;
       }
+      maxHealthCached.value = newMax;
     }
+
     public float GetHPPercentage()
     {
       return (currentHealth.value / GetMaxHealth()) * 100;
@@ -134,6 +129,7 @@ namespace RPG.Stats.ResourcePools
     public void RestoreFromJToken(JToken state)
     {
       currentHealth.value = state.ToObject<float>();
+      maxHealthCached.value = GetMaxHealth();
       if (currentHealth.value <= 0)
       {
         DeathBehavior();
