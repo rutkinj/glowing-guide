@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.AI;
@@ -22,12 +19,12 @@ namespace RPG.Movement
       navMeshAgent = GetComponent<NavMeshAgent>();
       healthPoints = GetComponent<HealthPoints>();
     }
+
     void Update()
     {
       navMeshAgent.enabled = !healthPoints.GetIsDead();
       AnimationControl();
     }
-
 
     public void StartMoveAction(Vector3 destination, float speedFraction = 1f)
     {
@@ -35,16 +32,14 @@ namespace RPG.Movement
       GetComponent<Animator>().SetTrigger("cancelAttack");
       MoveTo(destination, speedFraction);
     }
+
     public void MoveTo(Vector3 destination, float speedFraction = 1f)
     {
       navMeshAgent.speed = maxSpeed * Mathf.Clamp01(speedFraction);
       navMeshAgent.destination = destination;
       navMeshAgent.isStopped = false;
     }
-    public void Cancel()
-    {
-      navMeshAgent.isStopped = true;
-    }
+
     private void AnimationControl()
     {
       Vector3 velocity = navMeshAgent.velocity;
@@ -53,7 +48,13 @@ namespace RPG.Movement
       GetComponent<Animator>().SetFloat("forwardSpeed", speed);
     }
 
-    public JToken CaptureAsJToken(){
+    public void Cancel()
+    {
+      navMeshAgent.isStopped = true;
+    }
+
+    public JToken CaptureAsJToken()
+    {
       return transform.position.ToToken();
     }
 
