@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DefaultDropLibr
   m_EditorClassIdentifier: 
   dropPool:
-  - item: {fileID: 11400000, guid: 7153b3775064d1c4c96fcc6aad75a659, type: 2}
+  - item: {fileID: 11400000, guid: eb2f3d4c5525b2c4a847791bf7b309ba, type: 2}
     relativeChance: 3
     minCount: 1
     maxCount: 5
