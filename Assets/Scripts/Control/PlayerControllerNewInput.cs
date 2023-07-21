@@ -77,11 +77,15 @@ namespace RPG.Control
         Vector3 camForward = cameraTransform.forward;
         Vector3 camRight = cameraTransform.right;
 
-        input.x *= camRight.x;
-        input.y *= camForward.z;
-      }
+        camForward.y = 0;
+        camRight.y = 0;
 
-      moveVector = new Vector3(input.x, 0, input.y);
+        camForward = camForward.normalized;
+        camRight = camRight.normalized;
+
+        moveVector = (camForward * input.y + camRight * input.x);
+
+      }
     }
 
   }
