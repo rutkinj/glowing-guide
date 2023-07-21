@@ -86,7 +86,10 @@ namespace RPG.Control
         moveVector = (camForward * input.y + camRight * input.x);
 
       }
+      else
+      {
+        moveVector = new Vector3(input.x, 0, input.y);
+      }
     }
-
   }
 }
