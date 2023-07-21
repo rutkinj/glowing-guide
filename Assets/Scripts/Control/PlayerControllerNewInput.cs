@@ -13,7 +13,7 @@ namespace RPG.Control
     private InputActionMap playerActionMap;
     private InputAction movement;
 
-    Transform cameraTransform;
+    [SerializeField] Transform cameraTransform;
     private NavMeshAgent agent;
     [SerializeField, Range(0, 0.99f)] float smoothing = 0.25f;
     [SerializeField] float targetLerpSpeed = 1;
@@ -25,7 +25,6 @@ namespace RPG.Control
 
     private void Awake()
     {
-      cameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
       agent = GetComponent<NavMeshAgent>();
       playerActionMap = inputActions.FindActionMap("BasicMap");
       movement = playerActionMap.FindAction("Move");
@@ -73,11 +72,14 @@ namespace RPG.Control
     {
       Vector2 input = context.ReadValue<Vector2>();
 
-      Vector3 camForward = cameraTransform.forward;
-      Vector3 camRight = cameraTransform.right;
+      if (cameraTransform)
+      {
+        Vector3 camForward = cameraTransform.forward;
+        Vector3 camRight = cameraTransform.right;
 
-      input.x *= camRight.x;
-      input.y *= camForward.z;
+        input.x *= camRight.x;
+        input.y *= camForward.z;
+      }
 
       moveVector = new Vector3(input.x, 0, input.y);
     }
