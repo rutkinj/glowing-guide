@@ -16,6 +16,7 @@ namespace RPG.Control
     Transform cameraTransform;
     private NavMeshAgent agent;
     [SerializeField, Range(0, 0.99f)] float smoothing = 0.25f;
+    [SerializeField] float targetLerpSpeed = 1;
 
     private Vector3 targetDir;
     private float lerpTime = 0f;
@@ -41,18 +42,17 @@ namespace RPG.Control
         lerpTime = 0f;
       }
       lastDir = moveVector;
-      targetDir = Vector3.Lerp(targetDir, moveVector, Mathf.Clamp01(lerpTime * (1 - smoothing)));
+      targetDir = Vector3.Lerp(targetDir, moveVector, Mathf.Clamp01(lerpTime * targetLerpSpeed * (1 - smoothing)));
 
       agent.Move(targetDir * agent.speed * Time.deltaTime);
 
       Vector3 lookDir = moveVector;
       if (lookDir != Vector3.zero)
       {
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookDir), Mathf.Clamp01(lerpTime * (1 - smoothing)));
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookDir), Mathf.Clamp01(lerpTime * targetLerpSpeed * (1 - smoothing)));
       }
 
       lerpTime += Time.deltaTime;
-      print(lerpTime);
     }
 
     private void OnEnable()
@@ -78,7 +78,7 @@ namespace RPG.Control
 
       input.x *= camRight.x;
       input.y *= camForward.z;
-      
+
       moveVector = new Vector3(input.x, 0, input.y);
     }
 
