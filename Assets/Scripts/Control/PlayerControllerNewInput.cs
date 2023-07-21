@@ -42,14 +42,7 @@ namespace RPG.Control
       lastDir = moveVector;
       targetDir = Vector3.Lerp(targetDir, moveVector, Mathf.Clamp01(lerpTime * targetLerpSpeed * (1 - smoothing)));
 
-        // agent.Move(targetDir * agent.speed * Time.deltaTime);
       GetComponent<Mover>().StartMoveAction(transform.position + targetDir);
-
-      Vector3 lookDir = moveVector;
-      if (lookDir != Vector3.zero)
-      {
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookDir), Mathf.Clamp01(lerpTime * targetLerpSpeed * (1 - smoothing)));
-      }
 
       lerpTime += Time.deltaTime;
     }
