@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using RPG.Movement;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
@@ -36,14 +37,13 @@ namespace RPG.Control
     private void Update()
     {
       moveVector.Normalize();
-      if (moveVector != lastDir)
-      {
-        lerpTime = 0f;
-      }
+      if (moveVector != lastDir) lerpTime = 0f;
+
       lastDir = moveVector;
       targetDir = Vector3.Lerp(targetDir, moveVector, Mathf.Clamp01(lerpTime * targetLerpSpeed * (1 - smoothing)));
 
-      agent.Move(targetDir * agent.speed * Time.deltaTime);
+        // agent.Move(targetDir * agent.speed * Time.deltaTime);
+      GetComponent<Mover>().StartMoveAction(transform.position + targetDir);
 
       Vector3 lookDir = moveVector;
       if (lookDir != Vector3.zero)
@@ -74,17 +74,17 @@ namespace RPG.Control
 
       if (cameraTransform)
       {
+        //get camera directional vectors
         Vector3 camForward = cameraTransform.forward;
         Vector3 camRight = cameraTransform.right;
-
+        //nullify up, we only move on ground plane
         camForward.y = 0;
         camRight.y = 0;
-
+        //normalize vectors
         camForward = camForward.normalized;
         camRight = camRight.normalized;
-
+        //multiply camera vector by relevant input
         moveVector = (camForward * input.y + camRight * input.x);
-
       }
       else
       {
