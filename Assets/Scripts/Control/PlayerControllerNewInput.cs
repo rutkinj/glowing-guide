@@ -13,6 +13,7 @@ namespace RPG.Control
     [SerializeField] InputActionAsset inputActions;
     private InputActionMap playerActionMap;
     private InputAction movement;
+    private InputAction look;
 
     [SerializeField] Transform cameraTransform;
     private NavMeshAgent agent;
@@ -23,15 +24,22 @@ namespace RPG.Control
     private float lerpTime = 0f;
     private Vector3 lastDir;
     private Vector3 moveVector;
+    private Vector3 lookVector;
 
     private void Awake()
     {
       agent = GetComponent<NavMeshAgent>();
       playerActionMap = inputActions.FindActionMap("BasicMap");
+
       movement = playerActionMap.FindAction("Move");
       movement.started += HandleMoveAction;
       movement.performed += HandleMoveAction;
       movement.canceled += HandleMoveAction;
+
+      look = playerActionMap.FindAction("Look");
+      look.started += HandleLookAction;
+      look.performed += HandleLookAction;
+      look.canceled += HandleLookAction;
     }
 
     private void Update()
@@ -43,6 +51,11 @@ namespace RPG.Control
       targetDir = Vector3.Lerp(targetDir, moveVector, Mathf.Clamp01(lerpTime * targetLerpSpeed * (1 - smoothing)));
 
       GetComponent<Mover>().StartMoveAction(transform.position + targetDir);
+
+      if (lookVector != Vector3.zero)
+      {
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookVector), Mathf.Clamp01(lerpTime * targetLerpSpeed * (1 - smoothing)));
+      }
 
       lerpTime += Time.deltaTime;
     }
@@ -82,6 +95,26 @@ namespace RPG.Control
       else
       {
         moveVector = new Vector3(input.x, 0, input.y);
+      }
+    }
+
+    private void HandleLookAction(InputAction.CallbackContext context)
+    {
+      Vector2 input = context.ReadValue<Vector2>();
+
+      if (cameraTransform)
+      {
+        //get camera directional vectors
+        Vector3 camForward = cameraTransform.forward;
+        Vector3 camRight = cameraTransform.right;
+        //nullify up, we only move on ground plane
+        camForward.y = 0;
+        camRight.y = 0;
+        //normalize vectors
+        camForward = camForward.normalized;
+        camRight = camRight.normalized;
+        //multiply camera vector by relevant input
+        lookVector = (camForward * input.y + camRight * input.x);
       }
     }
   }
