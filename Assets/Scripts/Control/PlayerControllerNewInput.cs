@@ -21,6 +21,7 @@ namespace RPG.Control
     [SerializeField] float targetLerpSpeed = 1;
 
     private Vector3 targetDir;
+    private float targetMoveSpeed;
     private float lerpTime = 0f;
     private Vector3 lastDir;
     private Vector3 moveVector;
@@ -50,7 +51,7 @@ namespace RPG.Control
       lastDir = moveVector;
       targetDir = Vector3.Lerp(targetDir, moveVector, Mathf.Clamp01(lerpTime * targetLerpSpeed * (1 - smoothing)));
 
-      GetComponent<Mover>().StartMoveAction(transform.position + targetDir);
+      GetComponent<Mover>().StartMoveAction(transform.position + targetDir, targetMoveSpeed);
 
       if (lookVector != Vector3.zero)
       {
@@ -77,6 +78,7 @@ namespace RPG.Control
     private void HandleMoveAction(InputAction.CallbackContext context)
     {
       Vector2 input = context.ReadValue<Vector2>();
+      targetMoveSpeed = input.magnitude;
 
       if (cameraTransform)
       {
