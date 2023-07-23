@@ -4686,6 +4686,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 673586815297035785, guid: 31e3cef9736c6403db84a6c5c1aa2341, type: 3}
+      propertyPath: m_Follow
+      value: 
+      objectReference: {fileID: 7659572387791749003}
     - target: {fileID: 673586815739468964, guid: 31e3cef9736c6403db84a6c5c1aa2341, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.520521
@@ -10164,6 +10168,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1143745154379396124, guid: 6e394d6fb7ffc3b498a2214e9c20c7dd, type: 3}
   m_PrefabInstance: {fileID: 1767931011}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1820634806 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 673586814433411273, guid: 31e3cef9736c6403db84a6c5c1aa2341, type: 3}
+  m_PrefabInstance: {fileID: 777304578}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1839268730
 GameObject:
@@ -19058,8 +19067,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputActions: {fileID: -944628639613478452, guid: 129d9c4d0e6dcfb47876e47b2e0382b1, type: 3}
-  Camera: {fileID: 0}
-  smoothing: 0.25
+  cameraTransform: {fileID: 1820634806}
+  smoothing: 0.117
+  targetLerpSpeed: 10
 --- !u!114 &7734307598758539142
 MonoBehaviour:
   m_ObjectHideFlags: 0
