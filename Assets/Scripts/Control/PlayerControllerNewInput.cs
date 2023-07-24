@@ -20,6 +20,8 @@ namespace RPG.Control
     [SerializeField, Range(0, 0.99f)] float smoothing = 0.25f;
     [SerializeField] float targetLerpSpeed = 1;
 
+    [SerializeField] Transform reticleTEST;
+
     private Vector3 targetDir;
     private float targetMoveSpeed;
     private float lerpTime = 0f;
@@ -53,10 +55,9 @@ namespace RPG.Control
 
       GetComponent<Mover>().StartMoveAction(transform.position + targetDir, targetMoveSpeed);
 
-      if (lookVector != Vector3.zero)
-      {
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookVector), Mathf.Clamp01(lerpTime * targetLerpSpeed * (1 - smoothing)));
-      }
+
+      reticleTEST.position = transform.position + (lookVector + Vector3.up);
+
 
       lerpTime += Time.deltaTime;
     }
