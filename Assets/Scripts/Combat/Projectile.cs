@@ -30,22 +30,14 @@ public class Projectile : MonoBehaviour
   private void OnTriggerEnter(Collider other)
   {
     // projectiles cant hit their creators
-    if(other.gameObject == instigator) return;
+    if (other.gameObject == instigator) return;
 
     HealthPoints hitHP = other.GetComponent<HealthPoints>();
     if (hitHP == null) return;
-    //TODO projectiles fly through anything w/o hp; props, enviro, etc
     if (hitHP.GetIsDead()) return;
+    //TODO projectiles fly through anything w/o hp; props, enviro, etc
 
-    hitHP.LoseHealth(instigator, damage);
-
-    foreach (Transform child in transform)
-    {
-      child.gameObject.SetActive(false);
-    }
-
-    GetComponent<AudioSource>().PlayOneShot(hitSFX);
-    Destroy(gameObject, 2);
+    DoHit(hitHP);
   }
 
   public void SetTarget(HealthPoints target, GameObject instigator, float damage)
@@ -60,5 +52,19 @@ public class Projectile : MonoBehaviour
     CapsuleCollider targetCapsule = target.GetComponent<CapsuleCollider>();
     return target.transform.position + Vector3.up * targetCapsule.height / 2;
   }
+
+  private void DoHit(HealthPoints hitHP)
+  {
+    // deal damage
+    hitHP.LoseHealth(instigator, damage);
+    // hide mesh, disable collider; TODO onHit effect? projectile stuck in target?
+    foreach (Transform child in transform)
+    {
+      child.gameObject.SetActive(false);
+    }
+    // play hit audio
+    GetComponent<AudioSource>().PlayOneShot(hitSFX);
+    //destroy self after audio finishes
+    Destroy(gameObject, 2);
+  }
 }
-  
