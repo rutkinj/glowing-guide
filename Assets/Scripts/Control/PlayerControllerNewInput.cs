@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
+using RPG.Combat;
+
 namespace RPG.Control
 {
   [RequireComponent(typeof(NavMeshAgent))]
@@ -14,6 +16,8 @@ namespace RPG.Control
     private InputActionMap playerActionMap;
     private InputAction movement;
     private InputAction look;
+    private InputAction shoot;
+
 
     [SerializeField] Transform cameraTransform;
     private NavMeshAgent agent;
@@ -21,6 +25,7 @@ namespace RPG.Control
     [SerializeField] float targetLerpSpeed = 1;
 
     [SerializeField] Transform reticleTEST;
+    [SerializeField] GameObject bullet;
 
     private Vector3 targetDir;
     private float targetMoveSpeed;
@@ -43,6 +48,11 @@ namespace RPG.Control
       look.started += HandleLookAction;
       look.performed += HandleLookAction;
       look.canceled += HandleLookAction;
+
+      shoot = playerActionMap.FindAction("Shoot");
+      // shoot.started += HandleShootAction;
+      shoot.performed += HandleShootAction;
+      // shoot.canceled += HandleShootAction;
     }
 
     private void Update()
@@ -55,9 +65,7 @@ namespace RPG.Control
 
       GetComponent<Mover>().StartMoveAction(transform.position + targetDir, targetMoveSpeed);
 
-
       reticleTEST.position = transform.position + (lookVector + Vector3.up);
-
 
       lerpTime += Time.deltaTime;
     }
@@ -118,6 +126,15 @@ namespace RPG.Control
         camRight = camRight.normalized;
         //multiply camera vector by relevant input
         lookVector = (camForward * input.y + camRight * input.x);
+      }
+    }
+
+    private void HandleShootAction(InputAction.CallbackContext context)
+    {
+      float input = context.ReadValue<float>();
+
+      if(input > 0){
+        Instantiate(bullet, transform.position, Quaternion.LookRotation(lookVector, Vector3.up));
       }
     }
   }
