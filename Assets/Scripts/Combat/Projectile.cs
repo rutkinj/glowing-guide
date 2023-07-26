@@ -10,14 +10,17 @@ public class Projectile : MonoBehaviour
   [SerializeField] float projectileLifetime = 10f;
   [SerializeField] bool isHoming = false;
   [SerializeField] AudioClip hitSFX = null;
+
   HealthPoints target;
   GameObject instigator = null;
   float damage;
+
   void Start()
   {
     transform.LookAt(GetAimLocation());
     Destroy(gameObject, projectileLifetime);
   }
+
   void Update()
   {
     if (isHoming && !target.GetIsDead()) transform.LookAt(GetAimLocation());
@@ -26,12 +29,14 @@ public class Projectile : MonoBehaviour
 
   private void OnTriggerEnter(Collider other)
   {
-    if (other.GetComponent<HealthPoints>() != target)
-    {
-      return;
-    }
-    if (target.GetIsDead()) return;
-    target.LoseHealth(instigator, damage);
+    // projectiles cant hit their creators
+    if(other.gameObject == instigator) return;
+
+    HealthPoints hitHP = other.GetComponent<HealthPoints>();
+    if (hitHP) return;
+    if (hitHP.GetIsDead()) return;
+
+    hitHP.LoseHealth(instigator, damage);
 
     foreach (Transform child in transform)
     {
@@ -55,3 +60,4 @@ public class Projectile : MonoBehaviour
     return target.transform.position + Vector3.up * targetCapsule.height / 2;
   }
 }
+  
