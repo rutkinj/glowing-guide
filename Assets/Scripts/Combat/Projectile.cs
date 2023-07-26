@@ -33,7 +33,8 @@ public class Projectile : MonoBehaviour
     if(other.gameObject == instigator) return;
 
     HealthPoints hitHP = other.GetComponent<HealthPoints>();
-    if (hitHP) return;
+    if (hitHP == null) return;
+    //TODO projectiles fly through anything w/o hp; props, enviro, etc
     if (hitHP.GetIsDead()) return;
 
     hitHP.LoseHealth(instigator, damage);
