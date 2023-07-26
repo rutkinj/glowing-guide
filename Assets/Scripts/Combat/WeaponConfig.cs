@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using RPG.Stats.ResourcePools;
 using System;
 using RPG.Inventories;
 
@@ -68,7 +67,7 @@ namespace RPG.Combat
       return projectile != null;
     }
 
-    public void LaunchProjectile(Transform rightHand, Transform leftHand, HealthPoints target, GameObject instigator, float calculatedDamage)
+    public void LaunchProjectile(Transform rightHand, Transform leftHand, Vector3 target, GameObject instigator, float calculatedDamage)
     {
       Transform hand = rightHandEquip ? rightHand : leftHand;
       Projectile projectileInstance = Instantiate(projectile, hand.position, Quaternion.identity);

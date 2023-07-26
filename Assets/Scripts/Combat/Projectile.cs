@@ -11,7 +11,7 @@ public class Projectile : MonoBehaviour
   [SerializeField] bool isHoming = false;
   [SerializeField] AudioClip hitSFX = null;
 
-  HealthPoints target;
+  Vector3 target;
   GameObject instigator = null;
   float damage;
 
@@ -23,7 +23,8 @@ public class Projectile : MonoBehaviour
 
   void Update()
   {
-    if (isHoming && !target.GetIsDead()) transform.LookAt(GetAimLocation());
+    // TODO make homing work
+    // if (isHoming && !target.GetIsDead()) transform.LookAt(GetAimLocation());
     transform.Translate(Vector3.forward * projectileSpeed * Time.deltaTime);
   }
 
@@ -40,7 +41,7 @@ public class Projectile : MonoBehaviour
     DoHit(hitHP);
   }
 
-  public void SetTarget(HealthPoints target, GameObject instigator, float damage)
+  public void SetTarget(Vector3 target, GameObject instigator, float damage)
   {
     this.target = target;
     this.damage = damage;
@@ -49,8 +50,14 @@ public class Projectile : MonoBehaviour
 
   private Vector3 GetAimLocation()
   {
-    CapsuleCollider targetCapsule = target.GetComponent<CapsuleCollider>();
-    return target.transform.position + Vector3.up * targetCapsule.height / 2;
+    if (!Mathf.Approximately(target.y, 1))
+    {
+      return new Vector3(target.x, 1, target.z);
+    }
+    else
+    {
+      return target;
+    }
   }
 
   private void DoHit(HealthPoints hitHP)
