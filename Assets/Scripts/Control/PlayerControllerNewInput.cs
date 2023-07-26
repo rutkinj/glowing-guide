@@ -133,7 +133,8 @@ namespace RPG.Control
     {
       float input = context.ReadValue<float>();
 
-      if(input > 0){
+      if (input > 0)
+      {                   // TODO replace with transform field? //
         Instantiate(bullet, transform.position + Vector3.up, Quaternion.LookRotation(lookVector, Vector3.up));
       }
     }
