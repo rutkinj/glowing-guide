@@ -10,12 +10,13 @@ namespace RPG.Combat
     private Vector3 shootDir;
 
     private void Update() {
-      transform.position += transform.forward * speed * Time.deltaTime;
+      transform.Translate(Vector3.forward * speed * Time.deltaTime);
+      // transform.position += transform.forward * speed * Time.deltaTime;
     }
 
-    public void Setup(Vector3 shootDir){
-      this.shootDir = shootDir;
+    // public void Setup(Vector3 shootDir){
+    //   this.shootDir = shootDir;
 
-    }
+    // }
   }
 }
