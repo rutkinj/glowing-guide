@@ -134,7 +134,7 @@ namespace RPG.Control
       float input = context.ReadValue<float>();
 
       if(input > 0){
-        Instantiate(bullet, transform.position, Quaternion.LookRotation(lookVector, Vector3.up));
+        Instantiate(bullet, transform.position + Vector3.up, Quaternion.LookRotation(lookVector, Vector3.up));
       }
     }
   }
