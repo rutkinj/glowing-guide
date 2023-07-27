@@ -139,8 +139,6 @@ namespace RPG.Control
         //multiply camera vector by relevant input
 
         reticleVector = camForward * input.y + camRight * input.x;
-        aimVector = transform.position + reticleVector;
-
       }
     }
 
@@ -152,7 +150,7 @@ namespace RPG.Control
       if (input != 0 && this != null)
       {                   // TODO replace with transform field? //
         Projectile projInstance = Instantiate(projectile, shootPosition.position, Quaternion.identity);
-        projInstance.SetTarget(aimVector, gameObject, 5);
+        projInstance.SetTarget(transform.position + reticleVector, gameObject, 5);
       }
     }
   }
