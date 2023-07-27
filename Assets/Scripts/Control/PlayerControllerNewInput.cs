@@ -72,14 +72,10 @@ namespace RPG.Control
 
     private void LateUpdate()
     {
-      if (aimVector != Vector3.zero)
+      if (reticleVector != Vector3.zero)
       {
-        reticleTEST.localPosition = reticleVector + Vector3.up;
+        reticleTEST.localPosition = reticleVector + shootPosition.up;
       }
-      // else
-      // {
-      //   reticleTEST.position = /*transform.position +*/ Vector3.up;
-      // }
     }
 
     private void OnEnable()
@@ -150,7 +146,7 @@ namespace RPG.Control
       if (input != 0 && this != null)
       {                   // TODO replace with transform field? //
         Projectile projInstance = Instantiate(projectile, shootPosition.position, Quaternion.identity);
-        projInstance.SetTarget(transform.position + reticleVector, gameObject, 5);
+        projInstance.SetTarget(transform.position + shootPosition.up + reticleVector, gameObject, 5);
       }
     }
   }

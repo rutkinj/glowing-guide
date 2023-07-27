@@ -50,14 +50,7 @@ public class Projectile : MonoBehaviour
 
   private Vector3 GetAimLocation()
   {
-    if (!Mathf.Approximately(target.y, 1))
-    {
-      return new Vector3(target.x, 1, target.z);
-    }
-    else
-    {
-      return target;
-    }
+    return target;
   }
 
   private void DoHit(HealthPoints hitHP)
