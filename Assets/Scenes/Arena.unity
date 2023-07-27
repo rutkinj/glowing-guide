@@ -19234,7 +19234,7 @@ MonoBehaviour:
   smoothing: 0.117
   targetLerpSpeed: 10
   reticleTEST: {fileID: 942877932}
-  bullet: {fileID: 9100021453056251634, guid: 1ecd55e49d8328d4285e12d2298020ff, type: 3}
+  bullet: {fileID: -4300019192904647627, guid: 1ecd55e49d8328d4285e12d2298020ff, type: 3}
 --- !u!114 &7734307598758539142
 MonoBehaviour:
   m_ObjectHideFlags: 0

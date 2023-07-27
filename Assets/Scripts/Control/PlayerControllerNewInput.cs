@@ -25,7 +25,7 @@ namespace RPG.Control
     [SerializeField] float targetLerpSpeed = 1;
 
     [SerializeField] Transform reticleTEST;
-    [SerializeField] GameObject bullet;
+    [SerializeField] Projectile bullet;
 
     private Vector3 targetDir;
     private float targetMoveSpeed;
@@ -65,9 +65,20 @@ namespace RPG.Control
 
       GetComponent<Mover>().StartMoveAction(transform.position + targetDir, targetMoveSpeed);
 
-      reticleTEST.position = transform.position + (lookVector + Vector3.up);
-
       lerpTime += Time.deltaTime;
+    }
+
+    private void LateUpdate()
+    {
+      if (lookVector != Vector3.zero)
+      {
+
+        reticleTEST.position = lookVector + Vector3.up;
+      }
+      else
+      {
+        reticleTEST.position = transform.position + Vector3.up;
+      }
     }
 
     private void OnEnable()
@@ -125,7 +136,7 @@ namespace RPG.Control
         camForward = camForward.normalized;
         camRight = camRight.normalized;
         //multiply camera vector by relevant input
-        lookVector = (camForward * input.y + camRight * input.x);
+        lookVector = transform.position + (camForward * input.y + camRight * input.x);
       }
     }
 
@@ -133,9 +144,10 @@ namespace RPG.Control
     {
       float input = context.ReadValue<float>();
 
-      if (input > 0)
+      if (input != 0)
       {                   // TODO replace with transform field? //
-        Instantiate(bullet, transform.position + Vector3.up, Quaternion.LookRotation(lookVector, Vector3.up));
+        Projectile projInstance = Instantiate(bullet, transform.position + Vector3.up, Quaternion.identity);
+        projInstance.SetTarget(lookVector, gameObject, 5);
       }
     }
   }
