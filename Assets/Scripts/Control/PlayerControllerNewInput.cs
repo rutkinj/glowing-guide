@@ -32,7 +32,8 @@ namespace RPG.Control
     private float lerpTime = 0f;
     private Vector3 lastDir;
     private Vector3 moveVector;
-    private Vector3 lookVector;
+    private Vector3 aimVector;
+    private Vector3 reticleVector;
 
     private void Awake()
     {
@@ -70,15 +71,14 @@ namespace RPG.Control
 
     private void LateUpdate()
     {
-      if (lookVector != Vector3.zero)
+      if (aimVector != Vector3.zero)
       {
-
-        reticleTEST.position = lookVector + Vector3.up;
+        reticleTEST.localPosition = reticleVector + Vector3.up;
       }
-      else
-      {
-        reticleTEST.position = transform.position + Vector3.up;
-      }
+      // else
+      // {
+      //   reticleTEST.position = /*transform.position +*/ Vector3.up;
+      // }
     }
 
     private void OnEnable()
@@ -136,7 +136,10 @@ namespace RPG.Control
         camForward = camForward.normalized;
         camRight = camRight.normalized;
         //multiply camera vector by relevant input
-        lookVector = transform.position + (camForward * input.y + camRight * input.x);
+
+        reticleVector = camForward * input.y + camRight * input.x;
+        aimVector = transform.position + reticleVector;
+
       }
     }
 
@@ -148,7 +151,7 @@ namespace RPG.Control
       if (input != 0 && this != null)
       {                   // TODO replace with transform field? //
         Projectile projInstance = Instantiate(bullet, transform.position + Vector3.up, Quaternion.identity);
-        projInstance.SetTarget(lookVector, gameObject, 5);
+        projInstance.SetTarget(aimVector, gameObject, 5);
       }
     }
   }
