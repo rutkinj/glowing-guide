@@ -144,7 +144,8 @@ namespace RPG.Control
     {
       float input = context.ReadValue<float>();
 
-      if (input != 0)
+                      // VVV null check to satisfy strange error
+      if (input != 0 && this != null)
       {                   // TODO replace with transform field? //
         Projectile projInstance = Instantiate(bullet, transform.position + Vector3.up, Quaternion.identity);
         projInstance.SetTarget(lookVector, gameObject, 5);
