@@ -24,8 +24,9 @@ namespace RPG.Control
     [SerializeField, Range(0, 0.99f)] float smoothing = 0.25f;
     [SerializeField] float targetLerpSpeed = 1;
 
+    [SerializeField] Projectile projectile;
     [SerializeField] Transform reticleTEST;
-    [SerializeField] Projectile bullet;
+    [SerializeField] Transform shootPosition;
 
     private Vector3 targetDir;
     private float targetMoveSpeed;
@@ -150,7 +151,7 @@ namespace RPG.Control
                       // VVV null check to satisfy strange error
       if (input != 0 && this != null)
       {                   // TODO replace with transform field? //
-        Projectile projInstance = Instantiate(bullet, transform.position + Vector3.up, Quaternion.identity);
+        Projectile projInstance = Instantiate(projectile, shootPosition.position, Quaternion.identity);
         projInstance.SetTarget(aimVector, gameObject, 5);
       }
     }
